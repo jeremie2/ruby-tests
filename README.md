@@ -1,2 +1,3 @@
-# ruby-tests
-Launch School's exercise archive.
+# Readme
+
+This repo contains exercises for the Ruby course at https://launchschool.com
