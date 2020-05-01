@@ -1,0 +1,41 @@
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+1- Methods Without Arguments
+How would you use String#upcase to create an uppercase version of the string "xyz"?
+
+"Hello".upcase  #=> "HELLO"
+https://docs.ruby-lang.org/en/master/String.html#method-i-upcase
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+2   Required Arguments
+Assume you have this Array: a = %w(a b c d e)
+How would you use Array#insert to insert the numbers 5, 6, and 7 between the elements with values 'c' and 'd'?
+
+https://docs.ruby-lang.org/en/master/Array.html#method-i-insert
+a.insert(3, 5, 6, 7)  #=> ["a", "b", "c", 5, 6, 7, "d", "e"]
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+3   Optional Arguments
+Assume you have the following code:
+
+s = 'abc def ghi,jkl mno pqr,stu vwx yz'
+1- puts s.split.inspect
+2- puts s.split(',').inspect
+3- puts s.split(',', 2).inspect
+
+What will each of the 3 puts statements print?
+
+
+https://docs.ruby-lang.org/en/master/String.html#method-i-split
+  - Divides str into substrings based on a delimiter, returning an array of these substrings.
+https://docs.ruby-lang.org/en/master/String.html#method-i-inspect
+  - Returns a printable version of str, surrounded by quote marks, with special characters escaped.
+
+1- ["abc", "def", "ghi,jkl", "mno", "pqr,stu", "vwx", "yz"]
+
+split(',') will separate strins every time there's a ','
+2- ["abc def ghi", "jkl mno pqr", "stu vwx yz"]
+
+split(',', 2), '2' tells maximum elements numbers of the array
+3- ["abc def ghi", "jkl mno pqr,stu vwx yz"]
