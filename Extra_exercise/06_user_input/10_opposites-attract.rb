@@ -3,7 +3,8 @@
 # that one of the integers be positive, and one negative; however,
 # the order in which the two integers are entered does not matter.
 # 
-# Do not check for the positive/negative requirement until both integers are entered, and start over if the requirement is not met.
+# Do not check for the positive/negative requirement until both
+# integers are entered, and start over if the requirement is not met.
 # 
 # You may use the following method to validate input integers:
 # 
