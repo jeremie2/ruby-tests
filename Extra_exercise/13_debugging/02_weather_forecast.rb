@@ -31,8 +31,8 @@ predict_weather
 # 
 # At the beginning of the if/else statement:
 # if sunshine
-# returns always true. This is why the always sunny sentence is printed.
-# To fixit we just need:
+# returns always true. That's why the "sunny sentence" is always printed.
+# To fix it we just need:
 # if sunshine == 'true'
 # so that we can compare the result of the #sample method.
 
