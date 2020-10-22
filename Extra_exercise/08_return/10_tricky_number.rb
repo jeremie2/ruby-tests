@@ -15,5 +15,5 @@
 # ANSWER:
 # The program prints:
 1
-# if true (no way to get it false..) 1 is asssigned tu number
+# if true (no way to get it false..) 1 is asssigned to number
 # and this is an equivalent of returning.
