@@ -21,7 +21,7 @@ Locate the description of the while loop in the ruby documentation.
 Using the ruby documentation, determine what value a while loop returns.
 
 # Solution
-# nil unless break is used, in which case the value passed to break is used.
+# nil unless break is used, in that case the value passed to break is used.
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
