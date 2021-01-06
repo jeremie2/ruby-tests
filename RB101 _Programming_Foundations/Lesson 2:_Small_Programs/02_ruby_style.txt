@@ -1,0 +1,12 @@
+## Ruby style
+
+- Tab and indent: 2 spaces
+
+- Comment: #
+
+- Method/variable/file names: snake_case
+- Constant: UPPERCASE
+- class names: CamelCase
+
+- do...end blocks: use {} if there's only one line
+

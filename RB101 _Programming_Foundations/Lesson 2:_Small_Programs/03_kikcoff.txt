@@ -1,0 +1,22 @@
+Goal of the lesson:
+
+1- fluency in the syntax
+2- start to think like programmer building many little programs and debugging them
+  → building logical mindset
+
+Topics:
+- PROCEDURAL PROGRAMMING: still not clear what it is but basically it has something to do with building a program with logical step by step using basic functionalities we already know.
+- OBJECT PROGRAMMING: something more sophisticated that will add more benefits in programming.
+
+Learning to code vs learning to program:
+- CODING: focus on the syntax, building basic construct 
+- PROGRAMMING: building applications focusing on problem solving
+We have to dial with the frustration of jumping from this to different layer!
+PSEUDO CODE will help us: thinking first at the logic of a program and then at syntax
+
+Looking for help:
+- googling the right words (mind the error message!)
+- get help on lesson forums/chatrooms (tell what you have done, what is the error... whatever can help)
+
+What we learn is: APPLICATION DEVELOPMENT
+
