@@ -1,0 +1,26 @@
+
+
+#### BOOLEAN DATA TYPE
+
+# Return the state of objects or expressions and helps us to build conditional logic.
+# Bolean is an OBJECT and the only thing it does is returning true or false.
+# true and false are both object, therefore they've got CLASSES and METHODS: 
+
+true.Class       # TrueClass
+true.nil?        # false
+true.to_s        # "true"
+true.methods     # list of methods
+
+false.Class       # FrueClass
+false.nil?        # false
+false.to_s        # "false"
+false.methods     # list of methods
+
+
+
+
+
+
+
+
+
