@@ -1,0 +1,133 @@
+## TRUTHINESS
+# In order to use conditional logic, it's important to know which is the state
+# of an expression or object (true or false). Boolean objects intercept this state.
+# Bolean is an OBJECT and the only thing it does is returning true or false.
+# true and false are both object, therefore they've got CLASSES and METHODS: 
+
+true.class       # TrueClass
+true.nil?        # false
+true.to_s        # "true"
+true.methods     # list of methods
+
+false.class       # FrueClass
+false.nil?        # false
+false.to_s        # "false"
+false.methods     # list of methods
+
+# Examples
+
+# this prints 'hi'
+if true
+  puts 'hi'
+else
+  puts 'goodbye'
+end
+
+# this prints 'goodbye'
+if false
+  puts 'hi'
+else
+  puts 'goodbye'
+end
+
+# It seems there is a sort of "true" state unless
+# we say that a particular condition is false.
+
+# Most of the time we don't use directly true/false but
+# an expression (or method call) that evaluate true or false:
+
+num = 5
+
+if num < 10
+  puts 'small number'
+else
+  puts 'large number'
+end
+
+
+#### LOGICAL OPERATOR
+
+## Evaluating 2 or more  expressions
+# &&: 'and' operator returns true only if both expression are true
+
+true && true           # true
+true && false          # false
+num = 5
+num < 10 && num.odd?   # true
+num > 10 && num.odd?   # false
+# with more expressons we move from left to right:
+num < 10 && num.odd? && num > 0             # true
+num < 10 && num.odd? && num > 0 && false    # false
+
+# ||: 'or' operator returns true if at least one expression is true
+
+true || true       # true
+false || false     # false
+true || false      # true
+false || true      # true
+
+
+## SHORT CIRCUITING
+# CAUTION!!
+# Relying on the short circuit behavior can be dangerous!
+
+# && and || stop evaluating expressions once they can guarantee the return value
+
+false && 3/0    # false
+# the && operetor return false whenever one of the expression is false.
+# In this case the first expression is already false and the evaluation ends.
+# That's why we don't get ZeroDivisionError.
+# Same story with || operator:
+true || 3/0    # true
+# evaluation stop at the first usefull result.
+
+
+## Truthiness
+# Ruby considers everything to be truthy other than false and nil.
+# Basically any expression that doesn't evaluate to false or nil is true.
+
+# The following code prints "valid number" because the if statement is
+# evaluated to true, an integer is truthy:
+num = 5
+
+if num
+  puts "valid number"
+else
+  puts "error!"
+end
+
+# CAUTION!!
+# Don't confuse truthiness with true object.
+
+num = 5
+num == true    # flase
+
+# Because of Ruby's truthiness, it's possible to write code like this:
+
+def find_name
+  # ...
+end
+
+if name = find_name
+  puts "got a name"
+else
+  puts "couldn't find it"
+end
+
+# but as this form can be dangerous, it's better to use more usual code like this:
+
+def find_name
+  # ...
+end
+
+def valid
+   # ... 
+end
+
+name = find_name
+
+if name && name.valid?
+  puts "great name!"
+else
+  puts "either couldn't find name or it's invalid"
+end
