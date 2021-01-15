@@ -1,0 +1,39 @@
+
+## SYNTACTIC SUGAR
+
+# In the introduction to calculator program, it has been explained that
+# Ruby is taking advantage of some syntactic sugar:
+
+puts "ciao"
+
+# in this case we are omitting parenthesis and the module's name.
+# Here the long version:
+
+Kernel.puts("ciao")
+
+
+## INSPECT
+
+# gets method is taking the input as a string
+
+number1 = Kernel.gets()
+
+# if we print it like this:
+
+Kernel.puts("The number is:" + number1 + "!")
+
+# the result will be:
+#
+# The number is: 5
+# !
+#
+# Why? Let's use inspect module...
+
+Kernel.puts(number1.inspect())
+
+# "5\n"
+# this shows that gets method is also assigning the new line '\n'.
+
+
+
+
