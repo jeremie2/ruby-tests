@@ -82,6 +82,106 @@ def find_greatest(numbers)
 end
 ---------------------------------------
 
+:::::::::::::::::::: EXAMPLES
+
+For example, write out pseudo-code (both casual and formal) that does the following:
+
+
+:::::::::::: 1. a method that returns the sum of two integer
+
+---------------------------------------
+Given two integers
+
+Set the method with two variables for each integer
+Return the sum of the two variable
+
+
+---------------------------------------
+START
+
+# Given two integers
+
+SET var1 and var2
+PRINT var1 + var2
+
+END
+
+---------------------------------------
+def sum(var1, var2)
+  var1 + var2
+end
+
+
+
+:::::::::::: 2. a method that takes an array of strings, and returns a string that is all those strings concatenated together
+
+---------------------------------------
+Given an array of strings
+
+Set a variable wich represent the sum of the strings
+Iterate through the elements of the array
+ - sum each element to the variable
+ - return the variable
+
+ 
+---------------------------------------
+START
+# Given an array of strings called "words"
+
+SET iterator = 1
+SET string_sum = empty string
+WHILE iterator <= length of words
+  SET current_string = value within words collection at space "iterator"
+  SET string_sum = string_sum + current_string
+  iterator = iterator + 1
+  
+PRINT string_sum
+
+END
+
+---------------------------------------
+def sum_of_string(words)
+  string_sum = ''
+  words.each do |word|
+    string_sum += word
+  end
+  string_sum
+end
+
+
+
+:::::::::::: 3. a method that takes an array of integers, and returns a new array with every other element
+
+---------------------------------------
+Given an array of integers.
+
+Create an empty array called new_array
+Iterate through the array of elements.
+  - for each element append a random number < 10 to new_array
+  return new_array
+
+---------------------------------------
+START
+# Given an array of integers called 'integers'.
+SET new_array = []
+SET iterator = 1
+WHILE iterator <= length of integers
+  SET new_array << rand(10)
+  iterator = iterator + 1
+  
+PRINT new_array
+  
+END
+
+---------------------------------------
+integers = [9, 5, 1, 8, 4, 7]
+
+def random_array(integers)
+  new_array = []
+  integers.each {|elem| new_array << rand(10) }
+  new_array
+end
+
 
 
 
