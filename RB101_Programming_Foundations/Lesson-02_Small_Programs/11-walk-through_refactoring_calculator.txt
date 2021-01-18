@@ -1,0 +1,236 @@
+
+::::::::::: Refactoring Calculator
+
+See files:
+- calculator-01.rb
+- 09-calculator-flow.pdf
+- calculator-02.rb
+
+
+What calculator-01 does is:
+- saying "welcome"
+- asking for the first number
+- asking for the second number
+- asking for a number related to an operation to be performed
+  (+ - * /) via if/else statement
+- printing the result
+
+
+In calculator-02.rb there will be some improvement:
+
+:::: PROMPT MESSAGES:
+  - we want to improve the visual stile of messages adding the
+    string '=> ' at the beginning of each line
+    
+  - too many repetitions! We create prompt(message) method:
+  
+    def prompt(message)
+      Kernel.puts("=> #{message}")
+    end
+
+    now every Kernel.puts('=> text...') will be changed with
+    prompt('text...')
+
+    
+:::: VALID NUMBER?
+  - the flowchart shows "valid number" checks for the two integers
+    we create valid_number?(num) method:
+    
+    def valid_number?(num)
+      num.to_i() != 0
+    end
+
+    at this stage we just check that the integer is not zero
+
+:::: CASE INSTEAD IF/ELSE
+  - when performing the operation, a 'case' statement will avoid
+    repetitions:
+    
+    result = case operator
+      when '1'
+        number1.to_i() + number2.to_i()
+      when '2'
+        number1.to_i() - number2.to_i()
+      when '3'
+        number1.to_i() * number2.to_i()
+      when '4'
+        number1.to_f() / number2.to_f()
+    end
+ 
+:::: LOOPS
+  - we set a loop when asking for an integer so that the number
+    will be checked via if/else with valid_number?(num):
+    
+    number1 = ''  
+    loop do
+      prompt("What's the first number?")
+      number1 = Kernel.gets().chomp()
+
+      if valid_number?(number1)
+        break
+      else
+        prompt("Hmm... that doesn't look like a valid number")
+      end
+    end
+ 
+    This could be written as a method as we are going to repeat
+    the same stuff for number2
+
+  - we set a loop when asking for an operation to be performed
+    and to check via if/else that a correct option has been
+    given by the user:
+  
+    operator = ''
+    loop do
+      operator = Kernel.gets().chomp()
+
+      if %w(1 2 3 4).include?(operator)
+        break
+      else
+        prompt('Must choose 1, 2, 3 or 4')
+      end
+    end
+
+  - we set a main loop so that asking for numbers, for operation
+    and printing the result will be repeated if user want to:
+ 
+    loop do # main loop
+      ...
+      ...
+      prompt("Do you want to perform another calculation? (Y to calculate again)")
+      answer = Kernel.gets().chomp()
+      break unless answer.downcase().start_with?('y')
+    end 
+
+
+:::: PRETTY THINGS
+  - at the beginning we ask the user to enter a valid name (not empty):
+  
+    prompt("Welcome to Calculator! Enter your name:")
+
+    name = ''
+    loop do
+      name = Kernel.gets().chomp()
+
+      if name.empty?()
+        prompt('Make sure to use a valid name.')
+      else
+        break
+      end
+    end
+
+  - a better message (with '<<-MSG') to choose the operation to be performed:
+  
+    operator_prompt = <<-MSG
+  What operation would you like to perform?
+      1) add
+      2) subtract
+      3) multiply
+      4) divide 
+    MSG
+
+    prompt(operator_prompt)
+
+  - set a message that displays which operation has been chosen.
+    This require a method:
+    
+    def opearation_to_message(op)
+      case op
+      when '1'
+        'Adding'
+      when '2'
+        'Subtracting'
+      when '3'
+        'Multiplying'
+      when '4'
+        'Dividing'
+      end
+    end
+    
+    after the user has given the number related to the operation
+    a message will be displayed:
+    
+    prompt("#{opearation_to_message(operator)} the two numbers...")
+    ## Adding / Subtracting / Multiplying / Dividing
+
+  - set a goodbye message
+
+  
+:::::::::::::::::::::::::::::::::::::
+
+Things to think about:
+
+1. Is there a better way to validate that the user has input a number?
+- Yes, in one of the earliest exercise we used a valid_number?(number_string)
+  method like this:
+  
+  def valid_number?(number_string)
+    number_string.to_i.to_s == number_string && number_string.to_i != 0
+  end
+
+  to make sure that what has been given is an integer.
+  Remember that 'string'.to_i # => 0
+
+
+2. It looks like you can call to_i or to_f to convert strings to integers
+   and floats, respectively. Look up the String#to_i and String#to_f documentation
+   in Ruby docs and look at their various examples and use cases.
+- Extraneous characters past the end of a valid number are ignored. If there is not
+  a valid number at the start of str, 0.0 is returned. This method never raises an
+  exception.
+  #to_i can convert string with binary values: '101'.to_i(2) # => 5
+  and also other bases: 'ff'.to_i(16) # => 255
+
+  
+3. Our operation_to_message method is a little dangerous, because we're relying on
+   the case statement being the last expression in the method. What if we needed to
+   add some code after the case statement within the method? What changes would be
+   needed to keep the method working with the rest of the program? We'll show a
+   solution in an upcoming assignment.
+- I think in that case I would assign the output to a variable so that i can return
+  it at the end of the method, like this:
+
+  def opearation_to_message(op)
+    output = case op
+      when '1'
+        'Adding'
+      when '2'
+        'Subtracting'
+      when '3'
+        'Multiplying'
+      when '4'
+        'Dividing'
+      end
+      
+    # some more code
+    # ...
+    # ...
+      
+    output
+  end
+  
+
+4. Most Rubyists don't invoke methods with parentheses, unless they're passing
+   in an argument. For example, we use name.empty?(), but most Rubyists would
+   write name.empty?. Some Rubyists even go as far as not putting parentheses
+   around method calls even when passing in arguments. For example, they would
+   write prompt "hi there" as opposed to prompt("hi there").
+
+   Try removing some of the optional parentheses when calling methods to get your
+   eyes acquainted with reading different styles of Ruby code. This will be
+   especially useful if you are using a DSL written in Ruby, like Rspec or Rails.
+- OK
+
+
+5. We're using Kernel.puts() and Kernel.gets(). But the Kernel. is extraneous as
+   well as the parentheses. Therefore, we can just call those methods by gets and
+   puts. We already know that in Ruby we can omit the parentheses, but how come we
+   can also omit the Kernel.?
+- As reported in the answer, basically Kernel methods are always available unless
+  we are writing code inside a class.
+
+  
+6. There are lots of messages sprinkled throughout the program. Could we move
+  them into some configuration file and access by key? This would allow us
+  to manage the messages much easier, and we could even internationalize the
+  messages. This is just a thought experiment, and no need to code this up.
