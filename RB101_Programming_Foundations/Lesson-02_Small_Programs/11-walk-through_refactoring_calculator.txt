@@ -231,6 +231,6 @@ Things to think about:
 
   
 6. There are lots of messages sprinkled throughout the program. Could we move
-  them into some configuration file and access by key? This would allow us
-  to manage the messages much easier, and we could even internationalize the
-  messages. This is just a thought experiment, and no need to code this up.
+   them into some configuration file and access by key? This would allow us
+   to manage the messages much easier, and we could even internationalize the
+   messages. This is just a thought experiment, and no need to code this up.
