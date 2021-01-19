@@ -1,0 +1,125 @@
+ 
+::::::::: PRECEDENCE
+
+- Operator precedence: set of rules that dictate how Ruby determines what operands
+                       each operator takes. https://ruby-doc.org/core-2.6.3/doc/syntax/precedence_rdoc.html
+
+Example: 3 + 5 * 7 it's the equivalent of 3 + (5 * 7)
+
++ operator gets 3 and 35 (5*7) as operands
+* operator gets 5 and 7 as operands
+
+In an expression, operators with higher precedence are prioritized over those with lower precedence.
+
+
+::: PARENTHESES
+
+Don't take any risk!! If you are not sure or you just want to avoid possible problems,
+USE PARENTHESES!!
+
+
+::: OPERATORS WITH SAME PRECEDENCE
+
+Most of the time the precedence is left to right... but in some case it can be viceversa.
+Again... USE PARENTHESES!!
+
+
+::: EVALUATION ORDER
+
+def value(n)
+  puts n
+  n
+end
+
+puts value(3) + value(5) * value(7)
+
+## result
+
+3
+5
+7
+38
+
+## you could think that Ruby is evaluating the expression left-to-right looking
+## at the first 3 lines → 3, 5, 7
+## Operators (+ and *) need values. Let's say that it's true that Ruby is working
+## left to right while EVALUATING the operands.
+## But once value(3), value(5), and value(7) have been evaluated, then Ruby will
+## follow the operator precedence: first 5 * 7 and then 3 + 35. 
+
+:::::::::::::::::::::::::::::::::
+
+## RIGHT TO LEFT - multiple assignments or multiple modifiers
+
+## bed practice!!
+a = b = c = 3
+puts a if a == b if a == c
+
+
+## TERNARY OPERATOR (?:) and SHORT-CIRCUIT operators && and ||
+## truthy conditions
+
+3 ? 1 / 0 : 1 + 2    # raises error ZeroDivisionError
+5 && 1 / 0           # raises error ZeroDivisionError
+nil || 1 / 0         # raises error ZeroDivisionError
+
+## if we modify so that 1 / 0 will not be evaluated, that's the result:
+
+nil ? 1 / 0 : 1 + 2  # 3
+nil && 1 / 0         # nil
+5 || 1 / 0           # 5
+
+
+
+::: TRICKY BLOCKS
+
+array = [1, 2, 3]
+p array.map { |num| num + 1 }
+
+## => [2, 3, 4]    ...as expected.
+## but changing {} with do...end:
+
+p array.map do |num|
+  num + 1
+end 
+
+## => #<Enumerator: [1, 2, 3]:map>   ...why?
+
+## Blocks has lowest precedence of all operators. {} has a bit higher precedence.
+## So array.map gets bound to p, which first invokes array.map, returning an
+## Enumerator object.
+
+
+::: TAP METHOD
+
+## tap: obect instance method
+## It passes the calling object into a block, then returns that object.
+
+## Let's take something like this:
+
+(1..10).to_a.each {|x| p x}
+
+## this will print every single element:
+## 1
+## 2
+## ...
+## 10
+
+## if we change .each with .tap:
+
+(1..10).to_a.tap {|x| p x}
+
+## the result is the array it has been passed:
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+## This can be useful for debugging.
+
+
+
+
+
+
+
+
+
