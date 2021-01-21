@@ -1,0 +1,43 @@
+en:
+  welcome: "Welcome to Calculator! Enter your name:"
+  valid_name: 'Make sure to use a valid name.'
+  hi: 'Hi '
+  which_operation: "What operation would you like to perform?\n
+    1) add\n
+    2) subtract\n
+    3) multiply\n
+    4) divide\n"
+  must_choose: 'Must choose 1, 2, 3 or 4'
+  first_number: "What's the first number?"
+  not_valid_number: "Hmm... that doesn't look like a valid number"
+  second_number: "What's the second number?"
+  not_zero_divide: "Can't divide by zero!"
+  result: 'The result is '
+  another_calculation: 'Do you want to perform another calculation? (Y to calculate again)'
+  thanks: 'Thank you for using Calculator. Goodbye!'
+  add_message: 'Adding the two numbers...'
+  sub_message: 'Subtracting the two numbers...'
+  mul_message: 'Multiplying the two numbers...'
+  div_message: 'Dividing the two numbers...'
+
+it:
+  welcome: "Benvenuta/o in Calculator! Inserisci il tuo nome:"
+  valid_name: 'Accertarsi di utilizzare un nome valido.'
+  hi: 'Ciao '
+  which_operation: "Quale operazione vorreste eseguire?\n
+    1) addizione\n
+    2) sottrazione\n
+    3) moltiplicazione\n
+    4) divisione\n"
+  must_choose: 'Devi scegliere fra 1, 2, 3 o 4'
+  first_number: "Qual'è il primo numero?"
+  not_valid_number: "Hmm... questo non sembra un numero valido"
+  second_number: "Qual'è il secondo numero?"
+  not_zero_divide: 'Non puoi dividere per zero!'
+  result: 'Il risultato è '
+  another_calculation: "Vuoi eseguire un'altro calcolo? (Y per calcolare di nuovo)"
+  thanks: 'Grazie per aver usato Calculator. Arrivederci!'
+  add_message: 'Sto sommando i due numeri...'
+  sub_message: 'Sto sottraendo i due numeri...'
+  mul_message: 'Sto moltipicando i due numeri...'
+  div_message: 'Sto dividendo i due numeri...'

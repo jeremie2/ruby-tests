@@ -1,0 +1,140 @@
+ 
+:::::::::::: ASSIGNMENT: CALCULATOR BONUS FEATURES
+
+See files: calculator_02.rb and calculator_03.rb (the new one)
+
+
+:::::::::::: VALID NUMBERS
+
+The exercise is asking to improve some aspects.
+At point 1. and 2. it asks respectively for better integer and float validation.
+
+I already knew this simple integer validation:
+
+  def integer?(input)
+    input.to_i.to_s == input
+  end
+
+..and for floats it's basically the same:
+
+  def float?(input)
+    input.to_f.to_s == input
+  end
+
+It says that regex and Kernel#Integer method could be used, but at this stage integer?
+and float? methods would be enough and... I've used them as valid_integer? and valid_float?:
+
+  def valid_integer?(num)
+    num.to_i().to_s() == num
+  end
+
+  def valid_float?(num)
+    num.to_f().to_s() == num
+  end
+
+  
+:::::::::::: ZERO DIVISION ERROR
+
+But there's a problem the exercise is not talking about.
+Changing the program this way means that users are allowed to insert zero "0". How does it work when users choose division and a "0" as denominator? We need to avoid ZeroDivisionError.
+
+To handle the division problem I thought it could be easier to move the step of choosing the operation before choosing numbers. This way we know in advance if we need to handle the ZeroDivisionError error.
+While choosing the operation the variable 'operator' get set and can be used later on,
+when users enter the two numbers.
+
+:::::::::::: WORKING WITH INTEGER AND FLOAT
+
+The original code uses a 'case' statement to choose the select the chosen operation
+to perform. During the operation every number is converted to int or float:
+
+  when '1'
+    number1.to_i + number2.to_i
+
+But allowing users to enter float numbers, means that we can't wait this last step to set
+number type... or, well... we could but things get complicated.
+
+Then I thought to convert the entered number to int or float while users enter numbers.
+Too make things shorter and avoid some if/else steps, I've created the assign_number method:
+
+  def assign_number(num)
+    num = num.to_i if valid_integer?(num)
+    num = num.to_f if valid_float?(num)
+    num
+  end
+
+While asking the user to insert a number we still have to check if it's a valid number,
+because assign_number doesn't do that. The method just set int or float if users enter
+a valid int or float, but if you enter a not valid number, assign_number will return
+it anyway.
+
+This is how I wrote the two loops that assign values to number1:
+
+  number1 = ''
+  loop do
+    prompt("What's the first number?")
+    number1 = Kernel.gets().chomp()
+
+    if valid_integer?(number1) || valid_float?(number1)
+      number1 = assign_number(number1)
+      break
+    else
+      prompt("Hmm... that doesn't look like a valid number")
+    end
+  end
+
+and number2 taking in consideration handling ZeroDivisionError if division has been
+selected (operato == '4' means division):
+
+  number2 = ''
+  loop do
+    prompt("What's the second number?")
+    number2 = Kernel.gets().chomp()
+
+    if operator == '4' && number2 == '0'    # operato == '4' means division
+      prompt("Can't divide by zero!")
+    elsif valid_integer?(number2) || valid_float?(number2)
+      number2 = assign_number(number2)
+      break
+    else
+      prompt("Hmm... that doesn't look like a valid number")
+    end
+  end
+
+Inside if/else, check for operator == '4' and number2 == '0' MUST BE IN FIRST POSITION!
+  
+  
+:::::::::::: TAKING OFF ".0" WHEN RESULT IS INTEGER 
+
+In order to make things more elegant, I've introduced this little step:
+
+  result = result.to_i if result - result.to_i == 0.0
+
+In case we where working with float and the result is got point-zero after a number (e.g. 
+12.0, 5.0, etc...), the point-zero will be moved.
+
+
+:::::::::::: SAFER CASE STATEMENT
+
+Methods operation_to_message can be dangerous because in case a new line will be added,
+the method would not return the word we wont to print. We solve this problem just assigning
+the value to the variable 'word' and returning it at the end of the method:
+
+def opearation_to_message(op)
+  word = case op
+         when '1'
+           'Adding'
+         when '2'
+           'Subtracting'
+         when '3'
+           'Multiplying'
+         when '4'
+           'Dividing'
+         end
+  word
+end
+
+
+
+
+
+
