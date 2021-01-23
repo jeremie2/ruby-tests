@@ -40,23 +40,39 @@ def valid_float?(num)
   num.to_f().to_s() == num
 end
 
-def assign_number(num)
-  num = num.to_i if valid_integer?(num)
-  num = num.to_f if valid_float?(num)
+def set_number(first_or_second_num, operator)
+  num = ''
+  loop do
+    prompt(messages(first_or_second_num, LANGUAGE))
+    num = Kernel.gets().chomp()
+    num.gsub!(',', '.') if num.include?(',')
+
+    if first_or_second_num == 'second_number' && operator == '4' && num == '0'
+      prompt(messages('not_zero_divide', LANGUAGE))
+    elsif first_or_second_num == 'second_number' && (valid_integer?(num) || valid_float?(num))
+      num = num.to_f
+      break
+    elsif valid_integer?(num) || valid_float?(num)
+      valid_integer?(num) ? num = num.to_i : num = num.to_f
+      break
+    else
+      prompt(messages('not_valid_number', LANGUAGE))
+    end
+  end
   num
 end
 
 def operation_to_message(op)
   message = case op
-         when '1'
-           prompt(messages('add_message', LANGUAGE))
-         when '2'
-           prompt(messages('sub_message', LANGUAGE))
-         when '3'
-           prompt(messages('mul_message', LANGUAGE))
-         when '4'
-           prompt(messages('div_message', LANGUAGE))
-         end
+            when '1'
+              prompt(messages('add_message', LANGUAGE))
+            when '2'
+              prompt(messages('sub_message', LANGUAGE))
+            when '3'
+              prompt(messages('mul_message', LANGUAGE))
+            when '4'
+              prompt(messages('div_message', LANGUAGE))
+            end
   message
 end
 
@@ -93,35 +109,9 @@ loop do # main loop
     end
   end
 
-  ################### NUMBER 1
-  number1 = ''
-  loop do
-    prompt(messages('first_number', LANGUAGE))
-    number1 = Kernel.gets().chomp()
-
-    if valid_integer?(number1) || valid_float?(number1)
-      number1 = assign_number(number1)
-      break
-    else
-      prompt(messages('not_valid_number', LANGUAGE))
-    end
-  end
-
-  ################### NUMBER 2
-  number2 = ''
-  loop do
-    prompt(messages('second_number', LANGUAGE))
-    number2 = Kernel.gets().chomp()
-
-    if operator == '4' && number2 == '0'
-      prompt(messages('not_zero_divide', LANGUAGE))
-    elsif valid_integer?(number2) || valid_float?(number2)
-      number2 = assign_number(number2)
-      break
-    else
-      prompt(messages('not_valid_number', LANGUAGE))
-    end
-  end
+  ################### NUMBER 1 & NUMBER 2
+  number1 = set_number('first_number', operator)
+  number2 = set_number('second_number', operator)
 
   ################### OPERATION
   puts operation_to_message(operator)
@@ -145,4 +135,4 @@ loop do # main loop
   break unless answer.downcase().start_with?('y')
 end
 
-prompt('Thank you for using Calculator. Goodbye!')
+prompt(messages('thanks', LANGUAGE))

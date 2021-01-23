@@ -36,11 +36,15 @@ and float? methods would be enough and... I've used them as valid_integer? and v
 :::::::::::: ZERO DIVISION ERROR
 
 But there's a problem the exercise is not talking about.
-Changing the program this way means that users are allowed to insert zero "0". How does it work when users choose division and a "0" as denominator? We need to avoid ZeroDivisionError.
+Changing the program this way means that users are allowed to insert zero "0".
+How does it work when users choose division and a "0" as denominator? We need
+to avoid ZeroDivisionError.
 
-To handle the division problem I thought it could be easier to move the step of choosing the operation before choosing numbers. This way we know in advance if we need to handle the ZeroDivisionError error.
-While choosing the operation the variable 'operator' get set and can be used later on,
-when users enter the two numbers.
+To handle the division problem I thought it could be easier to move the step of
+choosing the operation before choosing numbers. This way we know in advance if
+we need to handle the ZeroDivisionError error.
+While choosing operations, the variable 'operator' get set and can be used later
+on, when users enter the two numbers.
 
 :::::::::::: WORKING WITH INTEGER AND FLOAT
 
@@ -54,55 +58,53 @@ But allowing users to enter float numbers, means that we can't wait this last st
 number type... or, well... we could but things get complicated.
 
 Then I thought to convert the entered number to int or float while users enter numbers.
-Too make things shorter and avoid some if/else steps, I've created the assign_number method:
+I've created the set_number(first_or_second_num, operator) method:
 
-  def assign_number(num)
-    num = num.to_i if valid_integer?(num)
-    num = num.to_f if valid_float?(num)
-    num
-  end
+	def set_number(first_or_second_num, operator)
+		num = ''
+		loop do
+		  prompt(messages(first_or_second_num, LANGUAGE))
+		  num = Kernel.gets().chomp()
+		  num.gsub!(',', '.') if num.include?(',')
 
-While asking the user to insert a number we still have to check if it's a valid number,
-because assign_number doesn't do that. The method just set int or float if users enter
-a valid int or float, but if you enter a not valid number, assign_number will return
-it anyway.
+		  if first_or_second_num == 'second_number' && operator == '4' && num == '0'
+		    prompt(messages('not_zero_divide', LANGUAGE))
+		  elsif first_or_second_num == 'second_number' && (valid_integer?(num) || valid_float?(num))
+		    num = num.to_f
+		    break
+		  elsif valid_integer?(num) || valid_float?(num)
+		    valid_integer?(num) ? num = num.to_i : num = num.to_f
+		    break
+		  else
+		    prompt(messages('not_valid_number', LANGUAGE))
+		  end
+		end
+		num
+	end
 
-This is how I wrote the two loops that assign values to number1:
 
-  number1 = ''
-  loop do
-    prompt("What's the first number?")
-    number1 = Kernel.gets().chomp()
+The method takes in consideration handling ZeroDivisionError if division has been
+selected (operator == '4' means division). The if/else statement related to the 2nd number,
+must be evaluated before the others!!!
 
-    if valid_integer?(number1) || valid_float?(number1)
-      number1 = assign_number(number1)
-      break
-    else
-      prompt("Hmm... that doesn't look like a valid number")
-    end
-  end
+This part could be shorter:
 
-and number2 taking in consideration handling ZeroDivisionError if division has been
-selected (operato == '4' means division):
+  elsif first_or_second_num == 'second_number' && (valid_integer?(num) || valid_float?(num))
+    num = num.to_f
+    break
+  elsif valid_integer?(num) || valid_float?(num)
+    valid_integer?(num) ? num = num.to_i : num = num.to_f
+    break
 
-  number2 = ''
-  loop do
-    prompt("What's the second number?")
-    number2 = Kernel.gets().chomp()
+like this:
 
-    if operator == '4' && number2 == '0'    # operato == '4' means division
-      prompt("Can't divide by zero!")
-    elsif valid_integer?(number2) || valid_float?(number2)
-      number2 = assign_number(number2)
-      break
-    else
-      prompt("Hmm... that doesn't look like a valid number")
-    end
-  end
+  elsif valid_integer?(num) || valid_float?(num)
+    num = num.to_f
+    break
 
-Inside if/else, check for operator == '4' and number2 == '0' MUST BE IN FIRST POSITION!
-  
-  
+but I was thinking that where possible it could be better to deal with only integer.
+
+
 :::::::::::: TAKING OFF ".0" WHEN RESULT IS INTEGER 
 
 In order to make things more elegant, I've introduced this little step:
@@ -119,22 +121,140 @@ Methods operation_to_message can be dangerous because in case a new line will be
 the method would not return the word we wont to print. We solve this problem just assigning
 the value to the variable 'word' and returning it at the end of the method:
 
-def opearation_to_message(op)
-  word = case op
-         when '1'
-           'Adding'
-         when '2'
-           'Subtracting'
-         when '3'
-           'Multiplying'
-         when '4'
-           'Dividing'
-         end
-  word
-end
+	def opearation_to_message(op)
+		word = case op
+					 when '1'
+				 	  'Adding'
+				 	 when '2'
+				 	   'Subtracting'
+					 when '3'
+						 'Multiplying'
+					 when '4'
+						 'Dividing'
+					 end
+		word
+	end
+
+JUST ONE PROBLEM! Rubocop set an alert saying the use of word is redundant.
+
+:::::::::::: LOCALIZATION
+
+Next step is extracting messages in the program to 'filecalculator_messages.yml'.
+This yaml file helps us to set up localization for our program.
+Inside the file there will be all the English string, plus strings of any other
+language.
+
+Messages are saved in calculator_messages.yml file, following a 'hash style':
+
+	welcome: "Welcome to Calculator! Enter your name:"
+	valid_name: "Make sure to enter a valid name."
+
+On top of program we must set:
+
+	require 'yaml'
+	MESSAGES = YAML.load_file('calculator_messages.yml')
+
+Now, running 'puts MESSAGES.inspect' we can see that the saved data is threaten
+as a hash:
+
+	{
+	  "welcome" => "Welcome to Calculator! Enter your name:",
+		"valid_name" => "Make sure to use a valid name.",
+		"hi" => "Hi ",
+		...
+	}
+
+This means that MESSAGES is a hash and we can get its elements like this:
+
+ MESSAGES['welcome']  # => "Welcome to Calculator! Enter your name:"
+
+So, inside our program we can set:
+
+	prompt(MESSAGES['welcome'])
 
 
+But the exercise is asking to go further and set into yaml file strings of a second language
+(in my case Italian):
+
+	en:
+		welcome: "Welcome to Calculator! Enter your name:"
+		valid_name: 'Make sure to use a valid name.'
+		.......
+
+	it:
+		welcome: "Benvenuta/o in Calculator! Inserisci il tuo nome:"
+		valid_name: 'Accertarsi di utilizzare un nome valido.'
+		.......
+
+Finally the variable MESSAGES will be a hash containing more hashes:
+
+	{
+		"en" =>
+			{ 
+			"welcome" => "Welcome to Calculator! Enter your name:",
+			"valid_name" => "Make sure to use a valid name.",
+			"hi" => "Hi ",
+			...
+			},
+
+		"it" =>
+			{ 
+			"welcome" => "Benvenuta/o in Calculator! Inserisci il tuo nome:",
+			"valid_name" => "Accertarsi di utilizzare un nome valido.",
+			"hi" => "Ciao ",
+			...
+			}
+	}
+
+and this is the final version of our code:
+
+	LANGUAGE = chosen_language
+	require 'yaml'
+	MESSAGES = YAML.load_file('calculator_messages.yml')
+
+	def messages(message, lang='en')
+		MESSAGES[lang][message]
+	end
 
 
+- LANGUAGE (in my case) will be set to 'en' or 'it'.
 
+- The 'messages' method takes two arguments:
+	- message: name of a string saved into yaml file
+	- lang ('en' by default): 'en' or 'it'
+  - the returned value is: MESSAGES[lang][message]
+  	ex. MESSAGES['it']['welcome'] # => 'Benvenuta/o in Calculator! Inserisci il tuo nome:'
+
+Inside the program we can see the interact part with 'prompt' method (where possible).
+Here an example:
+
+	prompt(messages('welcome', LANGUAGE))
+
+Sometimes, mainly because string interpolation with yaml file isn't an easy task, you might
+see 'puts' or 'print' methods instead of 'prompt'.
+
+I've finally write at the beginning of the program, a loop to ask the user which language
+wants:
+
+	chosen_language = ''
+	loop do
+		puts("\nSelect language / Selezionare lingua")
+		puts <<-MSG
+		  1) English
+		  2) Italiano
+		MSG
+		chosen_num = gets.chomp
+		case chosen_num
+		when '1'
+		  chosen_language = 'en'
+		  break
+		when '2'
+		  chosen_language = 'it'
+		  break
+		else
+		  puts "\nNot valid number - Numero non valido\n\n"
+		end
+	end
+
+	LANGUAGE = chosen_language
 
