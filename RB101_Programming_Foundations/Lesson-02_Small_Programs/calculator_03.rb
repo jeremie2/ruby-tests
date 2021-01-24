@@ -23,21 +23,21 @@ LANGUAGE = chosen_language
 require 'yaml'
 MESSAGES = YAML.load_file('calculator_messages.yml')
 
+################### METHODS
 def messages(message, lang='en')
   MESSAGES[lang][message]
 end
 
-################### METHODS
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
-def valid_integer?(num)
-  num.to_i().to_s() == num
+def valid_number?(num)
+  num.to_i().to_s() == num || num.to_f().to_s() == num
 end
 
-def valid_float?(num)
-  num.to_f().to_s() == num
+def denominator_zero?(num, first_or_second_num, operator)
+  first_or_second_num == 'second_number' && operator == '4' && num == '0'
 end
 
 def set_number(first_or_second_num, operator)
@@ -47,13 +47,10 @@ def set_number(first_or_second_num, operator)
     num = Kernel.gets().chomp()
     num.gsub!(',', '.') if num.include?(',')
 
-    if first_or_second_num == 'second_number' && operator == '4' && num == '0'
+    if denominator_zero?(num, first_or_second_num, operator)
       prompt(messages('not_zero_divide', LANGUAGE))
-    elsif first_or_second_num == 'second_number' && (valid_integer?(num) || valid_float?(num))
+    elsif valid_number?(num)
       num = num.to_f
-      break
-    elsif valid_integer?(num) || valid_float?(num)
-      valid_integer?(num) ? num = num.to_i : num = num.to_f
       break
     else
       prompt(messages('not_valid_number', LANGUAGE))
