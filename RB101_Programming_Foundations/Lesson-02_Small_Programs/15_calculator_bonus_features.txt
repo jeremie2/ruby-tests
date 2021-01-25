@@ -57,48 +57,58 @@ number type... or, well... we could but things get complicated.
 
 Then I thought to convert the entered number to int or float while users enter numbers.
 I've created the set_number(first_or_second_num, operator) method:
+(To make things easier the method return a float number.)
 
 	def set_number(first_or_second_num, operator)
 		num = ''
 		loop do
-		  prompt(messages(first_or_second_num, LANGUAGE))
-		  num = Kernel.gets().chomp()
-		  num.gsub!(',', '.') if num.include?(',')
-
+		  num = point_replace_comma(first_or_second_num)
 		  if denominator_zero?(num, first_or_second_num, operator)
 		    prompt(messages('not_zero_divide', LANGUAGE))
 		  elsif valid_number?(num)
-		    num = num.to_f
 		    break
 		  else
 		    prompt(messages('not_valid_number', LANGUAGE))
 		  end
 		end
+		num.to_f
+	end
+
+the method uses 3 sub-methods:
+  
+  - replace commas with points (5.5 instead 5,5)
+  
+	def point_replace_comma(first_or_second_num)
+		prompt(messages(first_or_second_num, LANGUAGE))
+		num = Kernel.gets().chomp()
+		num.gsub!(',', '.') if num.include?(',')
 		num
 	end
 
-plus one sub-method 'denominator_zero?' when 2nd number is denominator == 0.
+  - it handles ZeroDivisionError if division has been selected (operator == '4' means division)
 
-def denominator_zero?(num, first_or_second_num, operator)
-  first_or_second_num == 'second_number' && operator == '4' && num == '0'
-end
+	def denominator_zero?(num, first_or_second_num, operator)
+		first_or_second_num == 'second_number' && operator == '4' && num == '0'
+	end
 
-The method takes in consideration handling ZeroDivisionError if division has been
-selected (operator == '4' means division). The if/else statement related to the 2nd number,
-must be evaluated before the others!!!
-
-To make things easier I've set a valid number to float. 
-
+	- put together check for int and float numbers
+	def valid_number?(num)
+		num.to_i().to_s() == num || num.to_f().to_s() == num
+	end
+  
 
 :::::::::::: TAKING OFF ".0" WHEN RESULT IS INTEGER 
 
-In order to make things more elegant, I've introduced this little step:
+In order to make things more 'elegant', I've introduced this step:
 
-  result = result.to_i if result - result.to_i == 0.0
+  if result - result.to_i == 0.0
+    result = result.to_i
+  else
+    result = result.round(2)
+  end
 
-In case we where working with float and the result is got point-zero after a number (e.g. 
-12.0, 5.0, etc...), the point-zero will be moved.
-
+# float to integer, e.g. 23.00 => 23
+# rounded float, e.g. 23.152 => 23.15
 
 :::::::::::: SAFER CASE STATEMENT
 

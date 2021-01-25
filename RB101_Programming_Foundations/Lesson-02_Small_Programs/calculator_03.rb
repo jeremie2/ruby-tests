@@ -40,23 +40,26 @@ def denominator_zero?(num, first_or_second_num, operator)
   first_or_second_num == 'second_number' && operator == '4' && num == '0'
 end
 
+def point_replace_comma(first_or_second_num)
+  prompt(messages(first_or_second_num, LANGUAGE))
+  num = Kernel.gets().chomp()
+  num.gsub!(',', '.') if num.include?(',')
+  num
+end
+
 def set_number(first_or_second_num, operator)
   num = ''
   loop do
-    prompt(messages(first_or_second_num, LANGUAGE))
-    num = Kernel.gets().chomp()
-    num.gsub!(',', '.') if num.include?(',')
-
+    num = point_replace_comma(first_or_second_num)
     if denominator_zero?(num, first_or_second_num, operator)
       prompt(messages('not_zero_divide', LANGUAGE))
     elsif valid_number?(num)
-      num = num.to_f
       break
     else
       prompt(messages('not_valid_number', LANGUAGE))
     end
   end
-  num
+  num.to_f
 end
 
 def operation_to_message(op)
@@ -124,7 +127,11 @@ loop do # main loop
              number1 / number2
            end
 
-  result = result.to_i if result - result.to_i == 0.0
+  if result - result.to_i == 0.0
+    result = result.to_i # e.g. 23.00 => 23
+  else
+    result = result.round(2) # e.g. 23.152 => 23.15
+  end
 
   print('=> ', messages('result', LANGUAGE), "#{result}\n")
   prompt(messages('another_calculation', LANGUAGE))
