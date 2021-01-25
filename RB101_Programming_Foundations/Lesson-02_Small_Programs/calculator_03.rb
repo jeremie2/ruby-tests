@@ -40,8 +40,7 @@ def denominator_zero?(num, first_or_second_num, operator)
   first_or_second_num == 'second_number' && operator == '4' && num == '0'
 end
 
-def point_replace_comma(first_or_second_num)
-  prompt(messages(first_or_second_num, LANGUAGE))
+def point_replace_comma
   num = Kernel.gets().chomp()
   num.gsub!(',', '.') if num.include?(',')
   num
@@ -50,7 +49,8 @@ end
 def set_number(first_or_second_num, operator)
   num = ''
   loop do
-    num = point_replace_comma(first_or_second_num)
+    prompt(messages(first_or_second_num, LANGUAGE))
+    num = point_replace_comma
     if denominator_zero?(num, first_or_second_num, operator)
       prompt(messages('not_zero_divide', LANGUAGE))
     elsif valid_number?(num)
