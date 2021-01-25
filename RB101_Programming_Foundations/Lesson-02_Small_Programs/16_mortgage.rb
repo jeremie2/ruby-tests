@@ -27,7 +27,7 @@
 # m, p, j, and n; use explicit names. For instance, you may want to use
 # loan_amount instead of p.
 #
-#Finally, don't forget to run your code through Rubocop.
+# Finally, don't forget to run your code through Rubocop.
 #
 # Hints:
 #
