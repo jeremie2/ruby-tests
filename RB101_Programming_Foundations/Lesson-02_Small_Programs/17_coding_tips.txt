@@ -55,9 +55,9 @@ If the methods in your program are correctly compartmentalized, it makes program
 
 ::: DISPLAYING OUTPUT
 
-	def welcome
-		puts " "
-	end
+  def welcome
+    puts " "
+  end
 
 It's not obvious whether a method called welcome returns a string.
 print_welcome, say_welcome, display_welcome... would be better.
