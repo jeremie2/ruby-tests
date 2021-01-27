@@ -22,7 +22,8 @@ The block acts as an argument to the method. (In the same way a local variable
                                               can be passed as en argument to
                                               a method at invocation).
 
-The way that an argument is used, whether it is a method parameter or a block, depends on how the method is defined
+The way that an argument is used, whether it is a method parameter or a block,
+depends on how the method is defined.
 
 
 :::: METHOD PARAMETER NOT USED
@@ -92,7 +93,9 @@ method invocation.
 'yeld' is the keyword that activates the interaction with the block.
 
 
-When invoking a method with a block, we aren't just limited to executing code within the block; depending on the method definition, the method can use the return value of the block to perform some other action.
+When invoking a method with a block, we aren't just limited to executing code
+within the block; depending on the method definition, the method can use the
+return value of the block to perform some other action.
 
   a = "hello"
 
