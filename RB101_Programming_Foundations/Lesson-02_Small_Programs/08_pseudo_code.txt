@@ -29,8 +29,8 @@ After iterating through the collection, return the saved value.
 We can set some keywords so that this first example can look
 closer to a real program.
 
-keyword   meaning:
-START               start of the program
+keywords meaning:
+START               program starts
 SET                 sets a variable we can use for later
 GET                 retrieve input from user
 PRINT               displays output to user
@@ -181,8 +181,4 @@ def random_array(integers)
   integers.each {|elem| new_array << rand(10) }
   new_array
 end
-
-
-
-
 
