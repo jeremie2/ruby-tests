@@ -44,8 +44,8 @@ on, when users enter the two numbers.
 
 :::::::::::: WORKING WITH INTEGER AND FLOAT
 
-The original code uses a 'case' statement to choose the select the chosen operation
-to perform. During the operation every number is converted to int or float:
+The original code uses a 'case' statement to choose the operation to perform.
+During the operation every number is converted to int or float:
 
   when '1'
     number1.to_i + number2.to_i
@@ -55,9 +55,8 @@ to perform. During the operation every number is converted to int or float:
 But allowing users to enter float numbers, means that we can't wait this last step to set
 number type... or, well... we could but things get complicated.
 
-Then I thought to convert the entered number to int or float while users enter numbers.
+To make things easier I have set just a string-float convertion while users enter numbers.
 I've created the set_number(first_or_second_num, operator) method:
-(To make things easier the method return a float number.)
 
 	def set_number(first_or_second_num, operator)
 		num = ''
@@ -75,7 +74,7 @@ I've created the set_number(first_or_second_num, operator) method:
 		num.to_f
 	end
 
-the method uses 3 sub-methods:
+the method uses other two sub-methods:
   
   - replace commas with points (5.5 instead 5,5)
   
@@ -85,17 +84,12 @@ the method uses 3 sub-methods:
 		num
 	end
 
-  - it handles ZeroDivisionError if division has been selected (operator == '4' means division)
+  - ZeroDivisionError handling if division has been selected (operator == '4' means division)
 
 	def denominator_zero?(num, first_or_second_num, operator)
 		first_or_second_num == 'second_number' && operator == '4' && num == '0'
 	end
 
-	- put together check for int and float numbers
-	def valid_number?(num)
-		num.to_i().to_s() == num || num.to_f().to_s() == num
-	end
-  
 
 :::::::::::: TAKING OFF ".0" WHEN RESULT IS INTEGER 
 
@@ -136,10 +130,10 @@ JUST ONE PROBLEM! Rubocop set an alert saying the use of word is redundant.
 
 Next step is extracting messages in the program to 'filecalculator_messages.yml'.
 This yaml file helps us to set up localization for our program.
-Inside the file there will be all the English string, plus strings of any other
+Inside the file there will be all the English strings, plus strings of any other
 language.
 
-Messages are saved in calculator_messages.yml file, following a 'hash style':
+Messages are saved in calculator_messages.yml file, following a sort of 'hash' style:
 
 	welcome: "Welcome to Calculator! Enter your name:"
 	valid_name: "Make sure to enter a valid name."
@@ -228,8 +222,8 @@ Here an example:
 Sometimes, mainly because string interpolation with yaml file isn't an easy task, you might
 see 'puts' or 'print' methods instead of 'prompt'.
 
-I've finally write at the beginning of the program, a loop to ask the user which language
-wants:
+I've finally written at the beginning of the program, a loop to ask the user which language
+wants, so that LANGUAGE will be set to 'en' or 'it':
 
 	chosen_language = ''
 	loop do

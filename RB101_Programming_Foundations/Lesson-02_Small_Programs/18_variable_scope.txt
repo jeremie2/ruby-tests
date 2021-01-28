@@ -25,12 +25,12 @@ but not vice versa.
 
 
 1- Inner scope can access outer scope variables.
-2- You can change variables from an inner scope and have that change affect
+2- You can change variables from an inner scope and have that change affects
    the outer scope.
 
 (!) We have to be very careful that we're not accidentally re-assigning an 
     existing variable in an outer scope.
-    This is a big reason for avoiding single-letter variable names.
+    Thats's a good reason to avoid single-letter variable names.
 
 Inner scope variables cannot be accessed in outer scop:
 
@@ -46,6 +46,7 @@ Inner scope variables cannot be accessed in outer scop:
 
 
 :::: PEER SCOPES DO NOT CONFLICT
+
 From an inner scope you can't see what has been created in another inner scope:
 
   2.times do
@@ -111,10 +112,9 @@ In this case 'puts' will use the |n| parameter so that the result will be:
 
 The internal flow variable takes precedence and also it's not possible
 to change the variable in the outer scope.
-That is called 'variable shadowing'.
+That's called 'variable shadowing'.
 
-To prevent problems such problems, it's a good idea to use long and
-descriptive variable's names!
+To prevent such problems, it's a good idea to use descriptive variable's names!
 
 
 :::: VARIABLES AND METHOD DEFINITIONS
@@ -193,3 +193,4 @@ from outside a block:
   end
 
   puts MY_TEAM    # => Phoenix Suns
+  

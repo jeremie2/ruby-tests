@@ -70,7 +70,6 @@ nil && 1 / 0         # nil
 5 || 1 / 0           # 5
 
 
-
 ::: TRICKY BLOCKS
 
 array = [1, 2, 3]

@@ -93,7 +93,7 @@ method invocation.
 'yeld' is the keyword that activates the interaction with the block.
 
 
-When invoking a method with a block, we aren't just limited to executing code
+When invoking a method with a block, we aren't just limited to execut code
 within the block; depending on the method definition, the method can use the
 return value of the block to perform some other action.
 
@@ -132,3 +132,4 @@ If the method is defined to use a block, then the scope of the block can provide
 - Method definition sets a scope for local variables in terms of parameters and
   interaction with blocks.
 - Method invocation uses the scope set by the method definition.
+

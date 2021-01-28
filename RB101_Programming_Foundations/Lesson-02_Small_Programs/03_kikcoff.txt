@@ -5,7 +5,7 @@ Goal of the lesson:
   → building logical mindset
 
 Topics:
-- PROCEDURAL PROGRAMMING: still not clear what it is but basically it has something to do with building a program with logical step by step using basic functionalities we already know.
+- PROCEDURAL PROGRAMMING: still not clear what it is but basically it has something to do with building a program with logical 'step by step' using basic functionalities we already know.
 - OBJECT PROGRAMMING: something more sophisticated that will add more benefits in programming.
 
 Learning to code vs learning to program:

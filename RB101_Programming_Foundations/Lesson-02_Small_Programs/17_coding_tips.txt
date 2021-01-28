@@ -4,9 +4,9 @@
 ::: BURN
 
 Every time we discover a new rule, we don't really get it till we have some big problem
-with that specific rule... spending some hours trying to find the solution.
+with that specific rule... which means spending hours trying to find the solution.
 
-It's typical while debugging, while after 2/3 hours we discover a missing comma...
+It's typical while debugging finding just a missing comma after 2/3 hours of crazy search.
 That's the point where we will never forget what happened! That's our 'burn'.
 
 We can shortly say:
@@ -18,7 +18,8 @@ We can shortly say:
 
 Use always meaningful names!
 If you name a variable 'a' or 'x', you'll forget in the future what was for.
-The only exception: very small block of code with variables you use for 1/2 lines, like an index.
+The only exception: very small block of code with variables you use for 1/2 lines
+(e.g. each method).
 
 
 ::: NAMING CONVENTIONS
@@ -33,7 +34,7 @@ Using Rubocop is always a good help.
 
 ::: MUTATING CONSTANTS
 
-Constants are immutable. Don't change their value.
+Constants should be immutable. Don't change their value.
 
 
 ::: METHODS
@@ -70,12 +71,13 @@ to look up the implementation.
 ::: MISCELLANEOUS TIPS
 
 - Your program should probably only have just one exit point. 
-- Indentation: 2 spaces, not tabs.
+- Indentation: 2 spaces, no tabs.
 - Name your methods from the perspective of using them later.
-  if you have an array of cards, and you want to write a method to find the ace, your method should be called find_ace.
+  If you have an array of cards, and you want to write a method to find the ace, your method 
+  should be called find_ace.
   ace = find_ace(cards) and NOT find_ace_from_cards(cards)...
 - Know when to use a "do/while" vs a "while" loop. Remember that with while/do
-  we have to inizialize a variable.
+  we have to initialize a variable.
 
 
 ::: TRUTHINESS
@@ -91,8 +93,9 @@ is equivalent of:
 
 A code like this evaluate always to true the first if statement:
 
-  if some_variable = 2          # it isn't a comparision but an assignament
-    puts "some_variable is 2"   # which evaluate aways to true
+  if some_variable = 2          # it isn't a comparison but an assignment
+    puts "some_variable is 2"   # which evaluate always to true
   else
     puts "some_variable is not 2"
   end
+  

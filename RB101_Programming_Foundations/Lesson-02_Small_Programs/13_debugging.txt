@@ -29,11 +29,11 @@ is wrong. Otherwise, if we don't have any clue, it's time to find some documenta
 
 - Documentation:
   The official https://ruby-doc.org/ one of the best place where to look.
-  If the official doc looks too cryptic, go to search engine!
+  If the official doc looks too cryptic, go to search engines!
 
 - Search Engine:
   It's a good thing to search the whole string "NoMethodError: undefined method `name'
-  for nil:NilClass". But some information might be too specific like 'name', if you
+  for nil:NilClass". But.. some information might be too specific like 'name'. If you
   don't get infos, try to search without 'name'.
   Avoid using other specific info like personal directories (/home/user_name/..).
   If you find links related to other programming language, just preface "Ruby" in
@@ -49,7 +49,7 @@ is wrong. Otherwise, if we don't have any clue, it's time to find some documenta
 
 1. Reproduce the Error:
    Programmers need a deterministic way to consistently reproduce the problem, and only
-   then can we start to isolate the root cause.
+   then we can start to isolate the root cause.
    Your app can get more sophisticated, including external dependencies. The app works
    on your system but fails on another. Being able to reproduce the error is a big help
    to solve the problem.
@@ -146,11 +146,12 @@ Later on we'll learn about automated tests.
 2. Rubber Duck
    https://en.wikipedia.org/wiki/Rubber_duck_debugging
    Another way to say 'Line by Line' :)
-   Anyway trying to explain something to someone that doesn't know the topic, is one 
+   Anyway, trying to explain something to someone that doesn't know the topic, is one 
    of the best way of not give anything for granted.
    
 3. Walking Away
-   After having spent a long time on a problem, it's possible that the brain is tired or in some way is at the moment not able to exit from a dead end loop.
+   After having spent a long time on a problem, it's possible that the brain is tired or
+   in some way is at the moment not able to exit from a dead end loop.
    Doing something else will refresh the mind, while actually the brain is still working
    in background.
    Often, after a pause, it happens that you see the problem from a different point of view
@@ -220,3 +221,4 @@ Later on we'll learn about automated tests.
 
 4. Using a Debugger
    Pry can be used as a debugger, but at the moment this is an advanced topic.
+   

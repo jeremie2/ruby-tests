@@ -7,6 +7,7 @@ Static code analyzer, gives advice about style and possible logic error:
 Here a list of style conventions:
 https://github.com/rubocop-hq/ruby-style-guide
 
+
 ::: INSTALLATION (possibly version 0.86.0):
 gem install rubocop --version 0.86.0
 
@@ -43,6 +44,7 @@ Kernel.puts("hello world")
 
  
 ::: rubocop.yml and FrozenStringLiteralCommen
+
 Rubocop will look for a .rubocop.yml file in the root directory it's executed in and apply the configuration settings.
 
 The FrozenStringLiteralComment is too strict for our lessons. We can set the

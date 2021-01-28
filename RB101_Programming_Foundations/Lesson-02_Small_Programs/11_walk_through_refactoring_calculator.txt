@@ -19,7 +19,7 @@ What calculator-01 does is:
 In calculator-02.rb there will be some improvement:
 
 :::: PROMPT MESSAGES:
-  - we want to improve the visual stile of messages adding the
+  - we want to improve the visual style of messages adding the
     string '=> ' at the beginning of each line
     
   - too many repetitions! We create prompt(message) method:
@@ -33,8 +33,8 @@ In calculator-02.rb there will be some improvement:
 
     
 :::: VALID NUMBER?
-  - the flowchart shows "valid number" checks for the two integers
-    we create valid_number?(num) method:
+  - the flowchart shows "valid number" checks for the two integers.
+    We create valid_number?(num) method:
     
     def valid_number?(num)
       num.to_i() != 0
@@ -175,7 +175,7 @@ Things to think about:
 2. It looks like you can call to_i or to_f to convert strings to integers
    and floats, respectively. Look up the String#to_i and String#to_f documentation
    in Ruby docs and look at their various examples and use cases.
-- Extraneous characters past the end of a valid number are ignored. If there is not
+- Extraneous characters past the end of a valid number are ignored. If there isn't
   a valid number at the start of str, 0.0 is returned. This method never raises an
   exception.
   #to_i can convert string with binary values: '101'.to_i(2) # => 5
@@ -192,15 +192,15 @@ Things to think about:
 
   def opearation_to_message(op)
     output = case op
-      when '1'
-        'Adding'
-      when '2'
-        'Subtracting'
-      when '3'
-        'Multiplying'
-      when '4'
-        'Dividing'
-      end
+             when '1'
+               'Adding'
+             when '2'
+               'Subtracting'
+             when '3'
+               'Multiplying'
+             when '4'
+               'Dividing'
+             end
       
     # some more code
     # ...
@@ -234,3 +234,4 @@ Things to think about:
    them into some configuration file and access by key? This would allow us
    to manage the messages much easier, and we could even internationalize the
    messages. This is just a thought experiment, and no need to code this up.
+
