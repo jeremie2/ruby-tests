@@ -1,0 +1,164 @@
+
+::::: PASS BY VALUE
+
+When you "pass by value", the method only has a copy of the original object.
+No effect on the original object outside of the method.
+
+  def change_name(name)
+    name = 'bob'
+  end
+
+  name = 'jim'
+  change_name(name)
+  puts name           # => jim
+
+
+Note! This is NOT variable shadowing, main scope variable is not accessible
+to the method. 
+In this case it looks we have passed the variable to method by 'value'.
+
+
+::::: PASS BY REFERENCE
+
+When you pass by "reference", the operations within the method affect the
+original object.
+
+  def cap(str)
+    str.capitalize!
+  end
+
+  name = "jim"
+  cap(name)
+  puts name           # => Jim
+
+
+  WHEN AN OPERATION WITHIN THE METHOD MUTATES THE CALLER, IT WILL AFFECT THE ORIGINAL OBJECT
+
+Unfortunately we have to learn which methods change the caller:
+- when a method has "!", like "capitalize!", we know it changes the caller.
+  But other methods can do that without "!", like Array#<<.
+- re-assignment within a method is not considered a destructive operation:
+
+    def add_name(arr, name)
+      arr = arr + [name]
+    end
+
+    names = ['bob', 'kim']
+    add_name(names, 'jim')
+    puts names.inspect        # => ["bob", "kim"]
+
+  Note!
+  If you re-assign values OUTSIDE a method, this will affect the original value:
+
+    names = add_name(names, 'jim')
+    puts names.inspect       # => ["bob", "kim", "jim"]
+
+  Of course, using a destructive method inside method definition will change things:
+
+    def add_name(arr, name)
+      arr = arr << name
+    end
+
+    names = ['bob', 'kim']
+    add_name(names, 'jim')
+    puts names.inspect        # => ["bob", "kim", "jim"]
+
+
+WE CAN'T DEFINITELY SAY RUBY IS A PASS-BY-VALUE OR PASS-BY-REFERENCE LANGUAGE.
+IN A WAY, RUBY IS BOTH!
+
+We have always to look at the methods we use and see if they change the caller.
+
+
+::::: VARIABLES AS POINTERS
+
+Variables are pointers to physical space in memory.
+Variables are essentially labels we create to refer to some physical memory address in your computer:
+
+  a = "hi there"
+  b = a
+  a = "not here"
+  puts b          # => "hi there"
+                           _____________
+                          |             |
+  a = "hi there"      a → |  "hi there" |
+                          |_____________|
+
+                           _____________
+                      a → |             |
+  b = a                   |  "hi there" |
+                      b → |_____________|
+
+                           _____________
+                          |             |  a assigned to a completely different
+                      a → |  "not here" |  address in memory. It's now pointing
+                          |_____________|  to a new string.
+  a = "not here"           _____________
+                          |             |
+                      b → |  "hi there" |
+                          |_____________|
+
+
+  a = "hi there"
+  b = a
+  a << ", Bob"
+  puts b          # => "hi there, Bob"
+
+                           _____________
+                          |             |
+  a = "hi there"      a → |  "hi there" |
+                          |_____________|
+
+                           _____________
+                      a → |             |
+  b = a                   |  "hi there" |
+                      b → |_____________|
+
+                           ___________________
+                      a → |                   |  It's NOT a reassignment, just
+  a << ", Bob"            |  "hi there, Bob"" |  modifying the existing string
+                      b → |___________________|  and b still points to it.
+
+
+Some operations mutate the address space in memory, but others simply change
+the variable to point to a different address space.
+
+Example:
+
+  a = [1, 2, 3, 3]
+  b = a
+  c = a.uniq
+
+  # a = b = [1, 2, 3, 3]
+  # c = [1, 2, 3]
+
+  but using uniq! we modify the caller:
+
+  a = [1, 2, 3, 3]
+  b = a
+  c = a.uniq!
+
+  # a = b = c = [1, 2, 3]
+
+
+Example:
+
+  def test(b)
+    b.map {|letter| "I like the letter: #{letter}"}
+  end
+
+  a = ['a', 'b', 'c']
+  test(a)
+
+  # a = ['a', 'b', 'c']
+
+  but using map! we modify the caller:
+
+  def test(b)
+    b.map! {|letter| "I like the letter: #{letter}"}
+  end
+
+  a = ['a', 'b', 'c']
+  test(a)
+
+  # a = ["I like the letter: a", "I like the letter: b", "I like the letter: c"]
