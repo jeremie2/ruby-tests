@@ -47,12 +47,6 @@ Unfortunately we have to learn which methods change the caller:
     add_name(names, 'jim')
     puts names.inspect        # => ["bob", "kim"]
 
-  Note!
-  If you re-assign values OUTSIDE a method, this will affect the original value:
-
-    names = add_name(names, 'jim')
-    puts names.inspect       # => ["bob", "kim", "jim"]
-
   Of course, using a destructive method inside method definition will change things:
 
     def add_name(arr, name)

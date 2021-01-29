@@ -1,0 +1,172 @@
+
+VARIABLE REFERENCES AND MUTABILITY OF RUBY OBJECTS
+
+Some languages copies an object when assigned to a variable.
+Others create a link (reference/binding) between variable and object.
+
+
+::::: VARIABLES AND REFERENCES
+
+Objects can be assigned to variables:
+
+  >> greeting = 'Hello'
+  => "Hello"
+  greeting.object_id
+  => 920
+
+Variable 'greeting' is associated to String object "Hello".
+'greeting' references the String object or the variable is bound to
+the String object.
+
+
+  greeting
+  obj-id 920       =====>      "Hello" (String)
+
+
+'greeting' stores object id.
+Every object in Ruby has a unique object id.
+
+  >> whazzup = greeting
+  => "Hello"
+
+  >> greeting
+  => "Hello"
+
+  >> whazzup
+  => "Hello"
+
+  >> greeting.object_id
+  => 920
+
+  >> whazzup.object_id
+  => 920
+
+
+'greeting' and 'whazzup' not only reference a string with same value,
+that string is the same one:
+
+
+  greeting
+  obj.920        =====>
+                         \
+                           =====>  "Hello" (String)
+                         /
+  whazzup        =====>
+  obj.920
+
+
+::::: REASSIGNMENT
+
+This is what happens by reassigning one of the two variable:
+
+  >> greeting = 'Dude!'
+  => "Dude!"
+
+  >> puts greeting
+  => "Dude!"
+
+  >> puts whazzup
+  => "HELLO!"
+
+  >> greeting.object_id
+  => 940
+
+  >> whazzup.object_id
+  => 920
+
+
+the two variable refer now to different objects:
+
+
+  greeting
+  obj.940        =====>   "Dude!" (String)
+
+
+  whazzup        =====>   "Hello" (String)
+  obj.920
+
+
+Reassignment to a variable doesn’t change the object referenced by that
+variable. Instead, the variable is bound to a completely new object.
+
+
+::::: MUTABILITY
+
+With 'mutability' we mean that an object stored into a memory address
+can change. NOT assigning a new value, but performing an operation so that
+object_id still remains the same, but the value is changed:
+
+  a_word
+  obj.960       =====>   "ciao" (String)
+
+                 ||
+                 ||   Some operations...
+                \  /
+                 \/
+  a_word
+  obj.960       =====>   "miao" (String)
+
+
+::: IMMUTABLE OBJECTS
+
+In Ruby this are immutable objects:
+
+- numbers 
+- boolean
+- nil
+- range objects (e.g., 1..10)
+
+The only way to change a number assigned to a variable, is just
+assigning a new number to that variable... the same way we have changed
+the value of greeting from "Hello" to "Dude!".
+
+
+::: MUTABLE OBJECTS
+
+In Ruby most objects are mutable.
+This is possible because of SETTER methods or CALLING methods.
+
+- Setter method: is defined inside a class.
+
+An example is Array#[]= method:
+
+  a = %w(a b c)           # => ["a", "b", "c"]
+  a.object_id             # => 920
+  a[1] = '-'              # calls setter method
+  a                       # => ["a", "-", "c"]
+  a.object_id             # => 920
+
+Looking more in depth, it's interesting to note that the array
+is still the same object (object_id 920), but the changed
+element a[1] has been reassigned (object_id 960 → object_id 1000):
+
+
+a           => a[0]        =>   'a'
+(obj.920)      (obj.940)        (string)
+
+            => a[1]        =>   'b'
+               (obj.960)        (string)
+
+            => a[2]        =>   'c'
+               (obj.980)        (string)
+
+
+After performing a[1] = '-':
+
+
+a           => a[0]        =>   'a'
+(obj.920)      (obj.940)        (string)
+
+            => a[1]        =>   '-'
+               (obj.1000)       (string)
+
+            => a[2]        =>   'c'
+               (obj.980)        (string)
+
+
+::: CONCLUSION
+
+We’ve established a mental model that says that Ruby is pass by value for
+immutable objects, pass by reference otherwise. This model isn’t perfect,
+but it can be used to help determine whether the object associated bound
+to an argument will be modified. 
