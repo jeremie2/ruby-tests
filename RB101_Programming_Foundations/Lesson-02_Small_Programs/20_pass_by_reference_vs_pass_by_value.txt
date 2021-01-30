@@ -32,7 +32,7 @@ original object.
   puts name           # => Jim
 
 
-  WHEN AN OPERATION WITHIN THE METHOD MUTATES THE CALLER, IT WILL AFFECT THE ORIGINAL OBJECT
+  WHEN AN OPERATION WITHIN THE METHOD MUTATES THE CALLER, IT WILL AFFECT THE ORIGINAL OBJECT.
 
 Unfortunately we have to learn which methods change the caller:
 - when a method has "!", like "capitalize!", we know it changes the caller.

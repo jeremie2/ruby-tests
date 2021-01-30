@@ -1,0 +1,262 @@
+
+MUTATING AND NON-MUTATING METHODS
+
+A method is said to be non-mutating with respect to an argument or its calling object if it does not modify it.
+
+A method is said to be mutating with respect to an argument or its caller if it modifies it.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Let's see an example:
+
+  def fix(value)
+    value.upcase!
+    value.concat('!')
+    value
+  end
+
+  s = 'hello'
+  t = fix(s)
+
+Running this code which value have 's' and 't' at the end?
+
+  s = "HELLO!"
+  t = "HELLO!"
+
+Let's see why...
+
+- We start by passing s to fix; this binds the String represented by “hello”
+  to value. In addition, s and value are now aliases for the String.
+- Next, we call #upcase! which converts the String to uppercase. A new String
+  is not created; the String that is referenced by both s and value now contains
+  the value "HELLO".
+- We then call #concat on value, which also modifies value instead of creating
+  a new String; the String now has a value of "HELLO!", and both s and value
+  reference that object.
+- Finally the returned value of "HELLO!" is stored in t.
+
+As confirmation that s and t point to the same object, we can run:
+
+  s.object_id == t.object_id
+
+which return true.
+
+The only place we create a new String in this code is when we assign “hello”
+to s. The rest of the time, we work directly with that object, modifying it
+as needed. 
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Tings are quite different just with a small change inside fix() method:
+(value = value.upcase) instead of (value.upcase!):
+
+  def fix(value)
+    value = value.upcase
+    value.concat('!')
+    value
+  end
+
+  s = 'hello'
+  t = fix(s)
+
+In this modified code, we assign the return value of value.upcase back to value.
+Unlike #upcase!, #upcase does not modify the String referenced by value; instead,
+it creates a new copy of the String referenced by value, modifies the copy, and
+then returns a reference to the copy. We then bind value to the returned reference.
+
+The result will be:
+
+  s = "hello"
+  t = "HELLO!"
+
+to confirm these two object are different:
+
+  s.object_id == t.object_id
+
+will return false.
+(value = value.upcase) bound the return value of (value.upcase) to value; value now references a different object.
+
+
+                s = 'hello'
+  s
+  obj.1120        =====>   "hello" (String)
+
+
+
+                  fix(s)
+  s
+  obj.1120        =====>   "hello" (String)
+                         /
+              value     /
+              obj.1120
+
+
+
+          value = value.upcase
+  s
+  obj.1120        =====>   "hello" (String)
+
+  value           =====>   "HELLO" (String)
+  obj.1140
+
+
+
+          value = value.concat('!')
+  s
+  obj.1120        =====>   "hello" (String)
+
+  value           =====>   "HELLO!" (String)
+  obj.1140
+
+
+
+              return from fix
+  s
+  obj.1120        =====>   "hello" (String)
+
+  t               =====>   "HELLO!" (String)
+  obj.1140
+
+
+Assignment always binds the target variable on the left hand side of the = to the object referenced by the right hand side.
+The object originally referenced by the target variable is never modified.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+We must be careful when there's any mutating operation before assignment
+which might change the initial object:
+
+  def fix(value)
+    value << 'xyz'
+    value = value.upcase
+    value.concat('!')
+  end
+
+  s = 'hello'
+  t = fix(s)
+
+(value << 'xyz') mutates s in 'helloxyz'.
+Then (value = value.upcase) doesn't change s. upcase() doesn't change the
+caller, so what will be transformed in a upper case string with '!' is a
+copy of s.
+
+  s = 'helloxyz'
+  t = "HELLOXYZ!"
+
+
+::::::::::::::::::::::::
+
+Little variation: value = value.upcase!
+
+  def fix(value)
+    value = value.upcase
+    value.concat('!')
+    value
+  end
+
+  s = 'hello'
+  t = fix(s)
+
+This time upcase! changes directly the string object that both s and value
+are pointing. Then all the changes to value will affect also s.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+ASSIGNMAENT WITH OERATORS (*=, +=, and %=...) NEVER MUTETE OPERANDS
+
+>> s = 'Hello'
+=> "Hello"
+
+>> s.object_id
+=> 70101471465440
+
+>> s += ' World'     # this creates a new string object
+=> "Hello World"
+
+>> s
+=> "Hello World"
+
+>> s.object_id
+=> 70101474966820
+
+
+::::: MUTATING METHODS
+
+Most mutating method has '!' at the end of the name, like upcase!
+..but that isn't always true: concat()
+
+Other mutating methods are: #[]= and #<<
+
+
+::::: INDEXED ASSIGNMENT IS MUTATING
+
+str[3] = 'x'
+array[5] = Person.new
+hash[:age] = 25
+
+they always modify the original object. 
+
+But... remember that strings, array, etc.. are made of elements
+and when we change one of these elements, we do this assigning
+a new value to the single element.
+This means:
+
+  the string is still the same, but the new element is different
+  by the old one.
+
+>> a = [3, 5, 8]
+=> [3, 5, 8]
+
+>> a.object_id
+=> 70240541515340
+
+>> a[1].object_id
+=> 11
+
+>> a[1] = 9
+=> 9
+
+>> a[1].object_id    # reference to new object
+=> 19
+
+>> a
+=> [3, 9, 8]
+
+>> a.object_id
+=> 70240541515340
+
+
+::::: CONCATENATION IS MUTATING
+
+This is valid with strings, array and hash.
+Just remember that some classes define << for non-mutating action...
+read the documentation!
+
+>> s = 'Hello'
+=> "Hello"
+
+>> s.object_id
+=> 70101471465440
+
+>> s << ' World'
+=> "Hello World"
+
+>> s
+=> "Hello World"
+
+>> s.object_id
+=> 70101471465440
+
+
+::::: SETTERS ARE MUTATING
+
+Setter invocation looks like this:
+
+  person.name = 'Bill'
+  person.age = 23
+
+They work like in indexed assignment mutating the object (in this case the
+object 'person').
