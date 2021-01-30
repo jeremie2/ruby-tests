@@ -1,9 +1,11 @@
 
 MUTATING AND NON-MUTATING METHODS
 
-A method is said to be non-mutating with respect to an argument or its calling object if it does not modify it.
+A method is said to be non-mutating with respect to an argument or its calling 
+object if it does not modify it.
 
-A method is said to be mutating with respect to an argument or its caller if it modifies it.
+A method is said to be mutating with respect to an argument or its caller if it 
+modifies it.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -75,7 +77,8 @@ to confirm these two object are different:
   s.object_id == t.object_id
 
 will return false.
-(value = value.upcase) bound the return value of (value.upcase) to value; value now references a different object.
+(value = value.upcase) bound the return value of (value.upcase) to value; value 
+now references a different object.
 
 
                 s = 'hello'
@@ -119,7 +122,8 @@ will return false.
   obj.1140
 
 
-Assignment always binds the target variable on the left hand side of the = to the object referenced by the right hand side.
+Assignment always binds the target variable on the left hand side of the =
+to the object referenced by the right hand side.
 The object originally referenced by the target variable is never modified.
 
 
