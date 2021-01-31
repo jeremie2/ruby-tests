@@ -1,0 +1,79 @@
+
+OBJECT PASSING IN RUBY - PASS BY REFERENCE OR PASS BY VALUE
+
+
+:::::: EVALUATION STRATEGIES
+
+When passing objects, the most common strategies are known as
+STRICT EVALUATION strategies.
+
+The two most common 'strict evaluation' strategies are:
+- PASS BY VALUE: creates a copy of an object before passing it to methods;
+- PASS BY REFERENCE: a reference to an object will be passed. An alias will
+                    be set between argument and original object.
+
+It's quite common that the default strict evaluation strategy is 'pass by
+value'. 'Pass by reference' is used more when needed.
+Few languages are purely pass by value or pass by reference.
+
+
+When using IMMUTABLE objects there will be only a pass by value:
+
+  def plus(x, y)
+    x = x + y
+  end
+
+  a = 3
+  b = plus(a, 2)
+  puts a # 3
+  puts b # 5
+
+A number is immutable. When a is passed as argument to plus(), what is
+passed to variable x is just a copy of the original object. 
+In fact performing plus() doesn't affect a which is still = 3.
+
+
+:::::: IT’S REFERENCES ALL THE WAY DOWN
+
+Ruby’s variables don’t contain objects; they are merely references to objects. 
+
+  def print_id number
+    puts "In method object id = #{number.object_id}"
+  end
+
+  value = 33
+  puts "Outside method object id = #{value.object_id}"
+  print_id value
+
+We are passing here an immutable object, but that's the result:
+
+  Outside method object id = 67
+  In method object id = 67
+
+number and value reference the same object...
+
+       WHAT'S GOING ON???!
+
+While we can change which object is bound to a variable inside of a method,
+we can’t change the binding of the original arguments. We can change the
+objects if the objects are mutable, but the references themselves are immutable
+as far as the method is concerned.
+
+RUBY IS NEITHER PASS BY VALUE NOR PASS BY REFERENCE, BUT INSTEAD EMPLOYS A
+THIRD STRATEGY THAT BLENDS THE TWO STRATEGIES.
+
+
+:::::: FINAL MENTAL MODEL
+
+Which object passing strategy does ruby use?
+
+
+- PASS BY REFERENCE value is probably the most accurate answer, but it’s a hard
+  answer to swallow when learning ruby, and isn’t particularly helpful when 
+  trying to decide what will happen if a method modifies an argument – at least
+  not until you fully understand it.
+- PASS BY REFERENCE is accurate so long as you account for assignment and
+  immutability.
+- Ruby acts like PASS BY VALUE for IMMUTABLE objects, PASS BY REFERENCE for
+  MUTABLE objects is a reasonable answer when learning about ruby, so long as
+  you keep in mind that ruby only appears to act like this.
