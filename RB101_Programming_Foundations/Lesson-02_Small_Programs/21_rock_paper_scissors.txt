@@ -1,0 +1,93 @@
+:::::::::::::: ROCK PAPER SCISSORS
+
+In this assignment, we'll build a Rock Paper Scissors game.
+The game flow should go like this:
+
+  - the user makes a choice
+  - the computer makes a choice
+  - the winner is displayed
+
+See file: rock_paper_scissors.rb
+
+
+:::::::: THINGS TO CONSIDER
+
+1. Notice how the display_results method calls the prompt method. What
+   happens if you move the display_results method definition above the
+   prompt method definition? Does it still work?
+
+:: Yes it still works. Because the important thing is that invocations
+   are placed after definition.
+
+
+---------------------------------------
+2. Create another method called test_method at the very top, before the
+   prompt method definition.
+
+   def test_method
+     prompt('test message')
+   end
+
+   Now try invoking the newly created method from just after the prompt
+   method definition. Does it work?
+
+:: Yes it works.
+
+   Now try invoking the method again just before the prompt method
+   definition. Does it work? Why is there a different result?
+
+:: No it doesn't work because the invocation is place at a point of source
+   code where prompt() method has not yet been defined. 
+
+
+---------------------------------------
+3. How would you use the display_results method differently if it returned
+   a string, as opposed to outputting the string directly?
+
+:: Like this: prompt(display_results(choice, computer_choice))
+
+
+---------------------------------------
+4. Running Rubocop on this code generates a lot of complaints about the
+   display_results method being too complex. Can you think of a way to
+   mitigate?
+   We'll tackle this in an upcoming assignment, but try to think about a
+   possible solution.
+
+:: I already met this problem with Rubocop while refining the calculator
+   program. It's a good practice to keep a method as simple as possible.
+   In this case the way we use boolean conditions it's too complex.
+   Better to split the methods, for example creating two methods that
+   determine whether the player is the winner or not.
+
+   First, to make things simple I would create an array inside display_results
+   method:
+
+    both_inputs = [player, computer] 
+
+   This make things easier and shorter for the two extra methods:
+
+    def win_condition?(arr)
+      arr == %w(paper rock) || arr == %w(rock scissors) || arr == %w(scissors paper)
+    end
+
+    def loose_condition?(arr)
+      arr == %w(rock paper) || arr == %w(scissors rock) || arr == %w(paper scissors)
+    end
+
+   This is a cleaner way to check what are the winning and the loosing conditions.
+   display_results method will then look shorter and cleaner. Also, it is now
+   returning values instead of printing:
+
+    def display_result(player, computer)
+      both_inputs = [player, computer]
+      if win_condition?(both_inputs)
+        'You won!'
+      elsif loose_condition?(both_inputs)
+        'Computer won!'
+      else
+        "It's a tie."
+      end
+    end
+
+   See file: rock_paper_scissors_rubocop.rb
