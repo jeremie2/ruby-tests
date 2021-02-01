@@ -6,12 +6,12 @@ Starting from file: 22_rubocop_rock_paper_scissors.rb
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::: LIZARD SPOCK ::::::::::::::::::::::::::::::::::
+:::: 1. LIZARD SPOCK :::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::: file: 23_lizard_spock_1.rb ::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-The goal of this bonus is to add Lizard and Spock into your code, following
+The goal of this bonus is to add Lizard and Spock into your code following
 the rules:
 
   - Scissors cuts Paper
@@ -89,17 +89,74 @@ I decided to re-base the method:
       (result(choice, computer_choice))
 
 
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::: 2. NOT TYPING THE FULL WORD :::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::: file: 23_lizard_spock_2.rb ::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+Typing the full word "rock" or "lizard" is tiring. Update the program
+so the user can type "r" for "rock," "p" for "paper," etc.
+Note that if you do bonus #1, you'll have two words that start with "s."
+How do you resolve that?
 
+1. Instead of:
 
+     VALID_CHOICES = %w(rock paper scissors spock lizard)
 
+   I have set:
 
+     VALID_CHOICES = %w(r p sc sp l)
 
+2. I've created the following hash:
 
+     SELECT_ITEM = { 'r' => 'rock',
+                     'p' => 'paper',
+                     'sc' => 'scissors',
+                     'sp' => 'spock',
+                     'l' => 'lizard' }
 
+3. Inside the loop instead of:
 
+     loop do
+       prompt("Choose one: #{VALID_CHOICES.join(', ')}")
+       choice = Kernel.gets().chomp()
+       if VALID_CHOICES.include?(choice)
+         break
+       ......
 
+   I've altered the code:
 
+    loop do
+      prompt(CHOOSE)
+      choice = Kernel.gets().chomp().downcase()
+      if VALID_CHOICES.include?(choice)
+        choice = SELECT_ITEM[choice]
+        break
 
+   CHOOSE is better way to style the prompted string:
 
+   CHOOSE = <<-MSG
+     Choose one:
+     r) rock
+     p) paper
+     sc) scissors
+     sp) spock
+     l) lizard
+   MSG
 
+   so that the user can read better the available options.
+   If valid choice is correct, then choice will be set.
+   Example:
+ 
+     choice = 'l'
+     choice = SELECT_ITEM['l'] => 'lizard'
+
+4. Finally the computer_choice has been updated.
+   From:
+
+     computer_choice = VALID_CHOICES.sample
+
+   to:
+
+     computer_choice = SELECT_ITEM[VALID_CHOICES.sample]
