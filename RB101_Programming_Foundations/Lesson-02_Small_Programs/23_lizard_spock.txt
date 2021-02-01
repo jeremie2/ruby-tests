@@ -160,3 +160,49 @@ How do you resolve that?
    to:
 
      computer_choice = SELECT_ITEM[VALID_CHOICES.sample]
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::: 3. Keep score of player and computer ::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::: file: 23_lizard_spock_3.rb ::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Keep score of the player's and computer's wins. When either the player or
+computer reaches five wins, the match is over, and the winning player becomes
+the grand winner. Don't add your incrementing logic to display_results. Keep
+your methods simple; they should perform one logical task — no more, no less.
+
+1. Outside the loop we need to initialize two variables that will track
+   the score of the two gamers:
+
+     user_score = 0
+     computer_score = 0
+
+2. After 'prompt(match_winner)' I've place some code that will assign
+   1 point to the winner. The returned value of match_winner tell us
+   who is the winner of the single match.
+   The current result will be displayed:
+
+     user_score += 1 if match_winner == 'You won!'
+     computer_score += 1 if match_winner == 'Computer won!'
+     prompt("Score: You - Computer: #{user_score} - #{computer_score}")
+
+3. Then an if/else statement will prompt who is the winner after one
+   of the gamer has reached 5 points.
+
+     if user_score == 5
+       prompt('YOU ARE THE GRAND WINNER!')   
+     elsif computer_score == 5
+       prompt('COMPUTER IS THE GRAND WINNER!')
+     end
+
+4. If one of the gamer has reached 5 point, an if/else statement will reset
+   the score and ask the user 'Do you want to play again?':
+     if user_score == 5 || computer_score == 5
+       user_score = 0
+       computer_score = 0
+       prompt('Do you want to play again?')
+       answer = Kernel.gets().chomp()
+       break unless answer.downcase().start_with?('y')    
+     end
