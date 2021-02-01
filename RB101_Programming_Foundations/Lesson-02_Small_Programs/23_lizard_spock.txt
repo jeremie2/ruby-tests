@@ -1,0 +1,105 @@
+
+:::::::::::::::::::::::ASSIGNMENT: RPS BONUS FEATURES
+(RPS: Rock Paper Scissors)
+
+Starting from file: 22_rubocop_rock_paper_scissors.rb
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::: LIZARD SPOCK ::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::: file: 23_lizard_spock_1.rb ::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+The goal of this bonus is to add Lizard and Spock into your code, following
+the rules:
+
+  - Scissors cuts Paper
+  - Paper covers Rock
+  - Rock crushes Lizard
+  - Lizard poisons Spock
+  - Spock smashes Scissors
+  - Scissors decapitates Lizard
+  - Lizard eats Paper
+  - Paper disproves Spock
+  - Spock vaporizes Rock
+  - Rock crushes Scissors
+
+
+To have an updated and working program all we have to do is:
+1. Insert 'lizard' and 'spock' inside VALID_CHOICES:
+
+     VALID_CHOICES = %w(rock paper scissors spock lizard)
+
+2. Update win?(first, second) adding conditions with 'lizard' and 'spock':
+
+     def win?(first, second)
+       (first == 'rock' && second == 'scissors') ||
+       (first == 'rock' && second == 'lizard') ||
+       (first == 'paper' && second == 'rock') ||
+       (first == 'paper' && second == 'spock') ||
+       (first == 'scissors' && second == 'paper') ||
+
+       ......... and so on!
+     end
+
+At this stage the program works... BUT...
+
+      Rubocop COMPLAINTS because win?() is actually too messy.
+
+I decided to re-base the method:
+
+1. Created a new constant:
+   
+   WIN_COMBINATIONS = [%w(paper rock), %w(paper spock), %w(rock scissors),
+                    %w(rock lizard), %w(scissors paper), %w(scissors lizard),
+                    %w(lizard spock), %w(lizard paper), %w(spock rock),
+                    %w(spock scissors)]
+
+   WIN_COMBINATIONS is an array containing several arrays made of couple
+   of strings. These pairs are all the possible winning combinations.
+   The first string is the winning one: 
+      
+      %w(paper rock) => paper wins
+
+2. Now win?() method can be simplified:
+
+     def win?(first, second)
+       WIN_COMBINATIONS.include?([first, second])
+     end
+
+     win?() is just checking that the assigned pair is included in 
+     IN_COMBINATIONS. In that case it returns true.
+
+3. Changed display_result() with result():
+
+     def result(player, computer)
+       if win?(player, computer)
+         'You won!'
+       elsif win?(computer, player)
+         'Computer won!'
+       else
+         "It's a tie."
+       end
+     end
+
+   Now the method just return strings.
+   THis means that to display the result we have to prompt it:
+
+      (result(choice, computer_choice))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
