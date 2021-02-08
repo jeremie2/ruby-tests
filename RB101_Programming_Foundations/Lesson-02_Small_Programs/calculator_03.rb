@@ -114,7 +114,7 @@ loop do # main loop
   number2 = set_number('second_number', operator)
 
   ################### OPERATION
-  puts operation_to_message(operator)
+  print operation_to_message(operator)
 
   result = case operator
            when '1'

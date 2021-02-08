@@ -1,0 +1,176 @@
+:::::::::::::::::::::::::::::: QUESTIONS
+
+::::::::: 02 ruby style
+
+- What about indents?
+  To improve readability, Ruby code uses indentation with 2 spaces:
+
+    if 5 > 1
+      puts 'yes'
+    else
+      puts 'no'
+    end
+
+- When are uppercase, camel case or snake case used?
+  - UPPERCASE: constant
+  - CamelCase: class
+  - snake_case: variable, method, file
+
+- How can we place comments inside code?
+  Using: #
+  or for blocs of code:
+
+		=begin
+		...code here
+		=end
+  
+- What's the syntax for blocks?
+  A block after a method is made of
+
+    do
+    ...code here
+    end
+
+  If we have only one line, we just use curly brackets { ...code here }
+
+::::::::: 03 kick off
+
+- What's the goal of the lesson?
+  - fluency with syntax
+  - think like a programmer. To reach that we have to gain some experience
+    building little programs and debugging them.
+
+- What' procedural programming? (more or less)
+  We build a program step by step using basic functionalities.
+
+- ...and object programming? (more or less)
+   We build using sophisticated methods which hide all the steps.
+
+- Difference between coding and programming?
+  Coding is more about concentrating on the syntax, programming has to do
+  with focusing on problem solving while building an app.
+
+- What is pseudo code?
+  While creating an app, instead of start immediately to write regular code
+  (with proper syntax), it's useful to start writing down sentences that
+  explain/describe every step.
+  After that we can proceed replacing sentences with a sort of source code
+  (not real code) that explain more precisely but in a schematic way what we
+  are going to perform (conditional, loop, etc..).
+  That is pseudo code.
+  In the end pseudo code will be replaced by regular code.
+  
+
+::::::::: 06 truthiness
+
+- Is everything in Ruby evaluated to 'true'?
+  No, nil and false are never evaluated to true.
+
+- What is 'truthiness'?
+  Truthiness is a sort of state of every expression in ruby that is always
+  evaluated to true.
+  Careful!! This doesn't mean that its value is true.
+  
+		if puts 5
+			puts 'hi'
+		else
+			puts 'bye'
+		end
+  
+	"puts 5" is evaluated as true. The same would be replacing "puts 5"
+	with 'ciao'.upcase... it doesn't make any difference.
+	The only way to get a different result is:
+	- using nil or false
+  - or performing a boolean evaluations that return false (like 5 == 1)
+
+- What are logical operators and what they do?
+  - &&: it means 'and'.
+  - ||: it means 'or'.
+  
+  Comparing 2 expressions:
+  - && returns true only if both are true
+  - || returns false only if both are false
+
+- Are 'true' and 'false' object?
+  Yes they are. true.class => TrueClass and false.class => FalseClass
+
+- Can you explain 'short circuiting' property of || and && operators?
+  When using logical operators, they stop the evaluation once they reach
+  result. Example:
+  5 > 10 && 5 == 5  the 2nd statement will never be evaluated. As the 1st
+                    is already false, evaluation stops... that's enough
+                    for the result.
+
+
+::::::::: 07 calculator intro video
+
+- Kernel.puts("ciao")... what is Kernel?
+  Kernel is a module defined inside class Object and therefore always
+  available (except inside class definitions) and we don't need to prefix
+  'Kernel.' before the method name. Many of the most popular methods are
+  defined into this module:
+  	Kernel.puts, Kernel.gets, Kernel.print, etc...
+  but we are used to see them as:
+  	puts, gets, print, etc...
+
+
+::::::::: 08 pseudo code
+
+- What are the 2 layers to solve any problem?
+  1- Logical problem domain layer
+  2- Syntactical programming language layer
+  
+- What's the help of pseudo code?
+  Pseudo code help us to fix first the logic of the program. Then, once
+  we have the structure of the program it's easy to implement the syntax.
+
+- What are the keywords used in pseudo code?
+	START
+	SET: set a variable
+	GET: asking input from user
+	PRINT
+	IF / ELSE IF/ ELSE
+	WHILE
+	END
+
+
+::::::::: 09 flowchart
+
+- Why are flowcharts useful?
+  They can be useful to see at the problem we are trying to solve in a
+  schematic way, while pseudo-code can become extremely verbose.
+
+- What are the elements of a flowchart?
+                   ________
+	start/stop      (________)
+		               _______
+	processing step |_______|
+		                ________
+	input/output     /_______/
+
+		                /\
+		               /  \  
+	decision         \  /
+		                \/
+		                _
+	 connector       (_) 
+
+
+::::::::: 10 rubocop
+
+- What is Rubocop?
+  Rubocop is a software that checks syntax and style of your code, and
+  where possible even logic error.
+  
+  
+
+
+
+
+
+
+
+
+
+
+

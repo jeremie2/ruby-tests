@@ -1,4 +1,4 @@
-There are two layers to solving any problem:
+There are two layers to solve any problem:
 
 The logical problem domain layer.
 The syntactical programming language layer.

@@ -222,7 +222,7 @@ Things to think about:
 - OK
 
 
-5. We're using Kernel.puts() and Kernel.gets(). But the Kernel. is extraneous as
+5. We're using Kernel.puts() and Kernel.gets(). But the 'Kernel.' is extraneous as
    well as the parentheses. Therefore, we can just call those methods by gets and
    puts. We already know that in Ruby we can omit the parentheses, but how come we
    can also omit the Kernel.?
