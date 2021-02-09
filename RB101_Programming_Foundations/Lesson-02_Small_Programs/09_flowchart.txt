@@ -21,16 +21,21 @@ Flowchart helps us map out the logical sequence of a possible solution in a visu
 See 09-flow-chart.pdf
 
 Using flowcharts we are going to use the IMPERATIVE (or PROCEDURAL) way to solve problems.
-It means we'll see every single step for example in a loop. That's why in the pseudo code example a while loop is used instead of 'each' method, where many steps are encapsulated and hidden inside it.
+It means we'll see every single step for example in a loop. That's why in the pseudo code
+example a while loop is used instead of 'each' method, where many steps are encapsulated
+and hidden inside it.
 The 'each' method represent the DECLARATIVE way of solving a problem.
 
-Using imperative will force us to "think like a computer", understand the logic and make life  easier for debugging.
+Using imperative will force us to "think like a computer", understand the logic and make
+life  easier for debugging.
 
 
 ::::::::::: A LARGER PROBLEM
 
-The previous exercise was: "write a method that determines which number is greatest in a collection".
-Let's add some more steps... asking the user to give N collections of number. The method should give a list of the highest number of each collection.
+The previous exercise was: "write a method that determines which number is greatest in a
+collection".
+Let's add some more steps... asking the user to give N collections of number. The method
+should give a list of the highest number of each collection.
 
 
 # high level pseudo-code
@@ -94,12 +99,15 @@ END
 ----------------------------
 
 
-SUBPROCESS is actually not explained. Including every step would have made this piece of code
-too long.
+SUBPROCESS is actually not explained. Including every step would have made this piece of
+code too long.
 See flowchart 09-large_numbers.pdf
-We can see 'num = find_largest(collection)' is based on the find_largest method, basically the method we have built in the previous assignment.
+We can see 'num = find_largest(collection)' is based on the find_largest method, basically
+the method we have built in the previous assignment.
 
-What happen with SUBPROCESS is to use a DECLARATIVE style. This help to have a "general map" of the program we are trying to create. Once it is ready, we can think about the specific sub-process.
+What happen with SUBPROCESS is to use a DECLARATIVE style. This help to have a "general map"
+of the program we are trying to create. Once it is ready, we can think about the specific
+sub-process.
 
 
 ::::::::::: CALCULATOR EXAMPLE

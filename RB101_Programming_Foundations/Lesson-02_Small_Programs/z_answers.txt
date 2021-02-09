@@ -142,18 +142,18 @@
 
 - What are the elements of a flowchart?
                    ________
-	start/stop      (________)
+  start/stop      (________)
 		               _______
-	processing step |_______|
-		                ________
-	input/output     /_______/
+  processing step |_______|
+                    ________
+  input/output     /_______/
 
-		                /\
-		               /  \  
-	decision         \  /
-		                \/
-		                _
-	 connector       (_) 
+                    /\
+                   /  \  
+  decision         \  /
+                    \/
+                   _
+  connector       (_) 
 
 
 ::::::::: 10 rubocop
