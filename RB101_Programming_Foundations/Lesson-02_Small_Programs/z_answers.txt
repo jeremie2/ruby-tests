@@ -161,8 +161,157 @@
 - What is Rubocop?
   Rubocop is a software that checks syntax and style of your code, and
   where possible even logic error.
+
+
+::::::::: 13 debugging
+
+- What's the best temperament for debugging?
+  Patient, systematic and logical. Stop crying and and see for a possible
+  solution!
+
+- What is important to note inside a stack trace?
+  Things like "NoMethodError: undefined method `name' for nil:NilClass".
+  It could immediately make sense or we could start here for some online
+  research (documentation or search engines). 
+
+- What can you do to understand what's happening with an error?
+  Trying to reproduce an error.
+  Trying to understand which are the boundaries of the error. Playing with 
+  variables and methods to see what else is affected.
+
+- What are the techniques for debugging?
+  - Reading line by line
+  - Using pry
+  - Have a wlak!
+  - Rubber duck
+
+
+::::::::: 18 variable scope
+
+- What is a variable scope?
+  Inside a program it's where a variable is available.
+  This depends by 'where' the variable is created.
+
+- What define a variable scope?
+  A block of code after a method like {} or do..end block.
+
+- What about inner and outer scope variables?
+  Outer scope variable: created outside a block.
+    It can be accessed from inner scope.
+  Inner scope variable: created inside a block.
+    It can't be accessed from outer scope.
+
+- Can variables inside 2 different blocks be accessed by each others inner scope?
+  No. A variable defined inside a block can't be accessed from another block.
+
+- And what about nested blocks?
+  Same rules... from inner scope you can access outer scope, not vice versa.
+
+- What is variable shadowing?
+  When a variable inside a block has the same name of a variable outside the
+  block, then the inside variable got precedence in the block.
   
+- Can a method definition access in outer scope?
+  That is possible in 2 ways:
+  - passing outside variables as argument and assigned them a local variables
+  - interacting with blocks, which can access outer scope variables (Chapter 19)
   
+- What about constants?
+  Constants can be accessed from anywhere.
+
+
+::::::::: 19 more variable scope
+
+- How can methods interact with blocks?
+  Placing 'yeld' inside the definition:
+
+		def greetings
+		  yield
+		  puts "Goodbye"
+		end
+
+		word = "Hello"
+
+		greetings do
+		  puts word
+		end
+
+		# 'Hello'
+		# 'Goodbye'
+  
+
+::::::::: 20 pass by reference vs pass by value
+
+- What does it mean pass by value?
+  A method has a copy of the original object and there are no effects on it.
+  
+		def change_name(name)
+		  name = 'bob'
+		end
+
+		name = 'jim'
+		change_name(name)
+		puts name           # => jim  
+
+- What does it mean pass by reference?
+  The operations inside a method affects the original object.
+
+		def cap(str)
+		  str.capitalize!
+		end
+
+		name = "jim"
+		cap(name)
+		puts name           # => Jim
+
+- Which are the methods that nutate the caller?
+  All methods with '!' and some others like Array#<<
+
+- What is a variable?
+  A label created to refer to some physical memory address.
+
+- What does it happen when we assign a variable to another variable?
+  Both variable point to the same memory address.
+  If we change the value inside the memory address, using a method that mutates
+  the caller, then both variable will be affected.
+
+- We have a = b. Does a = c (reassignment) affect b?
+  No. A different value has been assigned to a, this doesn't change b.
+
+
+::::::::: 20 xtra1 mutability
+
+- What's mutability?
+  It's when an object stored into a memory address can change.
+  Not assigning new value, but performing an operation that change that object.
+
+- What is object_id?
+  It's an ID that refer to a memory address of the object.
+  Doing a = b, a and b will point the same object and they've got same object_id.
+
+- What are immutable objects?
+  - numbers
+  - bulean
+  - nill
+  - range object (e.g., 1..10)
+
+- Does object_id of an array change if we reassign its elements? 
+  No. Only the single element will have a different object_id.
+
+- Does assignment with operators *= and += mutate the operands?
+  No, never. We are just assigning a new value.
+
+- Does indexing assignment mutates the operands?
+  Yes, str[3] = 'x', array[5] = Person.new, hash[:age] = 25....
+  They modify the original object, but object_id is still the same.
+  Just remember that the elements will be different, they will point to a new object.
+
+- Does concatenation mutates the operands?
+  Yes.
+  str = 'ciao'
+  str << 'ciao'  # str = 'ciaociao'
+
+
 
 
 

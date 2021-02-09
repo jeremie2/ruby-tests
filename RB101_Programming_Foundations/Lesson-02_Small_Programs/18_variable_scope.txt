@@ -4,7 +4,7 @@
 A variable's scope determines where in a program a variable is available for use.
 Variable's scope is defined by where the variable is created/initialized.
 
-In Ruby variable scope is defined by a block a piece of code following a method 
+In Ruby variable scope is defined by a block, a piece of code following a method 
 invocation, delimited by curly braces {} or do..end.
 
 Inner scope can access variables initialized in an outer scope,

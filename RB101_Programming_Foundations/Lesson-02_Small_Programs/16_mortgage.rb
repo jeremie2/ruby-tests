@@ -104,7 +104,7 @@ prompt("Thanks for using the Mortgage Calculator!")
 #         monthly_payment variable.
 # What does the code look like with the optional parentheses removed? Can
 # you still recognize it?
-# ANSWER: Yes I can for two reasons: 1) text editor is hilighting methods
+# ANSWER: Yes I can for two reasons: 1) text editor is highlighting methods
 #         2) I'm used to 'gets' and 'chomp' methods.
-#         but I have to admit that without knowing  a method and without
-#         syntax hilighting... it could be tricky!
+#         but I have to admit that without knowing a method and without
+#         syntax highlighting... it could be tricky!

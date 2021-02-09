@@ -128,7 +128,7 @@ In some cases we can use the 'rescue' clause like this:
   model.start_with?("M") rescue false
 
 But this just jumps over the problem without solving it.
-In some cases this could create even worse problem.
+In some cases this could create even worse problems.
 
 
 4. Test the fix
