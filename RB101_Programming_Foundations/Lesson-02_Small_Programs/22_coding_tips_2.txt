@@ -99,8 +99,8 @@ Choosing an appropriate block variables, things will be OK:
 
   name = 'johnson'
 
-  ['kim', 'joe', 'sam'].each do |fname|
-    puts "#{fname} #{name}"
+  ['kim', 'joe', 'sam'].each do |first_name|
+    puts "#{first_name} #{name}"
   end
 
   # => kim johnson
@@ -160,3 +160,4 @@ Don't memorize "best practices", but spend enough time programming to the point
 where you understand the context for those practices.
 If you do that, you'll be able to lean on your past experience to draw on, rather 
 than try to retrieve a bullet list from an old reading months or years ago.
+

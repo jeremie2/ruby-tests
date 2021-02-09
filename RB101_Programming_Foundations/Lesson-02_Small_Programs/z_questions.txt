@@ -90,8 +90,9 @@
 - What is object_id?
 - What are immutable objects?
 - Does object_id of an array change if we reassign its elements? 
-
-
+- Does assignment with operators *= and += mutate the operands?
+- Does indexing assignment mutates the operands?
+- Does concatenation mutates the operands?
 
 - 
 - 

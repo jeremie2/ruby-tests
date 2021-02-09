@@ -20,9 +20,9 @@
   Using: #
   or for blocs of code:
 
-		=begin
-		...code here
-		=end
+    =begin
+    ...code here
+    =end
   
 - What's the syntax for blocks?
   A block after a method is made of
@@ -71,16 +71,16 @@
   evaluated to true.
   Careful!! This doesn't mean that its value is true.
   
-		if puts 5
-			puts 'hi'
-		else
-			puts 'bye'
-		end
+    if puts 5
+      puts 'hi'
+    else
+      puts 'bye'
+    end
   
-	"puts 5" is evaluated as true. The same would be replacing "puts 5"
-	with 'ciao'.upcase... it doesn't make any difference.
-	The only way to get a different result is:
-	- using nil or false
+  "puts 5" is evaluated as true. The same would be replacing "puts 5"
+  with 'ciao'.upcase... it doesn't make any difference.
+  The only way to get a different result is:
+  - using nil or false
   - or performing a boolean evaluations that return false (like 5 == 1)
 
 - What are logical operators and what they do?
@@ -109,9 +109,9 @@
   available (except inside class definitions) and we don't need to prefix
   'Kernel.' before the method name. Many of the most popular methods are
   defined into this module:
-  	Kernel.puts, Kernel.gets, Kernel.print, etc...
+    Kernel.puts, Kernel.gets, Kernel.print, etc...
   but we are used to see them as:
-  	puts, gets, print, etc...
+    puts, gets, print, etc...
 
 
 ::::::::: 08 pseudo code
@@ -125,13 +125,13 @@
   we have the structure of the program it's easy to implement the syntax.
 
 - What are the keywords used in pseudo code?
-	START
-	SET: set a variable
-	GET: asking input from user
-	PRINT
-	IF / ELSE IF/ ELSE
-	WHILE
-	END
+  START
+  SET: set a variable
+  GET: asking input from user
+  PRINT
+  IF / ELSE IF/ ELSE
+  WHILE
+  END
 
 
 ::::::::: 09 flowchart
@@ -143,7 +143,7 @@
 - What are the elements of a flowchart?
                    ________
   start/stop      (________)
-		               _______
+                   _______
   processing step |_______|
                     ________
   input/output     /_______/
@@ -210,6 +210,7 @@
 - What is variable shadowing?
   When a variable inside a block has the same name of a variable outside the
   block, then the inside variable got precedence in the block.
+  Outer scope variable will not be accessible.
   
 - Can a method definition access in outer scope?
   That is possible in 2 ways:
@@ -225,44 +226,66 @@
 - How can methods interact with blocks?
   Placing 'yeld' inside the definition:
 
-		def greetings
-		  yield
-		  puts "Goodbye"
-		end
+    def greetings
+      yield
+      puts "Goodbye"
+    end
 
-		word = "Hello"
+    word = "Hello"
 
-		greetings do
-		  puts word
-		end
+    greetings do
+      puts word
+    end
 
-		# 'Hello'
-		# 'Goodbye'
+    # 'Hello'
+    # 'Goodbye'
   
 
 ::::::::: 20 pass by reference vs pass by value
 
 - What does it mean pass by value?
-  A method has a copy of the original object and there are no effects on it.
-  
-		def change_name(name)
-		  name = 'bob'
-		end
+  It's when passing a variable to a method will not affect the original variable,
+  because the method will alter just a copy of the variable.
 
-		name = 'jim'
-		change_name(name)
-		puts name           # => jim  
+  Let's see this example:
+  
+    def change_name(a_name)
+      a_name = 'bob'
+    end
+
+    name = 'jim'
+    change_name(name)
+    puts name           # => jim
+
+  When 'name' is passed to 'change_name', variable name and a_name are sharing
+  the same value stored at the same memory address... which is 'jim'.
+  Then inside the method we have: a_name = 'bob'
+  We are now assigning to a_name a different value stored in a different memory address.
+  Whatever we do with a_name will never effect the original variable. 
+  
+  That's passing by value.
 
 - What does it mean pass by reference?
-  The operations inside a method affects the original object.
+  It's when passing a variable to a method will affect the original variable,
+  because the method will alter the value of the original variable.
+  
+  Let's see this example:
 
-		def cap(str)
-		  str.capitalize!
-		end
+    def cap(str)
+      str.capitalize!
+    end
 
-		name = "jim"
-		cap(name)
-		puts name           # => Jim
+    name = "jim"
+    cap(name)
+    puts name           # => Jim
+
+  When 'name' is passed to 'cap', variable name and str are sharing the same
+  value stored at the same memory address... which is 'jim'.
+  Then inside the method we have: str.capitalize!
+  capitalize! does change the value stored at that memory address. Doing this
+  both variable will be affected, their value is now 'Jim'. 
+  
+  That's passing by reference. 
 
 - Which are the methods that nutate the caller?
   All methods with '!' and some others like Array#<<
@@ -283,7 +306,7 @@
 
 - What's mutability?
   It's when an object stored into a memory address can change.
-  Not assigning new value, but performing an operation that change that object.
+  Not assigning new value, but performing an operation that change that value.
 
 - What is object_id?
   It's an ID that refer to a memory address of the object.
@@ -291,7 +314,7 @@
 
 - What are immutable objects?
   - numbers
-  - bulean
+  - boolean
   - nill
   - range object (e.g., 1..10)
 
@@ -312,14 +335,58 @@
   str << 'ciao'  # str = 'ciaociao'
 
 
+::::::::: 22 coding tips 2
 
+- Are blanked lines useful inside your code?
+  Yes, they can be used so that every section can be divided so that it will be
+  highlighted.
 
+- Should a method return or display?
+  Please avoid creating methods that returns values and produce side effects!
+  Good code provides just one action for a method.
 
+- Is it important to give a good name to a method?
+  It's the best practise.
+  We should understand what a method does just reading the name.
+  
+  Without looking at the implementation, a method called:
+  - total: should return a value 
+  - print_total: should display a value and return nil
+  - total!: should mutate a value
 
+- Is it OK to mutate the caller while iterating?
+  No!
+  Example: deleting elements of an array while iterating will mess up the
+  order of the elements (what was the second will be the first...).
 
+- How can I solve a problem created by variable shadowing?
+  By using better naming (and using Rubocop!). Example:
 
+    name = 'johnson'
 
+    ['kim', 'joe', 'sam'].each do |name|
+      puts "#{name} #{name}"
+    end
 
+    # => kim kim   As you can see outer scope 'name'
+    # => joe joe   can't be accessible. Inside the block
+    # => sam sam   only |name| is seen.
+  
+  Just using a different variable name into inner scope does the job:
 
+    name = 'johnson'
 
+    ['kim', 'joe', 'sam'].each do |first_name|
+      puts "#{first_name} #{name}"
+    end
+
+    # => kim johnson
+    # => joe johnson
+    # => sam johnson
+
+- What should we do when while iterating the block variable is not used?
+  It's a good practice to name the variable with an underscore _
+
+    names = ['kim', 'joe', 'sam']
+    names.each { |_| puts "got a name!" }
 
