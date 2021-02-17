@@ -16,7 +16,6 @@
 
 (0..9).each { |i| puts (' ' * i) + 'The Flintstones Rock!' }
 
-
 # SOLUTION
 #
 10.times { |number| puts (" " * number) + "The Flintstones Rock!" }
