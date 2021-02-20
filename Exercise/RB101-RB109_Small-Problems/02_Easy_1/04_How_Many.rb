@@ -82,7 +82,6 @@ def count_occurrences(array)
   occurrences.each { |elem, count| puts "#{elem} => #{count}" }
 end
 
-
 ######## OTHER SOLUTIONS
 
 # from Yves Creemers
