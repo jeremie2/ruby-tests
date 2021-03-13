@@ -1,0 +1,96 @@
+
+:::::::::::::::::::::::::::::: QUESTIONS
+
+::::::::: 02 ruby style
+
+- What about indents?
+- When are uppercase, camel case or snake case used?
+- How can we place comments inside code?
+- What's the syntax for blocks?
+
+
+::::::::: 03 kick off
+
+- What's the goal of the lesson? (int.. synt, think, deb, logic what..)
+- What' procedural programming? (more or less)
+- ...and object programming? (more or less)
+- Difference between coding and programming?
+- What is pseudo code?
+
+
+::::::::: 06 truthiness
+
+- Is everything in Ruby evaluated to 'true'?
+- What is 'truthiness'?
+- What are logical operators and what they do?
+- Are 'true' and 'false' object?
+- Can you explain 'short circuiting' property of || and && operators?
+
+
+::::::::: 07 calculator intro video
+
+- Kernel.puts("ciao")... what is Kernel?
+
+
+::::::::: 08 pseudo code
+
+- What are the 2 layers to solve any problem?
+- What are the keywords used in pseudo code?
+
+
+::::::::: 09 flowchart
+
+- Why are flowcharts useful?
+- What are the elements of a flowchart?
+
+
+::::::::: 10 rubocop
+
+- What is Rubocop?
+
+
+::::::::: 13 debugging
+
+- What's the best temperament for debugging?
+- What is important to note inside a stack trace?
+- What can you do to understand what's happening with an error?
+- What are the techniques for debugging?
+
+
+::::::::: 18 variable scope
+
+- What is a variable scope?
+- What define a variable scope?
+- What about inner and outer scope variables?
+- Can variables inside 2 different blocks be accessed by each others inner scope?
+- And what about nested blocks?
+- What is variable shadowing?
+- Can a method definition access in outer scope?
+- What about constants?
+
+
+::::::::: 19 more variable scope
+
+- How can methods interact with blocks?
+
+
+::::::::: 20 pass by reference vs pass by value
+
+- What does it mean pass by value?
+- What does it mean pass by reference?
+- Which are the methods that nutate the caller?
+- What is a variable?
+- What does it happen when we assign a variable to another variable?
+- We have a = b. Does a = c affect b?
+
+
+::::::::: 20 xtra1 mutability
+
+- What's mutability?
+- What is object_id?
+- What are immutable objects?
+- Does object_id of an array change if we reassign its elements? 
+- Does assignment with operators *= and += mutate the operands?
+- Does indexing assignment mutates the operands?
+- Does concatenation mutates the operands?
+

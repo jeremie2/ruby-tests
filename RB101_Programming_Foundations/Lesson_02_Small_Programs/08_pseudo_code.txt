@@ -181,4 +181,3 @@ def random_array(integers)
   integers.each {|elem| new_array << rand(10) }
   new_array
 end
-

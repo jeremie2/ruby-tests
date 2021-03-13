@@ -9,7 +9,7 @@ true.nil?        # false
 true.to_s        # "true"
 true.methods     # list of methods
 
-false.class       # FrueClass
+false.class       # FalseClass
 false.nil?        # false
 false.to_s        # "false"
 false.methods     # list of methods
@@ -34,7 +34,7 @@ end
 # we say that a particular condition is false.
 
 # Most of the time we don't use directly true/false but
-# an expression (or method call) that evaluate true or false:
+# an expression (or method call) that evaluates true or false:
 
 num = 5
 
@@ -131,14 +131,3 @@ if name && name.valid?
 else
   puts "either couldn't find name or it's invalid"
 end
-
-
-
-
-
-
-
-
-
-
-

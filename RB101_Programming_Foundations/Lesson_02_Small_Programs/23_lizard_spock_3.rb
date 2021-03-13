@@ -77,7 +77,7 @@ loop do
   if user_score == 5 || computer_score == 5
     user_score = 0
     computer_score = 0
-    prompt('Do you want to play again?')
+    prompt('Do you want to play again? (y, n)')
     answer = Kernel.gets().chomp()
     break unless answer.downcase().start_with?('y')    
   end

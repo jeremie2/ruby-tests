@@ -51,7 +51,7 @@ puts numbers
 # 5. ? : returns true.
 # 6. !!user_name : returns true.
 #
-# ooops! I didn't noticed that ! was referring to ternary operator.
+# ooops! I didn't noticed that ? was referring to ternary operator.
 
 # SOLUTION
 #
@@ -128,8 +128,8 @@ numbers.delete(1)    # Delete any element == 1 and return the deleted number.
 # from stackoverflow
 #
 # The main difference is that 'include' is checking whether object is one
-# of range element, and 'cover' is returning whether object is between edge
-# elements. You can see that:
+# of range element, and 'cover' is returning whether the object is between
+# edge elements. You can see that:
 # 
 # ('a'..'z').include?('cc')   => false
 # ('f'..'m').cover?('cc')     => false
