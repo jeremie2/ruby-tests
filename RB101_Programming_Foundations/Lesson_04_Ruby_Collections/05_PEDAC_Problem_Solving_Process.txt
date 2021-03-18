@@ -1,0 +1,179 @@
+
+::::::::::::::::::::::: VIDEO 1
+Understand the problem
+
+- Establish the rules - define the boundaries of the problem
+  - Assess available information
+  - Restate explicit requirements
+  - Identify implicit requirements
+- Don't rush, take your time for this step.
+
+## General example
+
+Given a string, produce a new string with every other word removed.
+
+- Explicit requirements:
+  - Input: string
+  - Output: string
+  - Remove every other word from input string
+
+- Questions:
+  - What do you mean by every other word?
+  - How do we define a word in this context?
+    - Words delimited by spaces
+
+
+###### SUM EVEN NUMBER ROWS
+
+Imagine a sequence of consecutive even integers beginning with 2.
+The integers are grouped in rows:
+- 1st row: one integer 
+- 2nd row: two integers
+- 3nd row: three integers
+- and so on...
+Given an integer representing the number of a particular row, return
+an integer representing the sum of all the integers in that row.
+
+**Rules/requirements**
+- Sequence of even integers
+- Sequence begins with two
+- Integers are consecutive
+- Sequence is grouped into rows
+- Each row incrementally larger: 1, 2, 3...
+- Row 'number' = number of elements in a raw
+  - Row 1 has 1 element, raw 2 has two elements...
+- Input: a single integer
+  - Identifies a row, which is a subset of a sequence of integer
+- Output: a single integer
+  - The sum of the integers in the row identified by the input integer
+- Sequence: 2, 4, 6, 8, 10...
+
+# sequence    # row sum
+ 2            #  2
+ 4  6         # 10
+ 8 10 12      # 30
+14 16 18 20   # 68
+...
+
+- How do we create a structure?
+
+
+::::::::::::::::::::::: VIDEO 2
+Example and test cases
+
+- Can confirm or refuse assumptions
+- Help to answer questions about implicit requirements
+- Act as assertions which help to codify the rules and boundaries
+
+**Examples**
+
+row 1: sum =  2
+row 2: sum = 10
+row 4: sum = 68
+
+ 2           -->  2
+ 4  6        --> 10
+14 16 18 20  --> 68
+
+
+::::::::::::::::::::::: VIDEO 3
+Data structures
+
+
+**Data structures**
+
+- Overall structure represent sequence of integers as a whole
+- Individual rows are part of the structure
+- Integers are in a set order
+
+[
+  [2],
+  [4, 6],
+  [8, 10, 12],
+  [14, 16, 18, 20],
+  ....
+]
+
+
+::::::::::::::::::::::: VIDEO 4
+Algorithm
+- Logical sequence of steps for accomplishing a task
+ - Closely linked to data structure
+- Stay abstract/ high level
+  - Avoid implementation details
+  - Don't worry about efficiency for now
+
+
+**Algorithm**
+
+1. Create an empty 'rows' array to contain all of the rows
+2. Create a 'row' array and add to the overall 'rows' array 
+3. Repeat step 2 until all the necessary rows have been created
+   - All rows have been created when the length of the 'rows' array = input integer
+4. Sum the final row
+5. Return the sum
+
+Step 2. needs more details. We could put some extra a. b. c...
+point in the above list, but let's extrapolate the problem:
+
+*Problem: create a row* 
+
+Rules:
+- Raw is an array of consecutive even integers
+- Integers in each row form part of a larger sequence
+- Rows are of different lengths
+- Input: the information needed to create the output
+  - the starting integer
+  - Length of the row
+- Output: array (the raw itself) ex. [8, 10, 12]
+
+
+Examples:
+start: 2, length: 1 --> [2]
+start: 4, length: 2 --> [4, 6]
+start: 8, length: 3 --> [8, 10, 12]
+
+Data structures:
+- An array of integers
+
+Algorithm:
+1. Create an empty 'row' array to contain the integers 
+2. Add the starting integer
+3. Increment the starting integer by 2 to get the next integer in the sequence
+4. Repeat step 2 & 3 until the array has reached the correct length
+5. Return the 'row' array
+
+
+::::::::::::::::::::::: VIDEO 5
+Implementing code
+
+
+def sum_even_number_row(row_number)
+  rows = []
+  start_integer = 2
+  (1..row_number).each do |current_row_number|
+    rows << create_row(start_integer, current_row_number)
+    start_integer = rows.last.last + 2
+  end
+  rows.last.sum
+end
+
+# Calculating the start integer:
+# Rule: first integer of row == last integer of precedeing row + 2
+# Algorithm:
+# - Get the preceding row
+# - Get last integer of that row
+# - Add 2 to the integer
+
+def create_row(start_integer, row_length)
+  row = []
+  current_integer = start_integer
+  loop do
+    row << current_integer
+    current_integer += 2
+    break if row.size == row_length
+  end
+  row
+end
+
+p create_row(4, 2)

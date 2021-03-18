@@ -9,7 +9,6 @@
 # palindrome_substrings("palindrome") == []
 # palindrome_substrings("") == []
 
-
 ######## ANSWER
 
 ################ UNDERSTANDING THE PROBLEM
@@ -26,10 +25,8 @@
 # empty string == "" == []
 # no result == []
 
-
 #### EXAMPLES TEST CASE
 # (see the above description)
-
 
 ################ DATA STRUCTURE
 #
@@ -140,7 +137,6 @@
 #   - slice_size += 1
 # - end outer loop
 # - return 'result'
-
 
 ########## CODE:
 
