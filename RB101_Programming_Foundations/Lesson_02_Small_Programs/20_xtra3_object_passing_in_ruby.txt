@@ -10,14 +10,13 @@ STRICT EVALUATION strategies.
 The two most common 'strict evaluation' strategies are:
 - PASS BY VALUE: creates a copy of an object before passing it to methods;
 - PASS BY REFERENCE: a reference to an object will be passed. An alias will
-                    be set between argument and original object.
+                     be set between argument and original object.
 
 It's quite common that the default strict evaluation strategy is 'pass by
 value'. 'Pass by reference' is used more when needed.
 Few languages are purely pass by value or pass by reference.
 
-
-When using IMMUTABLE objects there will be only a pass by value:
+When using IMMUTABLE objects, any operation involves a pass by value:
 
   def plus(x, y)
     x = x + y
@@ -28,9 +27,14 @@ When using IMMUTABLE objects there will be only a pass by value:
   puts a # 3
   puts b # 5
 
-A number is immutable. When a is passed as argument to plus(), what is
-passed to variable x is just a copy of the original object. 
-In fact performing plus() doesn't affect a which is still = 3.
+A number is immutable. At first x = a is actually a pass by reference, the
+two variables point the same object. But after that, whatever operation we
+are going to perform implies a pass by value. Every operation will be executed
+on a copy of the original object.
+In fact performing plus() doesn't affect 'a' which is still = 3.
+
+So, you can say that ruby appears to be pass by value, at least with respect
+to immutable values. 
 
 
 :::::: IT’S REFERENCES ALL THE WAY DOWN

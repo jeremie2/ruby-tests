@@ -30,9 +30,9 @@ but not vice versa.
 
 (!) We have to be very careful that we're not accidentally re-assigning an 
     existing variable in an outer scope.
-    Thats's a good reason to avoid single-letter variable names.
+    That's a good reason to avoid single-letter variable names.
 
-Inner scope variables cannot be accessed in outer scop:
+Inner scope variables cannot be accessed in outer scope:
 
 
 :::: INNER SCOPE VARIABLES CANNOT BE ACCESSED IN OUTER SCOPE
@@ -68,7 +68,8 @@ loops.
 
 :::: NESTED BLOCKS
 
-When dealing with nested blocks, our usage of what's "outer" or "inner" is going to be relative. We'll switch vocabulary and say "first level", "second level"..:
+When dealing with nested blocks, our usage of what's "outer" or "inner" is going to be relative.
+We'll switch vocabulary and say "first level", "second level"..:
 
   a = 1           # first level variable
 
@@ -96,7 +97,8 @@ When dealing with nested blocks, our usage of what's "outer" or "inner" is going
 
 :::: VARIABLE SHADOWING
 
-What happens when a block takes a parameter and we have one 'n' variable in outer scope and one 'n' in inner scope?
+What happens when a block takes a parameter and we have one 'n' variable in outer scope and
+one 'n' in inner scope?
 
   n = 10
 
@@ -110,7 +112,7 @@ In this case 'puts' will use the |n| parameter so that the result will be:
   # 2
   # 3
 
-The internal flow variable takes precedence and also it's not possible
+The internal 'flow variable' takes precedence and also it's not possible
 to change the variable in the outer scope.
 That's called 'variable shadowing'.
 
@@ -146,7 +148,7 @@ as a local variable.
 
 :::: BLOCKS WITHIN METHOD DEFINITIONS
 
-Everything said befor is valid for blocks inside method definitions:
+Everything said before is valid for blocks inside method definitions:
 
   def some_method
     a = 1

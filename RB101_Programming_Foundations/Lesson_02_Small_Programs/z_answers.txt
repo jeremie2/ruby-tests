@@ -208,8 +208,8 @@
   Same rules... from inner scope you can access outer scope, not vice versa.
 
 - What is variable shadowing?
-  When a variable inside a block has the same name of a variable outside the
-  block, then the inside variable got precedence in the block.
+  When a 'flow variable' inside a block has the same name of a variable outside
+  the block, then the inside variable got precedence in the block.
   Outer scope variable will not be accessible.
   
 - Can a method definition access in outer scope?

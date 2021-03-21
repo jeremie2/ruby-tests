@@ -264,4 +264,3 @@ Setter invocation looks like this:
 
 They work like in indexed assignment mutating the object (in this case the
 object 'person').
-
