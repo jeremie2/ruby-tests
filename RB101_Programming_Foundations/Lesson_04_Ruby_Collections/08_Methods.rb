@@ -87,15 +87,28 @@ end
 [1, 2, 3].map do |num|
   num * 2
 end
-
 # => [2, 4, 6]
 
 
 [1, 2, 3].map do |num|
   num.odd?
 end
-
 # => [true, false, true]
+
+
+# Here an interesting case.
+# Map is going to always return an array the same size of the original array.
+# Here we see that the new array takes original element if they are == 3.
+#
+# What does happen if there isn't a returned value? ...'nil'
+# 'nil' element will be added to the new array:
+
+[1, 2, 3].map do |value|
+  value if value == 3
+end
+# => [nil, nil, 3]
+
+
 
 
 ####### A USEFUL TABLE
