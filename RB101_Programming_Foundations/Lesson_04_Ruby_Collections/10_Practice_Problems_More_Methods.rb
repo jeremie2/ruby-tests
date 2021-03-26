@@ -44,7 +44,7 @@ end
 #   current string element has less than 4 character.
 # 
 # So I think this block of code will return how many elements return 'true'
-# to that condition. This happen with string 'ant' and 'bat'.
+# to that condition. This happens with string 'ant' and 'bat'.
 # The result is: 2
 
 #### SOLUTION
@@ -193,10 +193,9 @@ end
 #     1
 #     2
 #     3
-#   but I forgot the nature of truthiness. THe block stop iterating whenever
+#   but I forgot the nature of truthiness. The block stop iterating whenever
 #   it meets a 'true' condition. Then there's no need to go on.
-#   In this case the output is:
-#     1
+#   In this case the output is: 1
 
 
 ########################### PRACTICE PROBLEM 8
@@ -231,8 +230,8 @@ end
 #
 # 'ant'.size > 3 evaluate to 'false', so there is no value to be returned.
 # In such cases 'nil' is returned.
-# Then 'bear'.size > 3 evaluate to 'true' and this time we have a value to be return.
-# which is 'bear'.
+# Then 'bear'.size > 3 evaluate to 'true' and this time we have a value to
+# be return, which is 'bear'.
 
 
 ########################### PRACTICE PROBLEM 10

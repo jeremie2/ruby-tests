@@ -44,7 +44,7 @@ end
 ###### Enumerable#all?
 
 # It works in a similar way to #any? but the method returns 'true' only
-# every block's iteration returns 'true'.
+# if every block's iteration returns 'true'.
 
 [1, 2, 3].all? do |num|
   num > 2
@@ -208,6 +208,7 @@ end
 long, short = { a: "ant", b: "bear", c: "cat" }.partition do |key, value|
   value.size > 3
 end
+
 # => [[[:b, "bear"]], [[:a, "ant"], [:c, "cat"]]]
 #
 # long = [[:b, "bear"]]

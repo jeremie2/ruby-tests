@@ -15,7 +15,7 @@ loop do
   counter += 1
 end
 
-# using #each method things cn be written like this 
+# using #each method things can be written like this 
 
 [1, 2, 3].each do |num|
   puts num
@@ -29,7 +29,8 @@ end
 
                do |num|     # The block taken from the methods.
   puts num                  # This code will be executed for each iteration
-end                         # Num is the value of the current element sent by #each
+end                         # 'num' is the value of the current element sent
+                            # by each
 
 
 # #each can be called on hashes. In that case it needs two arguments:
@@ -54,7 +55,7 @@ end
 end
 
 # #select evaluates the return value of the block for each iteration.
-# If the return value is 'thruty' then the current element will be
+# If the return value is 'truthy' then the current element will be
 # appended to a new array.
 # Basically #select returns a new array made of elements that return
 # 'true' to a condition.
@@ -73,10 +74,10 @@ end
   puts num
 end
 
-# The last evaluated expression is not thruty as 'puts' returns 'nil'.
+# The last evaluated expression is not truthy as 'puts' returns 'nil'.
 # In this case no elements will be added to the new array [].
 # 
-# !! THIS CAN BE AN ERROR WHILE DEBUGGING
+# !! THIS CAN LEAD TO ERROR WHILE DEBUGGING
 # (It happens to forget a 'put' statement inside an iteration block)
 
 
@@ -107,8 +108,6 @@ end
   value if value == 3
 end
 # => [nil, nil, 3]
-
-
 
 
 ####### A USEFUL TABLE
