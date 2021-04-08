@@ -62,7 +62,7 @@ end
 ###### Enumerable#each_with_index
 
 ### WITH ARRAY
-# It works like #each but it takes in consideration the 'index' of an array.
+# It works like #each but it also takes in consideration the 'index' of an array.
 # Block's return value is ignored (it returns the original array).
 
 [1, 2, 3].each_with_index do |num, index|
@@ -75,10 +75,10 @@ end
 # => [1, 2, 3]
 
 ### WITH HASH
-# #each_with_index can be used also with hashes. The difference is that the
+# #each_with_index can be used also with hashes. The difference is that it
 # refers to an array made of keys/values couple arrays:
 
- a: "ant", b: "bear", c: "cat" }.each_with_index do |pair, index|
+{ a: "ant", b: "bear", c: "cat" }.each_with_index do |pair, index|
   puts "The index of #{pair} is #{index}."
 end
 

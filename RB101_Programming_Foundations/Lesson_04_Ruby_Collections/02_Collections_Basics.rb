@@ -6,6 +6,8 @@
 
 ########## STRINGS
 
+# A string is a collection made of character.
+#
 # To represent each character of a string, we can use the index,
 # starting from 0 (first element), adding 1 unit for each elements:
 
@@ -100,7 +102,7 @@ arr[2] # => "c"
 str[5] # => nil
 arr[5] # => nil
 
-# If we are dealing strings it's quite obvious that a returned nil value
+# If we are dealing with strings it's quite obvious that a returned nil value
 # tells us there should be an error.
 # But for an array nill could be an element of the array:
 
@@ -135,7 +137,7 @@ arr[-6]   # => nil
 # Previous considerations are still valid for nil elements in arrays
 
 
-  INVALID HASH KEYS
+##### INVALID HASH KEYS
 
 # Same problem of missing element because of out of bound key for array,
 # with hashes a missing key returns nil:

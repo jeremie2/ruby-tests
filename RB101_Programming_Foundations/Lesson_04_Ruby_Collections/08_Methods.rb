@@ -1,4 +1,4 @@
-############# SELECTION AND TRANSFORMATION
+############# ITERATION, SELECTION AND TRANSFORMATION
 
 # Looping can be very repetitive. Ruby's methods can make work shorter.
 
@@ -30,7 +30,7 @@ end
                do |num|     # The block taken from the methods.
   puts num                  # This code will be executed for each iteration
 end                         # 'num' is the value of the current element sent
-                            # by each
+                            # by #each
 
 
 # #each can be called on hashes. In that case it needs two arguments:
@@ -51,7 +51,7 @@ end
 # possible to select specific elements using #select method:
 
 [1, 2, 3].select do |num|
-  # num.odd?
+  num.odd?
 end
 
 # #select evaluates the return value of the block for each iteration.
@@ -66,7 +66,7 @@ end
   num + 1
 end
 
-# 'num + 1' is a thruty condition, then every single element will be
+# 'num + 1' is a truthy condition, then every single element will be
 # added to the return array [1, 2, 3].
 
 [1, 2, 3].select do |num|
@@ -78,7 +78,7 @@ end
 # In this case no elements will be added to the new array [].
 # 
 # !! THIS CAN LEAD TO ERROR WHILE DEBUGGING
-# (It happens to forget a 'put' statement inside an iteration block)
+# (It happens to forget a 'puts' statement inside an iteration block)
 
 
 ###### MAP

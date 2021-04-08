@@ -106,7 +106,7 @@ select_fruit(produce) # => {"apple"=>"Fruit", "pear"=>"Fruit"}
 # P
 # input: hash
 # output: hash
-# rules: the chosen element has as value 'Fruit'
+# rules: every chosen element has as value 'Fruit'
 
 # E
 # select_fruit(produce) # => {"apple"=>"Fruit", "pear"=>"Fruit"}
@@ -116,7 +116,7 @@ select_fruit(produce) # => {"apple"=>"Fruit", "pear"=>"Fruit"}
 # fruit = {"apple"=>"Fruit", "pear"=>"Fruit"}
 # we can't directly loop an hash
 # but #keys will give us an array made of keys
-# keyes = produce.keys = ['apple', 'carrot', 'pear', 'broccoli']
+# keys = produce.keys = ['apple', 'carrot', 'pear', 'broccoli']
 # fruit = {} will be filled with 'produce' values = 'fruit'
 
 # A
@@ -126,14 +126,14 @@ select_fruit(produce) # => {"apple"=>"Fruit", "pear"=>"Fruit"}
 #   - set 'keys' array made of 'produce' keys
 #   - set 'fruit' empty hash
 #   - set 'index' = 0
-#   - loop
+#   - begin loop
 #     - 'current_product' = 'keys' element at index 'index'
 #     - 'produce_value' = 'produce' element at index 'current_product'
 #     - if 'produce_value' = 'Fruit' string
 #       - 'fruit' at key 'current_product' = 'Fruit'
 #     - end if
 #     - add 1 to 'index'
-#     - stop loop if 'index' = 'keyes' length
+#     - stop loop if 'index' = 'keys' length
 #   - end loop
 #   - return 'fruit' hash
 # - end loop
@@ -234,7 +234,7 @@ puts double_numbers!(my_numbers)  == [2, 8, 6, 14, 4, 12]
 
 
 # rather than returning a new array, this method returns a reference
-#  to the (mutated) original array
+# to the (mutated) original array
 
 
 ############# SELECTION AND TRANSFORMATION COMBINED
