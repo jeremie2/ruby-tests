@@ -85,6 +85,27 @@ ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 5843, "Eddie" => 10, "Marily
 puts ages.values.min
 
 
+# trying to solve it using the longer paths
+
+ages_val = ages.values
+# [32, 30, 5843, 10, 22, 237]
+
+# :::::::::::
+
+puts ages_val.sort.shift
+
+# :::::::::::
+
+min = ages_val[0]
+
+ages_val.each do |elem|
+  min = elem if elem < min
+end
+
+puts "Minimum value: #{min}"
+# Minimum value: 10
+
+
 ########################### PRACTICE PROBLEM 5
 
 # In the array:
@@ -138,9 +159,9 @@ statement = "The Flintstones Rock"
 # { "F"=>1, "R"=>1, "T"=>1, "c"=>1, "e"=>2, ... }
 
 
-####  VERSION
+#### FANCY VERSION
 # Using syntactic sugar, but several steps require built-in loops.
-# It's fun and easy to use but maybe not good for performance.
+# It's fun and easy to use but maybe not good for performance (? no idea).
 
 ch_counter = {}
 letters_array = statement.delete(' ').split('')  # "TheFlints..." no spaces ' '
@@ -156,6 +177,21 @@ p ch_counter
 #      "k"=>1 }
 
 #### LONG VERSION
+
+frequency = {}
+char_arr = statement.delete!(' ').split('')  # ['T', 'h', 'e', ...]
+
+char_arr.each do |i|
+  if frequency[i] == nil
+    frequency[i] = 1
+  else
+    frequency[i] += 1
+  end
+end
+
+p frequency
+
+#### VERSION WITH SINGLE LOOP
 # I tried to do everything with a single loop.
 
 ch_counter = {}
@@ -244,7 +280,7 @@ words = "The Flintstones Rock"
 
 def titleize(string)
   string_arr = string.split(' ')
-  string_arr.map! { |word| word.capitalize!  }
+  string_arr.map! { |word| word.capitalize }
   string_arr.join(' ')
 end
 
@@ -257,7 +293,7 @@ words.split.map { |word| word.capitalize }.join(' ')
 
 ########################### PRACTICE PROBLEM 10
 
-# Given the munsters hash below
+# Given the 'munsters' hash below
 
 munsters = {
   "Herman" => { "age" => 32, "gender" => "male" },
@@ -325,15 +361,15 @@ end
 
 #### CODE
 
-munsters.each do |name, features|
-  case features['age']
-  when 0..17
-    features['age_group'] = 'kid'
-  when 18..64
-    features['age_group'] = 'adult'
-  else
-    features['age_group'] = 'senior'
-  end
+munsters.each do |name, details|
+  details['age_group'] = case details['age']
+                         when 0..17
+                           'kid'
+                         when 18..64
+                           'adult'
+                         else
+                           'senior'
+                         end
 end
 
-puts munsters
+p munsters

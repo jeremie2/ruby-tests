@@ -194,6 +194,7 @@ def fib(first_num, second_num)
   sum
 end
 
+
 # Another way is living 'limit' outside the method but passing to it as
 # argument:
 def fib(first_num, second_num, limit)
@@ -201,6 +202,22 @@ def fib(first_num, second_num, limit)
 end
 
 result = fib(0, 1, limit)
+
+
+# Another way, making 'limit' a constant 'LIMIT' so that it will be
+# accessible from outside the method definition.
+
+LIMIT = 15
+
+def fib(first_num, second_num)
+  while first_num + second_num < LIMIT
+    sum = first_num + second_num
+    first_num = second_num
+    second_num = sum
+  end
+  sum
+end
+
 
 ########################################################
 
