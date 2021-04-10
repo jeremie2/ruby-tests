@@ -10,6 +10,10 @@ while i < 100
   i += 2
 end
 
+## ALTERNATIVE
+
+(0..100).each {|i| puts i if i.even? }
+
 ######## SOLUTION
 
 value = 1

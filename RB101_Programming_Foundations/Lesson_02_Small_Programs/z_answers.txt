@@ -67,21 +67,32 @@
   No, nil and false are never evaluated to true.
 
 - What is 'truthiness'?
-  Truthiness is a sort of state of every expression in ruby that is always
+  Truthiness is a sort of state of most expressions in ruby that is always
   evaluated to true.
   Careful!! This doesn't mean that its value is true.
   
-    if puts 5
+    if 'ciao'.upcase
       puts 'hi'
     else
       puts 'bye'
     end
-  
-  "puts 5" is evaluated as true. The same would be replacing "puts 5"
-  with 'ciao'.upcase... it doesn't make any difference.
+    
+    # hi
+     
+  'ciao'.upcase is evaluated as true. The same would be replacing 'ciao'.upcase
+  with 5 + 5... it doesn't make any difference.
   The only way to get a different result is:
-  - using nil or false
-  - or performing a boolean evaluations that return false (like 5 == 1)
+  - directly using nil, false
+  - performing a boolean evaluations that return false (like 5 == 1)
+  - performing something that return nil or false (puts statement return nil)
+
+	if puts 5
+	  puts 'hi'
+	else
+	  puts 'bye'
+	end
+    
+    # bye
 
 - What are logical operators and what they do?
   - &&: it means 'and'.
@@ -166,8 +177,7 @@
 ::::::::: 13 debugging
 
 - What's the best temperament for debugging?
-  Patient, systematic and logical. Stop crying and and see for a possible
-  solution!
+  Patient, systematic and logical. Stop crying and see for a possible solution!
 
 - What is important to note inside a stack trace?
   Things like "NoMethodError: undefined method `name' for nil:NilClass".
@@ -315,7 +325,7 @@
 - What are immutable objects?
   - numbers
   - boolean
-  - nill
+  - nil
   - range object (e.g., 1..10)
 
 - Does object_id of an array change if we reassign its elements? 
@@ -384,7 +394,7 @@
     # => joe johnson
     # => sam johnson
 
-- What should we do when while iterating the block variable is not used?
+- What should we do when, while iterating the block, variable is not used?
   It's a good practice to name the variable with an underscore _
 
     names = ['kim', 'joe', 'sam']
