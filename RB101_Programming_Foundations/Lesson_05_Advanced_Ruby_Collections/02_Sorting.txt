@@ -1,0 +1,148 @@
+
+################ SORTING
+
+Sorting: setting the order of the items in a collection according to a certain criterion.
+
+[2, 5, 3, 4, 1].sort       # [1, 2, 3, 4 ,5]
+
+
+######## COMPARISON
+
+To sort a collection of items, you must compare each item in the collection to each
+other.
+If the criterion of sorting integers looks obvious (int_1 < int_2), how does it
+work with elements of other types?
+
+['c', 'a', 'e', 'b', 'd'].sort     # ['a', 'b', 'c', 'd', 'e']
+
+
+######## <=> 'SPACESHIP' METHOD and ORD
+
+<=> method performs comparison between two objects of the same type and returns:
+
+2 <=> 1         #  1
+1 <=> 2         # -1
+2 <=> 2         #  0
+1 <=> 'ciao'    # nil
+'b' <=> 'a'     #  1
+'a' <=> 'b'     # -1
+'b' <=> 'b'     #  0
+
+The order between elements of the same type is given by the ASCII table values.
+We can get the values using the #ord method:
+
+'b'.ord # => 98
+'}'.ord # => 125
+
+REMEMBER:
+- uppercase letters come before lowercase letters
+- digits and (most) punctuation come before letters
+- extended table with accented and other characters comes after main ASCII table
+
+
+######## SORT
+
+#sort methods returns a new array based on ordered elements of the original array. 
+
+[2, 5, 3, 4, 1].sort       # [1, 2, 3, 4 ,5]
+
+It's also possible to use a block which needs two arguments that will be compared 
+and the value of the comparison (-1, 0, 1 or nil) will be returned:
+
+[2, 5, 3, 4, 1].sort do |a, b|     # default sorting (same result without block)
+  a <=> b
+end
+# => [1, 2, 3, 4, 5]
+
+:::::::::::::::::::
+
+[2, 5, 3, 4, 1].sort do |a, b|     # 'reverse' sorting
+  b <=> a
+end
+# => [5, 4, 3, 2, 1]
+
+:::::::::::::::::::
+
+[2, 5, 3, 4, 1].sort do |a, b|     # this example gives an hint of the algorithm
+  puts "a is #{a} and b is #{b}"   # behind the method
+  a <=> b
+end
+# a is 2 and b is 5
+# a is 5 and b is 3
+# a is 2 and b is 3
+# a is 5 and b is 4
+# a is 3 and b is 4
+# a is 5 and b is 1
+# a is 4 and b is 1
+# a is 3 and b is 1
+# a is 2 and b is 1
+# => [1, 2, 3, 4, 5]
+
+
+::::: What's the result?
+
+['arc', 'bat', 'cape', 'ants', 'cap'].sort
+
+['ants', 'arc', 'bat', 'cap' 'cape']
+
+
+::::: What's the result with Array#<=>?
+
+[['a', 'cat', 'b', 'c'], ['b', 2], ['a', 'car', 'd', 3], ['a', 'car', 'd']].sort
+
+[['a', 'car', 'd'], ['a', 'car', 'd', 3], ['a', 'cat', 'b', 'c'], ['b', 2]]
+
+[b, 2] CONTAINS AN INTEGER!!!
+In this case the fact that the first element is 'b' it's enough to end the
+comparison with the other elements starting with 'a'.
+In case that array would have been [a, 2] there should have been raised:
+  # => ArgumentError: comparison of Array with Array failed
+
+
+######## SORT_BY
+# Return: array
+
+Mostly used with block. Inside it there's the sorting rule:
+
+  ['cot', 'bed', 'mat'].sort_by do |word|
+    word[1]                       # ordered by 2nd character of each word
+  end
+  # => ["mat", "bed", "cot"]
+
+It works also with hashes:
+
+  people = { Kate: 27, john: 25, Mike:  18 }
+
+  people.sort_by do |_, age|
+    age
+  end
+  # => [[:Mike, 18], [:john, 25], [:Kate, 27]]
+
+If we would like to compare keys, we can do it but when keys are made of
+symbol, we have to convert them to string with #to_s
+
+Careful!!
+Like in the previous case the pair 'john: 25', 'john' is not capitalized.
+Remember to capitalize it like the other keys, other wise because of the
+'ASCIIbetical' order, we might have an unexpected result:
+
+  people.sort_by do |name, _|
+    name.capitalize
+  end
+  # => [[:john, 25], [:Kate, 27], [:Mike, 18]]
+
+
+######## SORT! and SORT_BY!
+
+Array#sort! and Array#sort_by! are the 'destructive' version of the previous
+method. They exist only for array
+
+
+######## OTHER COMPARISON METHODS
+
+-min
+-max
+-minmax
+-min_by
+-max_by
+-minmax_by
