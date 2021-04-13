@@ -18,7 +18,7 @@ work with elements of other types?
 
 ######## <=> 'SPACESHIP' METHOD and ORD
 
-<=> method performs comparison between two objects of the same type and returns:
+#<=> method performs comparison between two objects of the same type and returns:
 
 2 <=> 1         #  1
 1 <=> 2         # -1
@@ -37,7 +37,7 @@ We can get the values using the #ord method:
 REMEMBER:
 - uppercase letters come before lowercase letters
 - digits and (most) punctuation come before letters
-- extended table with accented and other characters comes after main ASCII table
+- extended tables with accented and other characters come after main ASCII table
 
 
 ######## SORT
@@ -95,7 +95,7 @@ end
 [b, 2] CONTAINS AN INTEGER!!!
 In this case the fact that the first element is 'b' it's enough to end the
 comparison with the other elements starting with 'a'.
-In case that array would have been [a, 2] there should have been raised:
+In case that array would have been [a, 2] there would have been raised:
   # => ArgumentError: comparison of Array with Array failed
 
 
@@ -118,17 +118,17 @@ It works also with hashes:
   end
   # => [[:Mike, 18], [:john, 25], [:Kate, 27]]
 
-If we would like to compare keys, we can do it but when keys are made of
-symbol, we have to convert them to string with #to_s
+To compare keys made of symbol, Symbol#<=> perform the comparison calling
+#to_s method on both element.
 
 Careful!!
 Like in the previous case the pair 'john: 25', 'john' is not capitalized.
 Remember to capitalize it like the other keys, other wise because of the
 'ASCIIbetical' order, we might have an unexpected result:
 
-  people.sort_by do |name, _|
-    name.capitalize
-  end
+people.sort_by do |name, _|
+  name.capitalize
+end
   # => [[:john, 25], [:Kate, 27], [:Mike, 18]]
 
 
@@ -140,9 +140,108 @@ method. They exist only for array
 
 ######## OTHER COMPARISON METHODS
 
--min
--max
--minmax
--min_by
--max_by
--minmax_by
+:::::::: MIN
+
+Returns the object in enum with the minimum value.
+
+  ['car', 'alright', 'barman'].min
+  # => 'alright'
+
+With argument we can set the number of elements to be returned.
+In that case an array will be returned:
+
+  ['car', 'alright', 'barman'].min(2)
+  => ["alright", "barman"]
+
+With block:
+  
+  ['car', 'alright', 'barman'].min { |a, b| a.length <=> b.length }
+  # => 'car'
+  
+When element.length is the same for each element, it always returns the first
+element of the array:
+
+  ['bar', 'all', 'car'].min { |a, b| a.length <=> b.length }
+  # => 'bar'  
+  ['all', 'bar', 'car'].min { |a, b| a.length <=> b.length }
+  # => 'all'  
+  ['car', 'all', 'bar'].min { |a, b| a.length <=> b.length }
+  # => 'car'
+  
+
+:::::::: MIN_BY
+
+Returns the object in enum that gives the minimum value from the given block.
+It works very similar to #min:
+
+  ['car', 'alright', 'barman'].min_by { |x| x.length }
+  # => 'car'
+
+With the argument we can set the number of elements that we want to be returned.
+In that case an array will be returned:
+
+  ['car', 'alright', 'barman'].min_by(2) { |x| x.length }
+  # => ["car", "barman"]
+
+When all elements have the same size, it takes and sort the first 'n' elements.
+It doesn't do anything if any smaller string is found: 
+
+  ['var', 'all', 'ann'].min_by(2) { |x| x.length }
+  => ["all", "var"]
+
+
+:::::::: MINMAX
+
+Returns a two element array which contains the minimum and the maximum value in the enumerable.
+
+  ['car', 'alright', 'barman'].minmax
+  # => ["alright", "car"]
+
+With block:
+
+  ['car', 'alright', 'barman'].minmax { |a, b| a.length <=> b.length }
+  # => ["car", "alright"]
+
+
+:::::::: MINMAX_BY
+
+Returns a two element array containing the objects in enum that correspond to
+the minimum and maximum values respectively from the given block.
+
+  ['car', 'alright', 'barman'].minmax_by { |x| x.length }
+  # => ["car", "alright"]
+
+
+:::::::: MAX
+
+Returns the object in enum with the maximum value.
+
+  ['car', 'alright', 'barman'].max
+  # => 'car'
+
+With block:
+
+  ['car', 'alright', 'barman'].max { |a, b| a.length <=> b.length }
+  # => 'alright'
+
+With the argument we can set the number of elements that we want to be returned.
+In that case an array will be returned:
+
+  ['car', 'alright', 'barman'].max(2)
+  # => ["car", "barman"]
+
+  ['car', 'alright', 'barman'].max(2) { |a, b| a.length <=> b.length }
+  # => ["alright", "barman"]
+
+
+:::::::: MAX_BY
+
+Returns the object in enum that gives the maximum value from the given block.
+
+  ['car', 'alright', 'barman'].max_by { |x| x.length }
+  # => 'alright'
+
+WIth argument we select the number of argument that will be returned in an array:
+
+  ['car', 'alright', 'barman'].max_by(2) { |x| x.length }
+  # => ["alright", "barman"]
