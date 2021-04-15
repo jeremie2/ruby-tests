@@ -70,7 +70,7 @@ we have to notice a particular behavior:
   arr = [a, b]
   arr # => [[1, 3], [2]]
 
-Let's add a new element to the second inner array:
+Let's change an element of the second inner array:
 
   a[1] = 5
   arr # => [[1, 5], [2]]
@@ -91,13 +91,126 @@ because:
   BOTH 'arr[0]' AND 'a' ARE REFERENCING THE SAME OBJECT.
 
 
-###### SHALLOW COPY
+###### SHALLOW COPY (#DUP & #CLONE)
+
+Normally if we execute an assignment like this:
+
+  arr1 = ["a", "b", "c"]
+  arr2 = arr1
+  arr1.object_id     # 280
+  arr2.object_id     # 280
+
+we end up having with two variable referencing the same array (OBJECT).
+There's a way to avoid this using #dup or #clone method:
+
+  arr1 = ["a", "b", "c"]
+  arr2 = arr1.dup
+  arr1.object_id     # 300
+  arr2.object_id     # 320
+
+This time each variable point to a different object.
+What is still shared are the elements
+
+    arr1     ["a", "b", "c"]      arr2    ["a", "b", "c"]
+               |    |    |                  |    |    |
+  object_id   340  360  380                340  360  380
+
+in fact calling a methods that change objects inside the array produce
+the following result:
+
+  arr2[1].upcase!
+  arr2            # ["a", "B", "c"]
+  arr1            # ["a", "B", "c"]
+
+Let's see some examples:
+
+  #### BOTH ARRAYS CHANGE
+
+  arr1 = ["a", "b", "c"]
+  arr2 = arr1.dup
+  arr2.each do |char|
+    char.upcase!
+  end
+
+  arr1 # => ["A", "B", "C"]
+  arr2 # => ["A", "B", "C"]
+
+  #### ONE ARRAY IS AFFECTED
+  
+  arr1 = ["a", "b", "c"]
+  arr2 = arr1.dup
+  arr2.map! do |char|
+    char.upcase
+  end
+
+  arr1 # => ["a", "b", "c"]
+  arr2 # => ["A", "B", "C"]
+
+The same result could be reached performing a non-destructive #map
+with assignment: 
+
+  arr1 = ["a", "b", "c"]
+  arr2 = arr1.map do |char|
+    char.upcase
+  end
+
+  arr1 # => ["a", "b", "c"]
+  arr2 # => ["A", "B", "C"]
+
+this because #map return a new array (different by arr1).
 
 
+###### FREEZING OBJECTS
+
+#freeze can 'freeze' an object preventing it from being modified.
+This method can be used only with mutable object as the immutable
+are already frozen.
+
+  str = "abc".freeze
+  str << "d"
+  # => RuntimeError: can't modify frozen String
+
+  5.frozen?
+  # => true
+
+(!!!) It works only with the called object. It DOESN'T WORK with
+      nested objects:
+
+  arr = [[1], [2], [3]].freeze
+  arr[2] << 4
+  arr # => [[1], [2], [3, 4]]
+
+also with strings inside an array:
+
+  arr = ["a", "b", "c"].freeze
+  arr[2] << "d"
+  arr # => ["a", "b", "cd"]
 
 
+:::::: DUP & CLONE: DIFFERENCES WHILE USING FREEZE 
+
+The main difference between dup and clone is that clone preserves
+the frozen state of the object:
+
+  arr1 = ["a", "b", "c"].freeze
+  arr2 = arr1.clone
+  arr2 << "d"
+  # => RuntimeError: can't modify frozen Array
+
+  :::::: :::::: ::::::
+
+  arr1 = ["a", "b", "c"].freeze
+  arr2 = arr1.dup
+  arr2 << "d"
+
+  arr2 # => ["a", "b", "c", "d"]
+  arr1 # => ["a", "b", "c"]
 
 
+###### DEEP COPY
 
-
-
+In Ruby, there's no built-in or easy way to create a deep copy or deep
+freeze objects within objects.
+It is possible to implement it but we won't see it yet. At the moment
+is important to understand how #freeze, #dup, and #clone work and be
+aware at which level of a nested collection we are.
