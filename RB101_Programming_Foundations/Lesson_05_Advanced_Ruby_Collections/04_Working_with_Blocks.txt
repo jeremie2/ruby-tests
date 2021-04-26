@@ -1,7 +1,7 @@
 
 ######## WORKING WITH BLOCKS
 
-:::::::: Example 1
+################ EXAMPLE 1
 
 What's happening in this, seemingly simple, piece of code? Take it apart and
 try to describe every interaction with precision.
@@ -21,8 +21,8 @@ try to describe every interaction with precision.
   - Inside the block.
     - Every element will be assigned to variable 'arr'.
     - Each time it will be performed: puts arr.first
-      As 'arr.first' return the first element of 'arr'
-      will be printed.
+      as 'arr.first' returns the first element of 'arr',
+      it will be printed.
   - First iteration: arr = [1, 2] and 1 is printed.
   - Second and last iteration: arr = [3, 4] and 3 is printed.
 - Once the the iteration is finished #each methods will return the
@@ -32,7 +32,8 @@ try to describe every interaction with precision.
 
 The Array#each method is being called on the multi-dimensional array [[1, 2],
 [3, 4]]. Each inner array is passed to the block in turn and assigned to the
-local variable arr. The Array#first method is called on arr and returns the object at index 0 of the current array - in this case the integers 1 and 3, respectively. The puts method then outputs a string representation of the integer. puts returns
+local variable arr. The Array#first method is called on arr and returns the object
+at index 0 of the current array - in this case the integers 1 and 3, respectively. The puts method then outputs a string representation of the integer. puts returns
 nil and, since this is the last evaluated statement within the block, the return
 value of the block is therefore nil. each doesn't do anything with this returned
 value though, and since the return value of each is the calling object - in this
@@ -48,13 +49,17 @@ What specific pieces of information are we interested in keeping track of?
 - What's the return value of that action?
 - Is the return value used by whatever instigated the action?
 
+  - which ACTION?
+  - on which OBJECT?
+  - action's SIDE EFFECTS?
+  - action's RETURN VALUE?
+  - return value USED?
 
 We can take these pieces of information and set them out in a tabular format:
 
-
 ##############################################################################
-#      #            #             # Side     # Return        # Is Return     #
-# Line # Action     # Object      # Effect   # Value         # Value Used?   #
+#      #            #             # Side       # Return      # Is Return     #
+# Line # Action     # Object      # Effect     # Value       # Value Used?   #
 ##############################################################################
 # 1   :: mthd call :: outer      ::           :: calling    :: No, but shown #
 #     :: (each)    :: array      ::  none     :: object     :: on line 6     #
@@ -65,30 +70,509 @@ We can take these pieces of information and set them out in a tabular format:
 # 2   :: mthd call :: each       ::           :: el idx[0]  ::               #
 #     :: (first)   :: sub-arr    ::  none     :: of sub-arr :: yes, by puts  #
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+# 2   ::           ::            :: Output    ::            :: Yes to determ #
+#     :: mthd call :: el idx[0]  :: str repr  ::            :: return block  #
+#     :: (puts)    :: of sub-arr :: of int    :: nil        :: value         #
+##############################################################################
+
+
+################ EXAMPLE 2
+
+[[1, 2], [3, 4]].map do |arr|
+  puts arr.first
+end
+# 1
+# 3
+# => [nil, nil]
+
+
+##############################################################################
+#      #            #             # Side       # Return      # Is Return     #
+# Line # Action     # Object      # Effect     # Value       # Value Used?   #
+##############################################################################
+# 1   :: mthd call :: outer      ::           ::            :: No, but shown #
+#     :: (map)     :: array      ::  none     :: new array  :: on line 6     #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+# 1-3 :: block     :: each       ::           ::            :: Yes by map for#
+#     :: execution :: sub-arr    ::  none     :: nil        :: trnsformation #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+# 2   :: mthd call :: each       ::           :: el idx[0]  ::               #
+#     :: (first)   :: sub-arr    ::  none     :: of sub-arr :: yes, by puts  #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 #     ::           ::            :: Output    ::            :: Yes to determ #
 # 2   :: mthd call :: el idx[0]  :: str repr  ::            :: return block  #
 #     :: (puts)    :: of sub-arr :: of int    :: nil        :: value         #
 ##############################################################################
 
+Compare to #each, #map performs a transformation based on the return value
+of the block.
 
 
+################ EXAMPLE 3
+
+[[1, 2], [3, 4]].map do |arr|
+  puts arr.first
+  arr.first
+end
+# 1
+# 3
+# => [1, 3]
+
+##############################################################################
+#      #            #             # Side       # Return      # Is Return     #
+# Line # Action     # Object      # Effect     # Value       # Value Used?   #
+##############################################################################
+# 1   :: mthd call :: outer      ::           ::            :: No, but shown #
+#     :: (map)     :: array      ::  none     :: new array  :: on line 7     #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+# 1-4 :: block     :: each       ::           :: int idx[0] :: Yes by map for#
+#     :: execution :: sub-arr    ::  none     :: of sub-arr :: trnsformation #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+# 2   :: mthd call :: each       ::           :: el idx[0]  ::               #
+#     :: (first)   :: sub-arr    ::  none     :: of sub-arr :: yes, by puts  #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+#     ::           ::            :: Output    ::            ::               #
+# 2   :: mthd call :: el idx[0]  :: str repr  ::            ::               #
+#     :: (puts)    :: of sub-arr :: of int    :: nil        :: No            #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+# 3   :: mthd call :: each       ::           :: el idx[0]  :: yes, block    #
+#     :: (first)   :: sub-arr    ::  none     :: of sub-arr :: return value  #
+##############################################################################
+
+Block's return value: integer returned by 'arr.first'.
+It is then used by #map to replace the inner array with an integer and will
+finally return a new array with two integers as elements.
+
+Tables are nice but take ages to use it. Let's write the example this way:
+
+#### LINE 1:  [[1, 2], [3, 4]].map
+ACTION: map method call
+OBJECT: outer array
+SIDE EFFECT: no
+RETURN VALUE: new array
+IS RETURN VALUE USED?: no, but shown on line 6
+
+#### LINE 1-4:  do ... end 'block'
+ACTION: block exec
+OBJECT: each sub arrays
+SIDE EFFECT: no
+RETURN VALUE: integers at idx[0] of sub array
+IS RETURN VALUE USED?: by #map
+
+#### LINE 2
+ACTION: #first method call
+OBJECT: each sub array
+SIDE EFFECT: no
+RETURN VALUE: integer idx[0] of sub array
+IS RETURN VALUE USED?: by puts
+
+#### LINE 2
+ACTION: #puts method call
+OBJECT: integer idx[0] of each sub array
+SIDE EFFECT: output string representing an integer
+RETURN VALUE: nil
+IS RETURN VALUE USED?: no
+
+#### LINE 3
+ACTION: #first method call
+OBJECT: each sub array
+SIDE EFFECT: no
+RETURN VALUE: integer at idx[0] of sub array
+IS RETURN VALUE USED?: yes, as return value of the block 
 
 
+################ EXAMPLE 4
+
+my_arr = [[18, 7], [3, 12]].each do |arr|
+  arr.each do |num|
+    if num > 5
+      puts num
+    end
+  end
+end
+
+#### LINE 1
+ACTION: assignment to a variable
+OBJECT: array
+SIDE EFFECT: no
+RETURN VALUE: array
+IS RETURN VALUE USED?: no
+
+#### LINE 1
+ACTION: #each method call
+OBJECT: array
+SIDE EFFECT: no
+RETURN VALUE: original array
+IS RETURN VALUE USED?: yes, it is assigned to the variable
+
+#### LINE 1-7
+ACTION: outer block execution
+OBJECT: each sub array
+SIDE EFFECT: no
+RETURN VALUE: each sub array
+IS RETURN VALUE USED?: no
+
+#### LINE 2
+ACTION: #each method call
+OBJECT: array
+SIDE EFFECT: no
+RETURN VALUE: original array
+IS RETURN VALUE USED?: yes, by the outer block
+
+#### LINE 2-6
+ACTION: block execution
+OBJECT: each sub array
+SIDE EFFECT: no
+RETURN VALUE: nil
+IS RETURN VALUE USED?: no
+
+#### LINE 3
+ACTION: comparison 
+OBJECT: sub array element
+SIDE EFFECT: no
+RETURN VALUE: true or false
+IS RETURN VALUE USED?: yes, evaluated by 'if'
+
+#### LINE 3-5
+ACTION: conditional 'if' 
+OBJECT: boolean
+SIDE EFFECT: no
+RETURN VALUE: nil
+IS RETURN VALUE USED?: yes, by inner block
+
+#### LINE 4
+ACTION: #puts method call
+OBJECT: integer (element of sub array)
+SIDE EFFECT: print a string representing an integer
+RETURN VALUE: nil
+IS RETURN VALUE USED?: yes, to determine return value of the conditional
+                       statement if the condition is met
 
 
+################ EXAMPLE 5
+
+[[1, 2], [3, 4]].map do |arr|
+  arr.map do |num|
+    num * 2
+  end
+end
+# => [[2, 4], [6, 8]]
+
+#### LINE 1
+# ACTION: method call #map
+# OBJECT: outer array
+# SIDE EFFECT: no
+# RETURN VALUE: new transformed array
+# IS RETURN VALUE USED?: no but shown line 6
+
+#### LINE 1-5
+# ACTION: block exec
+# OBJECT: each inner array
+# SIDE EFFECT: no
+# RETURN VALUE: new transformed array
+# IS RETURN VALUE USED?: by outer map method
+
+#### LINE 2
+# ACTION: method call #map
+# OBJECT: each inner array
+# SIDE EFFECT: no
+# RETURN VALUE: new transformed array
+# IS RETURN VALUE USED?: by outer block return value
+
+#### LINE 2
+# ACTION: inner block exec
+# OBJECT: each element of inner array
+# SIDE EFFECT: no
+# RETURN VALUE: integer
+# IS RETURN VALUE USED?: yes by inner map for transformation
+
+#### LINE 3
+# ACTION: method call * with integer 2 as argument
+# OBJECT: integer (elem of inner array)
+# SIDE EFFECT: no
+# RETURN VALUE: integer
+# IS RETURN VALUE USED?: used as return block value
 
 
+################ EXAMPLE 6
+
+[{ a: 'ant', b: 'elephant' }, { c: 'cat' }].select do |hash|
+  hash.all? do |key, value|
+    value[0] == key.to_s
+  end
+end
+# => [{ :c => "cat" }]
+
+#### LINE 1
+# ACTION: method call #select
+# OBJECT: array (made of hashes)
+# SIDE EFFECT: no
+# RETURN VALUE: new array
+# IS RETURN VALUE USED?: no but shown line 6
+
+#### LINE 1-5
+# ACTION: block exec
+# OBJECT: array
+# SIDE EFFECT: no
+# RETURN VALUE: boolean
+# IS RETURN VALUE USED?: by outer #select to compose new array
+
+#### LINE 2
+# ACTION: method call #all?
+# OBJECT: hash (each element of original array)
+# SIDE EFFECT: no
+# RETURN VALUE: boolean
+# IS RETURN VALUE USED?: as block return value
+
+#### LINE 2-5
+# ACTION: block exec
+# OBJECT: hash (each element of original array)
+# SIDE EFFECT: no
+# RETURN VALUE: boolean
+# IS RETURN VALUE USED?: by method #all?
+
+#### LINE 3
+# ACTION: method call #to_s
+# OBJECT: symbol (key of each hash)
+# SIDE EFFECT: no
+# RETURN VALUE: string
+# IS RETURN VALUE USED?: by comparison ==
+
+#### LINE 3
+# ACTION: comparison ==
+# OBJECT: elem at idx 0 of each hash's value and each hash's key
+#         transformed to string
+# SIDE EFFECT: no
+# RETURN VALUE: boolean
+# IS RETURN VALUE USED?: as block's return value 
+
+What would happen if, instead of using all?, we used any?. Why would this
+affect the return value of select?
+
+### ANSWER
+Yes, both hashes would have been selected because also in the first hash
+{ a: 'ant', b: 'elephant' } there is at least the pair a: 'ant' for which
+  value[0] == key.to_s
+return true.
 
 
+################ EXAMPLE 7
+
+We want to sort the outer array so that the inner arrays are ordered according to the numeric value of the strings they contain.
+
+  arr = [['1', '8', '11'], ['2', '6', '13'], ['2', '12', '15'], ['1', '8', '9']]
+
+doing 'arr.sort' doesn't work because element of 'arr' will be ordered following
+the string comparison:
+
+# [["1", "8", "11"], ["1", "8", "9"], ["2", "12", "15"], ["2", "6", "13"]]
+
+["2", "12", "15"] is placed before because the character '1' in '12' comes
+before of '6' in ["2", "6", "13"].
+
+We can use the combination of #sort_by and #map:
+
+  arr.sort_by do |sub_arr|
+    sub_arr.map do |num|
+      num.to_i
+    end
+  end
+  # => [["1", "8", "9"], ["1", "8", "11"], ["2", "6", "13"], ["2", "12", "15"]]
+
+It works because using #sort_by the 'sorting' comparison between elements
+will be performed on the new array. 
+(That's is at the moment difficult to understand probably because at this
+stage it's not clear how #sort and #sort_by really work.)
+Anyway the base idea is that taking each element of 'arr', its position
+will be sorted by the comparison between the elements transformed by #map.
 
 
+################ EXAMPLE 8
+
+Let's see an example with an array made of an integer array and a string array.
+We want to select:
+  integers > 13
+  strings  < 6 characters
+
+[[8, 13, 27], ['apple', 'banana', 'cantaloupe']].map do |arr|
+  arr.select do |item|
+    if item.to_s.to_i == item    # if it's an integer
+      item > 13
+    else
+      item.size < 6
+    end
+  end
+end
+# => [[27], ["apple"]]
+
+The trick is not using immediately #select, because it doesn't work with nested
+array. To use #select first we have to reach the nested array.
 
 
+################ EXAMPLE 9
+
+Triple-level nested array.
+
+  [[[1], [2], [3], [4]], [['a'], ['b'], ['c']]].map do |element1|
+    element1.each do |element2|
+      element2.partition do |element3|
+        element3.size > 10
+      end
+    end
+  end
+  # => [[[1], [2], [3], [4]], [["a"], ["b"], ["c"]]]
+
+It returns the original array and that's obvious because the 2nd method with
+block is #each and it returns the original object that calls it.
+What is performed inside the block is not going to change the returned value. 
 
 
+################ EXAMPLE 10
+
+[[[1, 2], [3, 4]], [5, 6]].map do |arr|
+  arr.map do |el|
+    if el.to_s.size == 1    # it's an integer
+      el + 1
+    else                    # it's an array
+      el.map do |n|
+        n + 1
+      end
+    end
+  end
+end
+
+#### LINE 1
+# ACTION: call method #map 
+# OBJECT: outer array
+# SIDE EFFECT: no
+# RETURN VALUE: new array
+# IS RETURN VALUE USED?: no but shown line 12
+
+#### LINE 1-11
+# ACTION: exec block
+# OBJECT: each inner array
+# SIDE EFFECT: no
+# RETURN VALUE: each element of the new array
+# IS RETURN VALUE USED?: by outer #map
+
+#### LINE 2
+# ACTION: call inner method #map 
+# OBJECT: array or nested array
+# SIDE EFFECT: no
+# RETURN VALUE: new inner array
+# IS RETURN VALUE USED?: as block return value
+
+#### LINE 2
+# ACTION: exec block
+# OBJECT: inner array (or nested array)
+# SIDE EFFECT: no
+# RETURN VALUE: an integer or array
+# IS RETURN VALUE USED?: by inner #map
+
+#### LINE 3
+# ACTION: call method #to_s
+# OBJECT: integer
+# SIDE EFFECT: no
+# RETURN VALUE: string
+# IS RETURN VALUE USED?: by comparison ==
+
+#### LINE 3
+# ACTION: call method #size
+# OBJECT: string
+# SIDE EFFECT: no
+# RETURN VALUE: integer
+# IS RETURN VALUE USED?: by comparison ==  
+
+#### LINE 3
+# ACTION: comparison ==
+# OBJECT: integer with integer 1
+# SIDE EFFECT: no
+# RETURN VALUE: boolean
+# IS RETURN VALUE USED?: evaluated by if statement
+
+#### LINE 3
+# ACTION: conditional if
+# OBJECT: boolean value from comparison (== 1)
+# SIDE EFFECT: no
+# RETURN VALUE: integer + 1
+# IS RETURN VALUE USED?: as block return value
+
+#### LINE 4
+# ACTION: call of method +
+# OBJECT: integer with integer 1
+# SIDE EFFECT: no
+# RETURN VALUE: integer
+# IS RETURN VALUE USED?: as return value of if
+
+#### LINE 5
+# ACTION: conditional else
+# OBJECT: inner array
+# SIDE EFFECT: no
+# RETURN VALUE: new inner array
+# IS RETURN VALUE USED?: as block return value
+
+#### LINE 6
+# ACTION: method call #map
+# OBJECT: double inner array
+# SIDE EFFECT: no
+# RETURN VALUE: new inner array
+# IS RETURN VALUE USED?: as return value by else
+
+#### LINE 6
+# ACTION: block exec
+# OBJECT: each element of double inner array
+# SIDE EFFECT: no
+# RETURN VALUE: integer (elem of new array)
+# IS RETURN VALUE USED?: by inner #map
+
+#### LINE 7
+# ACTION: call of method +
+# OBJECT: integer and integer 1
+# SIDE EFFECT: no
+# RETURN VALUE: integer (new elem of new array)
+# IS RETURN VALUE USED?: by else as return value
+
+(!!!) The tricky part about this example is that the original array has uneven
+nested levels.In practice, this type of nested data processing is typically a
+sign of bad design. But if you ever find yourself in that situation, you should
+be confident in your ability to work through it.
 
 
+################ MUTATING COLLECTIONS WHILE ITERATING
 
+NEVER DO THAT!!!
 
+Iterating are based on the indexes of elements. If we remove elements while
+iterating with them we change the index of the following elements.
+If we are at index '2' and we delete it, then element at index '3' becomes
+the new element at index '2' and it will not be iterated.
 
+A possible way to avoid this problem is to iterate on a cloned collection
+while deleting element on the original collection.
 
+WRONG:
+
+  def remove_evens!(arr)
+    arr.each do |num|
+      if num % 2 == 0
+        arr.delete(num)
+      end
+    end
+    arr
+  end
+
+p remove_evens!([1,1,2,3,4,6,8,9])
+# expected return value [1, 1, 3, 9]
+# actual return value [1, 1, 3, 6, 9]
+
+CORRECT
+
+  def remove_evens!(arr)
+    cloned_arr = arr.dup
+    cloned_arr.each do |num|
+      if num % 2 == 0
+        arr.delete(num)
+      end
+    end
+    arr
+  end

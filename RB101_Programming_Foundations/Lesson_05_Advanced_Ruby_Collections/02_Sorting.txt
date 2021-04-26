@@ -1,7 +1,8 @@
 
 ################ SORTING
 
-Sorting: setting the order of the items in a collection according to a certain criterion.
+Sorting: setting the order of the items in a collection according to a certain
+criterion.
 
 [2, 5, 3, 4, 1].sort       # [1, 2, 3, 4 ,5]
 
@@ -63,7 +64,7 @@ end
 
 :::::::::::::::::::
 
-[2, 5, 3, 4, 1].sort do |a, b|     # this example gives an hint of the algorithm
+[2, 5, 3, 4, 1].sort do |a, b|     # this example gives a hint of the algorithm
   puts "a is #{a} and b is #{b}"   # behind the method
   a <=> b
 end
@@ -184,7 +185,7 @@ In that case an array will be returned:
   # => ["car", "barman"]
 
 When all elements have the same size, it takes and sort the first 'n' elements.
-It doesn't do anything if any smaller string is found: 
+It doesn't do anything if any other string is found: 
 
   ['var', 'all', 'ann'].min_by(2) { |x| x.length }
   => ["all", "var"]

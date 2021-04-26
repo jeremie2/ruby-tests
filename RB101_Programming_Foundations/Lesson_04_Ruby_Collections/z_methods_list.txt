@@ -1,6 +1,27 @@
 
 ######################### FOUNDAMENTALS METHODS
 
+####### A USEFUL TABLE
+
+##############################################################
+#        #            # Considers #             #            #
+#        #            # return    # Returns     # Returned   #
+# Method #  Action    # block's   # new         # collection #
+#        #            # value?    # collection? # length     #
+##############################################################
+#        ::           ::          ::   No       ::           #
+# each   :: Iteration ::   No     :: (returns   :: Original  #
+#        ::           ::          ::  original) ::  length   #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::# 
+#        ::           ::          ::            :: Original  #
+# select :: Selection ::   Yes    ::    Yes     ::  length   #
+#        ::           :: (truthy) ::            ::  or less  #
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
+#        :: Transfor- ::          ::            ::           #
+# map    ::  mation   ::   Yes    ::    Yes     :: Original  #
+#        ::           ::          ::            ::  length   #
+##############################################################
+
                       EACH - SELECT - MAP
 
 ::::::::::::::: ITERATION
