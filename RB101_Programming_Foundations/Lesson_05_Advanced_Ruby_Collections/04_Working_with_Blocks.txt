@@ -33,7 +33,8 @@ try to describe every interaction with precision.
 The Array#each method is being called on the multi-dimensional array [[1, 2],
 [3, 4]]. Each inner array is passed to the block in turn and assigned to the
 local variable arr. The Array#first method is called on arr and returns the object
-at index 0 of the current array - in this case the integers 1 and 3, respectively. The puts method then outputs a string representation of the integer. puts returns
+at index 0 of the current array - in this case the integers 1 and 3, respectively.
+The puts method then outputs a string representation of the integer. puts returns
 nil and, since this is the last evaluated statement within the block, the return
 value of the block is therefore nil. each doesn't do anything with this returned
 value though, and since the return value of each is the calling object - in this
@@ -358,7 +359,8 @@ return true.
 
 ################ EXAMPLE 7
 
-We want to sort the outer array so that the inner arrays are ordered according to the numeric value of the strings they contain.
+We want to sort the outer array so that the inner arrays are ordered according to
+the numeric value of the strings they contain.
 
   arr = [['1', '8', '11'], ['2', '6', '13'], ['2', '12', '15'], ['1', '8', '9']]
 
