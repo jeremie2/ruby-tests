@@ -1,0 +1,92 @@
+
+########### CHARACTER CLASSES
+
+########### SET OF CHARACTERS
+
+Character class patterns use a list of characters between square brackets.
+
+  str = "Four score + seven"
+
+
+  [FX]    # Four score + seven
+            |
+
+  [e+]    # Four score + seven
+                     | |  | |
+
+  [abAB]  # Four score + seven
+                no matches
+
+  [*+]    # Four score + seven
+                       |
+
+
+Basically regex try to find matches for each character inside [].
+Example: if a program wants a user to choose between five different
+options (1 and 5), the input can be validated with regex /[12345]/
+
+Likewise, you can validate a y/n prompt response with /[nyNY]/
+
+Upper/lowercase if you cant use / /i classes:
+/[Hh]oover/ matches Hoover or hoover, but not HOOVER.
+
+
+GOOD PRACTICE:
+group characters by type: digits, uppercase letters, lowercase letters, 
+whitespace, and non-alphanumeric characters.
+For readability put non-alphanumerics first or last.
+
+
+CONCATENATION
+
+still works:
+
+  str = "a2 Model 640c1 a1 a2 a3 b1 b2 b3 c1 c2 c3 d1 d2 d3"
+
+  [abc][12]   #  a2 Model 640c1 a1 a2 a3 b1 b2 b3 c1 c2 c3 d1 d2 d3
+                 ||          || || ||    || ||    || ||
+
+
+METACHARACTER: *  +
+
+No need to escape them.
+
+
+########### RANGE OF CHARACTERS
+
+Range of character can be represented inside [ ] with first and
+last element divided by -
+
+  [a-z]  # abcd..z
+  [A-Z]  # ABCD..Z
+  [0-9]  # 0123..9
+
+Ranges can be combined:
+
+  def hex_digit?(char)
+    char.match(/[0-9A-Fa-f]/)
+  end
+
+but...
+DON'T MIX THEM!!! (like [A-z].. it doesn't work)
+
+
+########### NEGATED CLASSES
+
+For negation first character inside brackets must be ^
+Example to say everything but not 'y':
+
+  /[^y]/ 
+
+with multiple characters, ex. "everything but lowercase vowels":
+
+  /[^aeiou]/
+
+
+What do you think happens in this code?
+
+  text = 'xyx'
+  puts 'matched' if text.match(/[^x]/)
+
+# ANSWER
+It should print 'matched' because 'y' matches.

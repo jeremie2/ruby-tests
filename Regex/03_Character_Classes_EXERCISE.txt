@@ -1,0 +1,145 @@
+
+########### EXERCISES 1
+
+Write a regex that matches uppercase or lowercase K or a lowercase s. 
+Test it with these strings:
+
+Kitchen Kaboodle
+Reds and blues
+kitchen Servers
+
+There should be six matches.
+
+#####
+
+/[Kks]/
+
+
+########### EXERCISES 2
+
+Write a regex that matches any of the strings cat, cot, cut, bat, bot, 
+or but, regardless of case. Test it with this text:
+
+My cats, Butterscotch and Pudding, like to
+sleep on my cot with me, but they cut my sleep
+short with acrobatics when breakfast time rolls
+around. I need a robotic cat feeder.
+
+There should be nine matches.
+
+#####
+
+/[cb][aou]t/i
+
+
+########### EXERCISES 3
+
+Base 20 digits include the decimal digits 0 through 9, and the letters A through J in upper or lowercase. Write a regex that matches base 20 digits. Test it with these strings:
+
+0xDEADBEEF
+1234.5678
+Jamaica
+plow ahead
+
+There should be 28 matches.
+
+#####
+
+/[0-9a-j]/i
+
+ or
+
+/[0-9a-jA-J]/i
+
+
+########### EXERCISES 4
+
+Write a regex that matches any letter except x or X. Test it with these strings:
+
+0x1234
+Too many XXXXXXXXXXxxxxxxXXXXXXXXXXXX to count.
+The quick brown fox jumps over the lazy dog
+THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+
+There should be 82 matches.
+
+#####
+
+/[a-wyz]/i
+
+##### SOLUTION
+
+/[A-WYZa-wyz]/
+
+
+########### EXERCISES 5
+
+Why is /[^xX]/ not a valid answer to the previous exercise?
+
+#####
+
+Because also other than alphabetical character are taken in consideration.
+
+
+########### EXERCISES 6
+
+Write a regex that matches any character that is not a letter. Test it with 
+these strings:
+
+0x1234abcd
+1,000,000,000s and 1,000,000,000s.
+THE quick BROWN fox JUMPS over THE lazy DOG!
+
+There should be 45-46 matches.
+
+#####
+
+/[^a-z]/i
+
+
+########### EXERCISES 7
+
+Are /(ABC|abc)/ and /[Aa][Bb][Cc]/ equivalent regex? If not, how do they differ?
+
+#####
+
+/(ABC|abc)/
+combinations like Ab Ba Cc... with the first letter uppercase
+
+/[Aa][Bb][Cc]/
+combinations both lower-uppercase AbC aBc ABC...
+
+
+Can you provide an example of a string that would match one of these regex, but
+not the other?
+
+#####
+
+/[a][b][c]/i will match /[Aa][Bb][Cc]/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+
+########### WHAT ARE REGULAR EXPRESSIONS?
+
+Common tasks on strings:
+- testing
+- analyzing
+- modifying
+
+Some examples:
+- change filename from  "First Last" format to "Last, First"
+- search for "Launch School" or "launchschool"
+
+Here come REGULAR EXPRESSIONS also known as REGEX.
+
+Regex: patterns (schemi 'it') to be used to:
+- get informations
+- perform conditional tests
+- modify information
+from a seto of strings.
+
+
+########### WHAT ARE REGEX USED FOR?
+
+- Check whether the pattern ss appears in the string Mississippi.
+- Check whether the letter i occurs three or more times in Mississippi.
+- Find and replace all instances of Mrs with Ms in a document.
+- Does a file name begin with Bob and end with .txt or .md?
+- Does a string have any non-alphanumeric characters in it?
+- Did the user enter a valid integer?
+- Are there any whitespace characters in the string?
+- Find and replace all non-alphanumeric characters in a string with -.
+- Locate all email addresses in a document.
+- Split a line of text into fields assuming that each whitespace character
+  delimits two values.
+
+
+########### REGEX RUBY DOC & CO
+
+https://ruby-doc.org/core-3.0.1/Regexp.html
+https://rubular.com/
