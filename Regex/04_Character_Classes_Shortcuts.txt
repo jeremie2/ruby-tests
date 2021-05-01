@@ -1,0 +1,65 @@
+
+########### CHARACTER CLASS SHORTCUTS
+
+
+########### ANY CHARACTER .
+
+/./ match any character
+
+
+########### WHITESPACE
+
+/\s/ match any whitespace
+/\S/ match everything but whitespace
+
+whitespace are:
+- space (' ')
+- tab ('\t')
+- vertical tab ('\v')
+- carriage return ('\r')
+- line feed ('\n')
+- form feed ('\f')
+
+/\s/ = /[ \t\v\r\n\f]/
+/\S/ = /[^ \t\v\r\n\f]/
+
+
+  puts 'matched 1' if 'Four score'.match(/\s/)
+  # => matched 1
+
+  puts 'matched 2' if "Four\tscore".match(/\s/)
+  # => matched 2
+
+  puts 'matched 3' if "Four-score\n".match(/\s/)
+  # => matched 3
+
+  puts 'matched 4' if "Four-score".match(/\s/)
+  ....
+
+
+  puts 'matched 1' if 'a b'.match(/\S/)
+  # => matched 1
+  puts 'matched 2' if " \t\n\r\f\v".match(/\S/)
+  ....
+
+
+########### DIGITS AND HEX DIGITS
+
+Instead of using 0-9, A-F, a-f we can use shorter character to match
+digits and hexadecimal digits:
+
+\d  any decimal digit (0-9)
+\D  any character but a decimal digit
+\h  any hexadecimal digit (0-9, A-F, a-f) (Ruby)
+\H  any character but a hexadecimal digit (Ruby)
+
+
+########### WORD CHARACTERS
+
+/\w/ matches "word characters" 
+/\W/ matches "non-word characters"
+
+What does is "word characters" mean?
+- (a-z, A-Z)
+- (0-9)
+- (_)     # underscore

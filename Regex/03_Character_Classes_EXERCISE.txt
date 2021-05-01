@@ -1,5 +1,5 @@
 
-########### EXERCISES 1
+########### EXERCISE 1
 
 Write a regex that matches uppercase or lowercase K or a lowercase s. 
 Test it with these strings:
@@ -15,7 +15,7 @@ There should be six matches.
 /[Kks]/
 
 
-########### EXERCISES 2
+########### EXERCISE 2
 
 Write a regex that matches any of the strings cat, cot, cut, bat, bot, 
 or but, regardless of case. Test it with this text:
@@ -32,7 +32,7 @@ There should be nine matches.
 /[cb][aou]t/i
 
 
-########### EXERCISES 3
+########### EXERCISE 3
 
 Base 20 digits include the decimal digits 0 through 9, and the letters A through J in upper or lowercase. Write a regex that matches base 20 digits. Test it with these strings:
 
@@ -52,7 +52,7 @@ There should be 28 matches.
 /[0-9a-jA-J]/i
 
 
-########### EXERCISES 4
+########### EXERCISE 4
 
 Write a regex that matches any letter except x or X. Test it with these strings:
 
@@ -72,7 +72,7 @@ There should be 82 matches.
 /[A-WYZa-wyz]/
 
 
-########### EXERCISES 5
+########### EXERCISE 5
 
 Why is /[^xX]/ not a valid answer to the previous exercise?
 
@@ -81,7 +81,7 @@ Why is /[^xX]/ not a valid answer to the previous exercise?
 Because also other than alphabetical character are taken in consideration.
 
 
-########### EXERCISES 6
+########### EXERCISE 6
 
 Write a regex that matches any character that is not a letter. Test it with 
 these strings:
@@ -97,7 +97,7 @@ There should be 45-46 matches.
 /[^a-z]/i
 
 
-########### EXERCISES 7
+########### EXERCISE 7
 
 Are /(ABC|abc)/ and /[Aa][Bb][Cc]/ equivalent regex? If not, how do they differ?
 
@@ -118,7 +118,7 @@ not the other?
 /[a][b][c]/i will match /[Aa][Bb][Cc]/
 
 
-########### EXERCISES 8
+########### EXERCISE 8
 
 Are /abc/i and /[Aa][Bb][Cc]/ equivalent regex? If not, how do they differ? 
 
@@ -135,7 +135,7 @@ but not the other?
 No
 
 
-########### EXERCISES 9
+########### EXERCISE 9
 
 Challenge: write a regex that matches a string that looks like a simple negated 
 character class range, e.g., '[^a-z]'. (Your answer should match precisely six 

@@ -1,0 +1,92 @@
+
+########### EXERCISE 1
+
+Write a regex that matches any sequence of three characters delimited 
+by whitespace characters. Test it with these strings:
+
+reds and blues
+the lazy cat sleeps
+
+There should be three matches.
+
+#####
+
+/\s...\s/
+
+It matches ' and '  ' cat '  ' the ' 
+'the ' is matched because a new line is a whitespace.
+
+
+########### EXERCISE 2
+
+Test the pattern /\s...\s/ from the previous exercise against this text 
+(be sure to delete the previous text first):
+
+Doc in a big red box.
+Hup! 2 3 4
+
+Observe that one of the three-letter words in this text match the pattern; it 
+also matches 2 3. Why is it that this pattern doesn't include the three-letter 
+words Doc, red, box, or Hup, but it does match 2 3?
+
+#####
+
+- Doc is not matched because there's no ' ' on the left.
+- Red probably because the first whitespace is already taken as the final 
+  whitespace character of ' big '
+- box is surrounded by ' ' and '.'
+- Hup is surrounded by new line and '!'
+
+' 2 3 ' works because '2 3' is surrounded by ' '
+and the whitespace between 2 and 3 is just any character.
+
+
+##### SOLUTION
+
+- Doc doesn't match since Doc doesn't follow any whitespace.
+- big matches since it is three characters with both leading and trailing 
+  whitespace.
+- red doesn't match since the regex engine consumes the space character that 
+  precedes red when it matches big (note the trailing space). Once consumed as 
+  part of a match, the character is no longer available for subsequent matches.
+- box doesn't match since a period follows it.
+- Hup doesn't match since an exclamation point follows it.
+- 2 3 matches since 2 3 is three characters long and it has both leading and 
+  trailing whitespace.
+
+
+########### EXERCISE 3
+
+Write a regex that matches any four digit hexadecimal number that is both preceded 
+and followed by whitespace. Note that 0x1234 is not a hexadecimal number in this 
+exercise: there is no space before the number 1234.
+
+Hello 4567 bye CDEF - cdef
+0x1234 0x5678 0xABCD
+1F8A done
+
+There should be four matches (2 on Scriptular)
+
+#####
+
+\s\h\h\h\h\s
+
+
+##### SOLUTION (for Javascript)
+
+/\s[\dA-F][\dA-F][\dA-F][\dA-F]\s/ig
+
+
+########### EXERCISE 3
+
+Write a regex that matches any sequence of three letters. Test it with 
+these strings:
+
+The red d0g chases the b1ack cat.
+a_b c_d
+
+There should be seven matches.
+
+#####
+
+/[a-z][a-z][a-z]/i

@@ -1,0 +1,148 @@
+
+########### QUANTIFIERS
+
+
+########### ZERO OR MORE *
+
+If we have to match a sequence 3 digits the regex would be:
+
+  /\b\d\d\d\b/
+
+But more digit we need to match, more the sequence get long.
+To shorten the sequence we can use *
+
+* is known as 'zero or more' special character. 
+If we need to find matches for sequences of 3 or more digits,
+the previous regex becomes:
+
+  /\b\d\d\d\d*\b/ 
+
+Trying it on: 
+
+  Four and 20 black birds
+  365 days in a year, 100 years in a century.
+  My phone number is 222-555-1212.
+  My serial number is 345678912.
+
+this are the matched sequences: 365, 100, 222, 555, 1212 
+and 345678912, but not sequences less than 3 digits.
+
+  /co*t/
+
+will match every string, even the one without 'o':
+
+  ct
+  cot
+  coot
+  cooot
+
+
+Another example:
+
+  15
+  12345
+  12342342345
+  1234235
+
+  1(234)*5
+
+The last string doesn't match because '23' is not exactly '234'.
+
+
+(!!!) /x*/ matches any string because it matches between every character.
+
+
+########### ONE OR MORE +
+
++ matches one or more occurrences.
+
+  /\b\d\d\d\d+\b/
+
+  Four and 20 black birds
+  365 days in a year, 100 years in a century.
+  My phone number is 222-555-1212.
+  My serial number is 345678912.
+
+Only 1212 and 345678912 are selected.
+
+
+########### ZERO OR ONE ?
+
+? matches if a pattern appears once or doesn't appear at all.
+
+  /coo?t/
+
+  Scott scoots but doesn't act cooot.
+
+It matches with 'cot' inside Scott and 'coot' inside 'scoot'.
+Here a practical case with dates:
+
+  /\b\d\d\d\d-?\d\d-?\d\d\b/
+
+  20170111
+  2017-01-11
+  2017-0111
+  201701-11
+
+Every string is matched. We are just trying to match dates in
+both cases where numbers are separated by '-' or not.
+
+
+(!!!) Same behavior of * matching every string because matches
+      zero occurrences.
+
+
+########### RANGES {}
+
+It's possible to quantify repeated sequences. 
+
+p{m}    m occurrences of p
+p{m,}   m or more occurrences of p
+p{m,n}  m or more occurrences of p but <= n
+
+
+  /\b\d{10}\b/
+
+  2225551212 1234567890 123456789 12345678900
+
+The regex match the first two numbers made of 10 digits.
+
+
+  /\b\d{3,}\b/
+
+  Four and 20 black birds
+  365 days in a year, 100 years in a century.
+  My phone number is 222-555-1212.
+  My serial number is 345678912.
+
+It matches 3 or more consecutive digits. 20 is not matched.
+
+
+  /\b[a-z]{5,8}\b/i
+
+  Bizarre
+  a
+  one two three four five six seven eight nine
+  sensitive
+  dropouts
+
+Words made of 5 up to 8 letters are matched in case insensitive mode.
+
+
+########### GREEDINESS
+
+The quantifiers we've discussed always match the longest possible
+string they can.
+
+  xabcbcbacy
+  
+  /a[abc]*c/
+
+This pattern matches abcbcbac
+
+If we want a 'lazy' match, matching the fewest number of characters
+possible, we have to add ?
+
+  /a[abc]*?c/
+
+It matches abc and ac

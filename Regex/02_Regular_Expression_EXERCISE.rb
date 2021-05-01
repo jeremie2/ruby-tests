@@ -1,5 +1,5 @@
 
-########### EXERCISES 1
+########### EXERCISE 1
 
 # Write a regex that matches an uppercase K. Test it with these strings:
 #
@@ -12,7 +12,7 @@
 /K/
 
 
-########### EXERCISES 2
+########### EXERCISE 2
 
 # Write a regex that matches an uppercase or lowercase H. Test it with
 # these strings:
@@ -30,7 +30,7 @@
 /(H|h)/
 
 
-########### EXERCISES 3
+########### EXERCISE 3
 
 # Write a regex that matches the string dragon. Test it with these strings:
 #
@@ -43,7 +43,7 @@
 /dragon/
 
 
-########### EXERCISES 4
+########### EXERCISE 4
 
 # Write a regex that matches any of the following fruits: banana, orange,
 # apple, strawberry. The fruits may appear in other words. Test it with
@@ -61,7 +61,7 @@
 /(banana|orange|apple|strawberry)/
 
 
-########### EXERCISES 5
+########### EXERCISE 5
 
 # Write a regex that matches a comma or space. Test your regex with these strings:
 #
@@ -74,7 +74,7 @@
 /(,| )/
 
 
-########### EXERCISES 6
+########### EXERCISE 6
 
 # Challenge: Write a regex that matches blueberry or blackberry, but write berry 
 # precisely once. Test it with these strings:

@@ -1,0 +1,125 @@
+
+########### ANCHORS
+
+Anchors provide a way to limit how a regex matches a particular string 
+by telling the regex engine where matches can begin and where they can 
+end.
+
+Anchors don't match any characters, they do is ensure that a regex matches 
+a string at a specific place:
+- beginning/end of a string
+- end of a line
+- on a word or non-word boundary.
+
+
+########### START/END OF LINE
+
+^ and $ meta-characters are anchors:
+  
+  ^ beginning
+  $ end
+
+Let's take them for a while as beginning and end of a string.
+(Ruby has some particular stuff about it, we will see..)
+
+Example:
+
+  cat
+  catastrophe
+  wildcat
+  I love my cat
+  <cat>
+
+let's try: /^cat/
+
+  It matches the first two 'cat' strings but not the last three.
+
+then: /cat$/
+
+  This time the 1st, 3rd and 4th matches
+
+THEY MATCH A STRING AT THE BEGINNING OR AT THE END OF A LINE.
+
+Combining together: /^cat$/
+
+  Only the first 'cat' is matched, which corresponds with begin/end of the line.
+
+
+########### LINES VS STRINGS (Ruby specific)
+
+  TEXT1 = "red fish\nblue fish"
+  puts "matched red" if TEXT1.match(/^red/)
+  puts "matched blue" if TEXT1.match(/^blue/)
+
+'red' and strangely also 'blue' will be matched.
+
+(!!!) In Ruby a new line is after \n
+
+  TEXT2 = "red fish\nred shirt"
+  puts "matched fish" if TEXT2.match(/fish$/)
+  puts "matched shirt" if TEXT2.match(/shirt$/)
+
+Now look obvious that also 'fish' will be matched.
+
+
+########### START/END OF STRING (Ruby specific)
+
+Sometimes we need to match multi-line strings and we can use specific anchors.
+
+\A  matches the beginning of the string
+\z  matches end of a string
+(there is also \Z... but need more investigation)
+
+  TEXT3 = "red fish\nblue fish"
+  TEXT4 = "red fish\nred shirt"
+
+  puts "matched red" if TEXT3.match(/\Ared/)
+  puts "matched blue" if TEXT3.match(/\Ablue/)
+  # only red is matched
+
+  puts "matched fish" if TEXT4.match(/fish\z/)
+  puts "matched shirt" if TEXT4.match(/shirt\z/)
+  # only shirt is matched
+
+With Ruby it's better to use \A and \z instead of ^ and $.
+Here the last two character are mainly used because they fit
+better with Rubular.
+
+
+########### WORD BOUNDARIES
+
+\b matches word (sequence of \w) boundaries.
+\B does the opposite
+
+Word boundaries occurs:
+- between pair chars \w and not \w
+- beginning of string if 1st character is \w
+- end of string if last character is \w
+
+Example:
+
+  Eat some food.
+
+Boundaries occur:
+- before E, s and f
+- after t, e and d
+
+Not boundaries
+- elsewhere (between the o and m in some, and following the .)
+
+
+Example
+Match 3 letter words consisting of word characters:
+
+  One fish,
+  Two fish,
+  Red fish,
+  Blue fish.
+  123 456 7890
+
+  
+  /\b\w\w\w\b/
+
+
+(!!!) \b and \B do not work as word boundaries inside []
+      In that case \b matches backspace character.
