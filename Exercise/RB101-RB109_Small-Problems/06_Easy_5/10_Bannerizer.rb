@@ -75,7 +75,7 @@ def print_in_box(string)
 end
 
 text = "bumba la bamba ye! bumba la bamba ye! \
-bumba la bamba ye! bumba labamba ye! bumba la \
+bumba la bamba ye! bumba la bamba ye! bumba la \
 bamba ye! bumba la bamba ye!"
 
 print_in_box(text)
@@ -83,8 +83,8 @@ print_in_box(text)
 # result:
 # +------------------------------------------------------------------------------+
 # |                                                                              |
-# | bumba la bamba ye! bumba la bamba ye! bumba la bamba ye! bumba labamba ye! b |
-# | umba la bamba ye! bumba la bamba ye!                                         |
+# | bumba la bamba ye! bumba la bamba ye! bumba la bamba ye! bumba la bamba ye!  |
+# | bumba la bamba ye! bumba la bamba ye!                                        |
 # |                                                                              |
 # +------------------------------------------------------------------------------+
 #

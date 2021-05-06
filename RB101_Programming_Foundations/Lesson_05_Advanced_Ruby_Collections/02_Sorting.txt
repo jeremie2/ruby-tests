@@ -9,9 +9,9 @@ criterion.
 
 ######## COMPARISON
 
-To sort a collection of items, you must compare each item in the collection to each
-other.
-If the criterion of sorting integers looks obvious (int_1 < int_2), how does it
+To sort a collection of items, you must compare each item in the collection to 
+each other.
+If the criterion of sorting integers looks obvious (1 < 2), how does it
 work with elements of other types?
 
 ['c', 'a', 'e', 'b', 'd'].sort     # ['a', 'b', 'c', 'd', 'e']
@@ -112,7 +112,7 @@ Mostly used with block. Inside it there's the sorting rule:
 
 It works also with hashes:
 
-  people = { Kate: 27, john: 25, Mike:  18 }
+  people = { Kate: 27, john: 25, Mike: 18 }
 
   people.sort_by do |_, age|
     age

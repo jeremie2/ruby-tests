@@ -7,8 +7,7 @@ arr = ['10', '11', '9', '7', '8']
 
 # ANSWER
 
-arr_int = arr.map { |el| el.to_i }.sort.reverse
-desc_sort_arr = arr_int.map { |el| el.to_s }
+arr_srt = arr.map {|i| i.to_i}.sort {|a,b| b <=> a}
 
 p desc_sort_arr
 
@@ -374,6 +373,15 @@ end
 
 p new_arr
 
+##### I would prefer
+
+arr = []
+
+hsh.each do |key, val|
+  arr << val[:colors] if val[:type] == 'fruit'
+  arr << val[:size].upcase if val[:type] == 'vegetable'
+end
+
 
 ############ PRACTICE PROBLEM 15
 
@@ -412,7 +420,7 @@ end
 # through these first.
 #
 # If all of the integers in an inner array are even then the inner block returns
-#true to the innermost call to all?. If all of the inner blocks for a particular
+# true to the innermost call to all?. If all of the inner blocks for a particular
 # hash return true then the middle block returns true to the outer call to all?
 # which in turn causes the outer block to return true to the select method for
 # that iteration.
