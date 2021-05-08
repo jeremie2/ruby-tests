@@ -53,7 +53,7 @@ str.match(/\./)
 
 # If you don't remember which meta character needs to be escaped, that's
 # not a big problem. Escaping a meta character that doesn't need to be
-# escaped doesn't create any problems.
+# escaped doesn't create any problem.
 
 str = "? What's up: doc? Silence! What's that?"
 

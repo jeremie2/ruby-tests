@@ -4,11 +4,11 @@
 
 ########### ZERO OR MORE *
 
-If we have to match a sequence 3 digits the regex would be:
+If we have to match a sequence of 3 digits the regex would be:
 
   /\b\d\d\d\b/
 
-But more digit we need to match, more the sequence get long.
+But more digit we need to match, more the sequence gets long.
 To shorten the sequence we can use *
 
 * is known as 'zero or more' special character. 
