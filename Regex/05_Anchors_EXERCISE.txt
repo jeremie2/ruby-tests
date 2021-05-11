@@ -79,3 +79,4 @@ There should be three matches.
 
 Outside Rubolar:
 /\A(A|The) [a-zA-Z][a-zA-Z][a-zA-Z][a-zA-Z] (dog|cat)\z/
+
