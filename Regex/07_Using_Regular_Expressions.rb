@@ -105,7 +105,7 @@ text = %(We read "War of the Worlds".)
 puts text.sub(/(['"]).+\1/, '\1The Time Machine\1')
 # => We read "The Time Machine".
 
-# We could use double quote, but the we have to double the backslash:
+# We could use double quote, but then we have to double the backslash:
 puts text.sub(/(['"]).+\1/, "\\1The Time Machine\\1")
 
 # If possible use single quotes.
@@ -121,3 +121,45 @@ def format_date(original_date)
 end
 
 format_date('2016-06-17') # => '17.06.2016'
+
+######################
+
+# Removing empty spacec between digits:
+
+str = 'Please call me at 5 5 5 1 2 3 4. Thanks.'
+str.gsub!(/(\d)\s/, '\1')  # 'Please call me at 5551234. Thanks.'
+
+# Numbers of backreference take in consideration the groups inside round bracket ( )
+# (\d) represents a digit. In the substitution there is just \1 that match (\d)
+# 
+# Example using group for digit and empty space:
+
+str.gsub!(/(\d)(\s)/, '\1\2')  # 'Please call me at 5 5 5 1 2 3 4. Thanks.'
+
+# In this case there is also \2 that refers to (\s), so empty spacec will be present
+# also after the substitution.
+
+##########
+
+# Another example matching palindromes made of 4 letters:
+
+str = 'passare uno alla volta'  # 'alla'
+
+/\b(\w)(\w)\2\1\b/   # \1 is a reference to the 1st group
+#   'a' 'l' | |       # \2    "     "     "      2nd   "
+#           | |
+#          'l''a'
+
+##########
+
+# Change the number in the form: (123) 555-1234
+
+str = 'Please call me at 1235551234. Thanks.'
+
+str.gsub!(/\b(\d{3})(\d{3})(\d{4})\b/, '(\1) \2-\3')
+#             -----  -----  -----
+#               |      |      |
+#     group:   \1     \2     \3
+
+# Result:
+# 'Please call me at (123) 555-1234. Thanks.'
