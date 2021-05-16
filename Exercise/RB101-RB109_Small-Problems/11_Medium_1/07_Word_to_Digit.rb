@@ -72,3 +72,27 @@ end
 # account for phone numbers? For our purposes, assume that any 10 digit number is a phone 
 # number, and that the proper format should be "(123) 456-7890".
 
+def word_to_digit(str)
+  DIGITS.keys.each { |number| str.gsub!(/\b#{number}\b/, DIGITS[number]) }
+  str.gsub!(/(\d)\s/, '\1')
+  str.gsub!(/\b(\d{3})(\d{3})(\d{4})\b/, '(\1) \2-\3')
+end
+
+puts word_to_digit('Please call me at one two three five five five one two three four. Thanks.') == 'Please call me at (123) 555-1234. Thanks.'
+
+
+#### from user RALPH WILLIAM HARTMAN IV
+
+def word_to_digit(string)
+  puts string.gsub(/zero|one|two|three|four|five|six|seven|eight|nine/,
+  'zero' => '0',
+  'one' => '1',
+  'two' => '2',
+  'three' => '3',
+  'four' =>'4',
+  'five' => '5',
+  'six' => '6',
+  'seven' => '7',
+  'eight' => '8',
+  'nine' => '9')
+end
