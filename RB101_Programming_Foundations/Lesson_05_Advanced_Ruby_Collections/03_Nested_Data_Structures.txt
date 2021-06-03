@@ -163,7 +163,7 @@ this because #map return a new array (different by arr1).
 ###### FREEZING OBJECTS
 
 #freeze can 'freeze' an object preventing it from being modified.
-This method can be used only with mutable object as the immutable
+This method can be used only with mutable object as the immutables
 are already frozen.
 
   str = "abc".freeze
@@ -212,5 +212,5 @@ the frozen state of the object:
 In Ruby, there's no built-in or easy way to create a deep copy or deep
 freeze objects within objects.
 It is possible to implement it but we won't see it yet. At the moment
-is important to understand how #freeze, #dup, and #clone work and be
+it's important to understand how #freeze, #dup, and #clone work and be
 aware at which level of a nested collection we are.

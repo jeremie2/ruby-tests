@@ -1,0 +1,80 @@
+
+[2, 5, 3, 4, 1].sort
+
+
+[2, 5, 3, 4, 1].sort do |a, b|
+  b <=> a
+end
+
+
+[2, 5, 3, 4, 1].sort do |a, b|
+  puts "a is #{a} and b is #{b}"
+  a <=> b
+end
+
+
+['arc', 'bat', 'cape', 'ants', 'cap'].sort
+
+
+[['a', 'cat', 'b', 'c'], ['b', 2], ['a', 'car', 'd', 3], ['a', 'car', 'd']].sort
+
+
+['cot', 'bed', 'mat'].sort_by do |word|
+  word[1]
+end
+
+
+people = { Kate: 27, john: 25, Mike: 18 }
+
+people.sort_by do |_, age|
+  age
+end
+
+
+['car', 'alright', 'barman'].min
+
+
+['car', 'alright', 'barman'].min(2)
+
+
+['car', 'alright', 'barman'].min { |a, b| a.length <=> b.length }
+['bar', 'all', 'car'].min { |a, b| a.length <=> b.length }
+['all', 'bar', 'car'].min { |a, b| a.length <=> b.length }
+['car', 'all', 'bar'].min { |a, b| a.length <=> b.length }
+
+
+['car', 'alright', 'barman'].min_by { |x| x.length }
+
+
+['car', 'alright', 'barman'].min_by(2) { |x| x.length 
+
+
+['var', 'all', 'ann'].min_by(2) { |x| x.length }
+
+
+['car', 'alright', 'barman'].minmax
+
+
+['car', 'alright', 'barman'].minmax { |a, b| a.length <=> b.length }
+
+
+['car', 'alright', 'barman'].minmax_by { |x| x.length }
+
+
+['car', 'alright', 'barman'].max
+
+
+['car', 'alright', 'barman'].max { |a, b| a.length <=> b.length }
+
+
+['car', 'alright', 'barman'].max(2)
+
+
+['car', 'alright', 'barman'].max(2) { |a, b| a.length <=> b.length }
+
+
+['car', 'alright', 'barman'].max_by { |x| x.length }
+
+
+['car', 'alright', 'barman'].max_by(2) { |x| x.length }
+

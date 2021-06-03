@@ -80,8 +80,7 @@ We can take these pieces of information and set them out in a tabular format:
 ################ EXAMPLE 2
 
 [[1, 2], [3, 4]].map do |arr|
-  puts arr.first
-end
+  puts arr.firstline
 # 1
 # 3
 # => [nil, nil]
@@ -144,7 +143,7 @@ Block's return value: integer returned by 'arr.first'.
 It is then used by #map to replace the inner array with an integer and will
 finally return a new array with two integers as elements.
 
-Tables are nice but take ages to use it. Let's write the example this way:
+Table is nice but it takes ages to write it. Let's write the example this way:
 
 #### LINE 1:  [[1, 2], [3, 4]].map
 ACTION: map method call
@@ -313,7 +312,7 @@ end
 
 #### LINE 1-5
 # ACTION: block exec
-# OBJECT: array
+# OBJECT: each element of array (hash)
 # SIDE EFFECT: no
 # RETURN VALUE: boolean
 # IS RETURN VALUE USED?: by outer #select to compose new array
@@ -486,8 +485,8 @@ end
 # IS RETURN VALUE USED?: by comparison ==  
 
 #### LINE 3
-# ACTION: comparison ==
-# OBJECT: integer with integer 1
+# ACTION: comparison mthd == call with argument 1
+# OBJECT: integer
 # SIDE EFFECT: no
 # RETURN VALUE: boolean
 # IS RETURN VALUE USED?: evaluated by if statement
@@ -500,8 +499,8 @@ end
 # IS RETURN VALUE USED?: as block return value
 
 #### LINE 4
-# ACTION: call of method +
-# OBJECT: integer with integer 1
+# ACTION: call of method + with argument 1
+# OBJECT: integer
 # SIDE EFFECT: no
 # RETURN VALUE: integer
 # IS RETURN VALUE USED?: as return value of if
@@ -528,14 +527,14 @@ end
 # IS RETURN VALUE USED?: by inner #map
 
 #### LINE 7
-# ACTION: call of method +
-# OBJECT: integer and integer 1
+# ACTION: call of method + with argument 1
+# OBJECT: integer
 # SIDE EFFECT: no
 # RETURN VALUE: integer (new elem of new array)
 # IS RETURN VALUE USED?: by else as return value
 
 (!!!) The tricky part about this example is that the original array has uneven
-nested levels.In practice, this type of nested data processing is typically a
+nested levels. In practice, this type of nested data processing is typically a
 sign of bad design. But if you ever find yourself in that situation, you should
 be confident in your ability to work through it.
 

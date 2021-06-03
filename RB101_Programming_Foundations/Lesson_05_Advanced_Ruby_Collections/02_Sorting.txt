@@ -193,7 +193,8 @@ It doesn't do anything if any other string is found:
 
 :::::::: MINMAX
 
-Returns a two element array which contains the minimum and the maximum value in the enumerable.
+Returns a two element array which contains the minimum and the maximum value in
+the enumerable.
 
   ['car', 'alright', 'barman'].minmax
   # => ["alright", "car"]
