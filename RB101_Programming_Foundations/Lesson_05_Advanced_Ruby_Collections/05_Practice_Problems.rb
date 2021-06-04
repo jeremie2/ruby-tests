@@ -176,14 +176,16 @@ end
 
 a = 2
 b = [5, 8]
-arr = [a, b]
+arr = [a, b]    # [2, [5, 8]]
 
 arr[0] += 2
 arr[1][0] -= a
 
 # ANSWER:
 
-# [4, [3, 8]]
+# a #=> 2
+# b #=> [3, 8]
+# arr #=> [4, [3, 8]]
 
 
 ############ PRACTICE PROBLEM 8
@@ -200,7 +202,7 @@ hsh = { first: ['the', 'quick'],
 # ANSWER:
 
 vowels = %w(a e i o u)
-all_chars = hsh.values.join.split('')
+all_chars = hsh.values.join.chars
 all_chars.each { |ch| p ch if vowels.include?(ch) }
 
 # LONG ANSWER:
@@ -214,6 +216,42 @@ hsh.each_value do |array|
     end
   end
 end
+
+######## WITH PEDAC
+
+# PROBLEM
+# 
+# input: hash (where values are arrays with strings inside)
+# output: characters (vowels contained into strings inside arrays)
+# 
+# EXAMPLE
+# 
+# no examples
+# 
+# DATA STRUCTURES
+# 
+# - The data I'm looking for are inside the element of the arrays.
+# - I have just to iterate each value (= array), then each string,
+#   then transforming each string into array (string.chars) each
+#   character so that I can print it it's a vowel. 
+# 
+# example:
+#  
+# - hsh.each_value for ['the', 'quick', ... 'dog']
+# - ['the', 'quick', ... 'dog'].each |word|
+# - word.chars.each to print characters that are vowels
+# 
+# 
+# ALGORITHM
+# 
+# - define an array of vowels 
+# - iterate on values of hsh (which is an array)
+#   - iterate on words inside the array
+#     - iterate on words transformed to array of character
+#       - print each character if it's included into array of vowels
+# 
+# CODE
+# (see above)
 
 
 ############ PRACTICE PROBLEM 9
@@ -373,11 +411,11 @@ end
 
 p new_arr
 
-##### I would prefer
+##### or
 
 arr = []
 
-hsh.each do |key, val|
+hsh.each_value do |val|
   arr << val[:colors] if val[:type] == 'fruit'
   arr << val[:size].upcase if val[:type] == 'vegetable'
 end
@@ -396,9 +434,7 @@ arr = [{a: [1, 2, 3]},
 # ANSWER:
 
 new_arr = arr.select do |hash| 
-   hash.values.flatten.all? do |n|
-    n.even?
-  end 
+   hash.values.flatten.all? { |n| n.even? }
 end
 
 p new_arr

@@ -9,7 +9,8 @@
   It's a collection of character enclosed inside quote or double quote.
 
 - What is an array?
-  It's a collection of elements of any type (string, integer, array..) enclosed inside square brackets.
+  It's a collection of elements of any type (string, integer, array..) enclosed inside 
+  square brackets.
 
 - Are strings and array following an order to represent each element?
   Yes, an array is a ordered list so as the collection of characters into a string.
@@ -73,7 +74,7 @@
   country_capitals.keys      # => [:uk, :france, :germany]
   country_capitals.values    # => ["London", "Paris", "Berlin"]
 
-- What happens if to access an element of a string or array using an out of
+- What happens if we access an element of a string or array using an out of
   bound index? 
   This returns nil:
   

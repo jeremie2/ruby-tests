@@ -117,7 +117,7 @@ end
   value.size > 3
 end
 
-# => false   ... last evaluation is "bear".size > 3 as it returns 'true'
+# => true   ... last evaluation is "bear".size > 3 as it returns 'true'
 #                loops stops immediately. 'cat' is not evaluated.
 
 
@@ -283,3 +283,4 @@ end
 
 long.to_h    # => {:b=>"bear"}
 short.to_h   # => {:a=>"ant", :c=>"cat"}
+

@@ -319,7 +319,7 @@
   Not assigning new value, but performing an operation that change that value.
 
 - What is object_id?
-  It's an ID that refer to a memory address of the object.
+  It's an ID that refers to a memory address of the object.
   Doing a = b, a and b will point the same object and they've got same object_id.
 
 - What are immutable objects?
