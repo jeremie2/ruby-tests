@@ -107,7 +107,7 @@ Algorithm
 **Algorithm**
 
 1. Create an empty 'rows' array to contain all of the rows
-2. Create a 'row' array and add to the overall 'rows' array 
+2. Create a 'row' array and add it to the overall 'rows' array 
 3. Repeat step 2 until all the necessary rows have been created
    - All rows have been created when the length of the 'rows' array = input integer
 4. Sum the final row
@@ -177,3 +177,4 @@ def create_row(start_integer, row_length)
 end
 
 p create_row(4, 2)
+

@@ -119,8 +119,8 @@ is wrong. Otherwise, if we don't have any clue, it's time to find some documenta
 
 3. Implement a fix
 
-When possible we act directly on our code, but sometimes the error is in
-a external library and an immediate fix is not possible.
+When possible we act directly on our code, but sometimes the error could be in
+external libraries and an immediate fix is not possible.
 In that case we have to handle the problem.
 
 In some cases we can use the 'rescue' clause like this:
