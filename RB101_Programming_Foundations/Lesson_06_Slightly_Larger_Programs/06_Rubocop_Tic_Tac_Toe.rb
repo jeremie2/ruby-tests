@@ -132,3 +132,17 @@ def detect_winner(brd)
   end
   nil
 end
+
+## RECAP:
+
+def someone_won?(brd)
+  WINNING_LINES.each do |line|
+    # brd = {1=>" ", 2=>" ", 3=>" "..
+    # brd[line[0]] == marker.. && brd[line[1]] == marker..
+    # brd.values_at(line[0], line[1]..)..
+    # brd.values_at(*line).... = ['X', 'X', 'X']
+    if brd.values_at(*line).count(PLAYER_MARKER) == 3
+      'Player'
+    end
+  # ......
+end

@@ -61,7 +61,7 @@ def board_full?(brd)
 end
 
 def someone_won?(brd)
-  detect_winner(brd)
+  !!detect_winner(brd)
 end
 
 def detect_winner(brd)

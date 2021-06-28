@@ -1,16 +1,29 @@
 
 # TIC TAC TOE
 
-1. Display the initial empty 3x3 board.
-2. Ask the user to mark a square.
-3. Computer marks a square.
-4. Display the updated board state.
-5. If winner, display winner.
-6. If board is full, display tie.
-7. If neither winner nor board is full, go to #2
-8. Play again?
-9. If yes, go to #1
-10. Good bye!
+# 1. Display the initial empty 3x3 board.
+#    - initialize_board: create a hash connected to the board 
+#                        {1=>" ", 2=>" ",.. , 8=>" ", 9=>" "}
+#    - display_board(brd): creat the board with simple #puts method,
+#                          place a placehold on each square #{brd[1]},
+#                          #system 'clear' to refresh the board
+# 2. Ask the user to mark a square.
+#    - empty_squares(brd): take trace of still available square creating
+#                          an array performing #selct on brd.keys array.
+#    - start a loop that goes on till there's a winner or a tie
+#      - someone_won?(board)
+#        - detect_winner(brd)
+#      - board_full?(board)
+#    - simple prompt
+# 3. Computer marks a square.
+#    - computer_places_piece!(brd)
+# 4. Display the updated board state.
+# 5. If winner, display winner.
+# 6. If board is full, display tie.
+# 7. If neither winner nor board is full, go to #2
+# 8. Play again?
+# 9. If yes, go to #1
+# 10. Good bye!
 
 # There is gonna be a loop between point 2-7:
 
