@@ -202,3 +202,244 @@ end
 #   [1].first  # => 1
 # 
 # Then #computer_places_piece! will in this case return brd[1] = COMPUTER_MARK
+
+
+##### 4. COMPUTER AI: OFFENSE
+
+# The defensive minded AI is pretty cool, but it's still not performing as well as 
+# it could because if there are no impending threats, it will pick a square at 
+# random. We'd like to make a slight improvement on that. We're not going to add 
+# in any complicated algorithm (there's an extra bonus below on that), but all we 
+# want to do is piggy back on our find_at_risk_square from bonus #3 above and turn 
+# it into an attacking mechanism as well. The logic is simple: if the computer 
+# already has 2 in a row, then fill in the 3rd square, as opposed to moving at 
+# random.
+
+## ANSWER
+
+# To implement an "offence strategy" we can use the existing #find_at_risk_square
+# The only difference is that for a defence purpose the 2 existing marked squares
+# in a row are both 'X', while for the 'attack mode' they should be both 'O'.
+# 
+# The easiest thing is to add the variable 'marker' to #find_at_risk_square, so
+# that the method can be switch to defence or offence:
+
+def find_at_risk_square(line, brd, marker)
+  if brd.values_at(*line).count(marker) == 2
+    brd.select{|k,v| line.include?(k) && v == INITIAL_MARKER}.keys.first
+  else
+    nil
+  end
+end
+
+# Now #computer_places_piece!(brd) can be updated repeating #find_at_risk_square
+# passing as variable one time COMPUTER_MARKER and one time PLAYER_MARKER:
+
+def computer_places_piece!(brd)
+  square = nil
+
+  # offense first
+  WINNING_LINES.each do |line|
+    square = find_at_risk_square(line, brd, COMPUTER_MARKER)
+    break if square
+  end
+
+  # defense
+  if !square
+    WINNING_LINES.each do |line|
+      square = find_at_risk_square(line, brd, PLAYER_MARKER)
+      break if square
+    end
+  end
+
+  # just pick a square
+  if !square
+    square = empty_squares(brd).sample
+  end
+
+  brd[square] = COMPUTER_MARKER
+end
+
+# The solution uses first the 'defense' strategy. But I think this is wrong,
+# because if Computer as the chance to fill a line with 3 'O' he has only
+# to do it... match ends at that point.
+
+
+##### 5. COMPUTER TURN REFINEMENTS
+
+# a) We actually have the offense and defense steps backwards. In other words, if 
+# the computer has a chance to win, it should take that move rather than defend. 
+# As we have coded it now, it will defend first. Update the code so that it plays 
+# the offensive move first.
+
+## ANSWER
+# 
+# Done!
+
+
+# b) We can make one more improvement: pick square #5 if it's available. The AI 
+# for the computer should go like this: first, pick the winning move; then, 
+# defend; then pick square #5; then pick a random square.
+
+## ANSWER
+
+def computer_places_piece!(brd)
+  square = nil
+
+  # offense
+  WINNING_LINES.each do |line|
+    square = find_at_risk_square(line, brd, COMPUTER_MARK)
+    break if square
+  end
+
+  # defense
+  if !square
+    WINNING_LINES.each do |line|
+      square = find_at_risk_square(line, brd, PLAYER_MARK)
+      break if square
+    end
+  end
+
+  # pick square #5
+  if !square && brd[5] == INITIAL_MARKER
+    square = 5
+  end
+
+  # just pick a square
+  if !square
+    square = empty_squares(brd).sample
+  end
+
+  brd[square] = COMPUTER_MARK
+end
+
+
+# c) Can you change the game so that the computer can move first? Ask the user at 
+# before play begins who should go first.
+
+## ANSWER
+
+who_goes_first = nil
+
+loop do
+  prompt "Who does go first? Please select which player starts:"
+  prompt "Player:   1"
+  prompt "Computer: 2"
+  who_goes_first = gets.to_i
+  break if who_goes_first == 1 || who_goes_first == 2
+  puts 'Not a valid choice!'
+end
+
+# Then the main loop is changed with:
+
+loop do
+  board = initialize_board
+  computer_places_piece!(board) if who_goes_first == 2
+
+  loop do
+    display_board(board)
+
+    player_places_piece!(board)
+    break if someone_won?(board) #.....
+
+# Basically if user choose 2 Computer will mark a square right after board 
+# initialization. Otherwise everything goes on like the original version
+# with Player starting first. 
+
+
+# d) Can you add another "who goes first" option that lets the computer choose who 
+# goes first?
+
+## ANSWER
+
+who_goes_first = rand(1..2)
+
+loop do
+  board = initialize_board
+  computer_places_piece!(board) if who_goes_first == 2
+
+  loop do
+    display_board(board) #.......
+
+
+##### 6. IMPROVE THE GAME LOOP
+
+# There's a bit of redundant code in the main game loop:
+
+loop do
+  display_board(board)
+
+  player_places_piece!(board)
+  break if someone_won?(board) || board_full?(board)
+
+  computer_places_piece!(board)
+  break if someone_won?(board) || board_full?(board)
+end
+
+# Notice how we have to break after each player makes a move. What if we could have a 
+# generic method that marks a square based on the player? We could do something like 
+# this:
+
+loop do
+  display_board(board)
+  place_piece!(board, current_player)
+  current_player = alternate_player(current_player)
+  break if someone_won?(board) || board_full?(board)
+end
+
+## ANSWER
+
+def place_piece!(brd, current_player)
+  if current_player == 'Player'
+    player_places_piece!(brd)
+  else
+    computer_places_piece!(brd)
+  end
+end
+
+def alternate_player(current_player)
+  current_player == 'Player' ? 'Computer' : 'Player'
+end
+
+# Initial section:
+
+player_score = 0
+computer_score = 0
+current_player = ['Player', 'Computer'].sample
+
+system 'clear'
+prompt "#{current_player} moves first."
+prompt "Press enter to start"
+gets
+
+loop do
+  board = initialize_board
+
+  loop do
+    display_board(board)
+    place_piece!(board, current_player)
+    current_player = alternate_player(current_player)
+    break if someone_won?(board) || board_full?(board)
+  end
+
+
+########### ON YOUR OWN IDEAS
+
+# On your own ideas
+
+# 1. Below are some extra ideas you may want to explore on your own. They're too 
+# challenging and out of scope for this course, but may be worth exploring for the 
+# adventurous programmer.
+# 
+# 2. Minimax algorithm
+# 
+# 3. You can build an unbeatable Tic Tac Toe by utilizing the minimax algorithm.
+# 
+# 4. Bigger board
+# 
+# 5. What happens if the board is 5x5 instead of 3x3? What about a 9x9 board?
+# 
+# 6. More players
+# When you have a bigger board, you can perhaps add more than 2 players. Would it be 
+# interesting to play against 2 computers? What about 2 human players against a 
+# computer?
