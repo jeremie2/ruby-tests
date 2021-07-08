@@ -11,9 +11,9 @@
 # - Target: try to get as close to 21 as possible, without going over.
 #           If you go over 21, you loose.
 # 
-# - The game consists of a "dealer" and a "player". Both participants are initially 
-#   dealt 2 cards. The player can see their 2 cards, but can only see one of the 
-#   dealer's cards.
+# - The game consists of a "dealer" and a "player". Both participants are 
+#   initially dealt 2 cards. The player can see their 2 cards, but can only see 
+#   one of the dealer's cards.
 # 
 # - Card values: - 2..10 are worth their face value
 #                - jack, queen, and king are each worth 10
@@ -21,9 +21,9 @@
 #                       will not exceed 21.
 # 
 # - Player turn: player goes first, and can decide to either "hit" (ask another 
-#   card) or "stay". He decides depending by the cards he got. Ex. if you know that 
-#   the dealer already has a 10 and you got a 2 and a 4... you have to ask for 
-#   another card.
+#   card) or "stay". He decides depending by the cards he got. Ex. if you know 
+#   that the dealer already has a 10 and you got a 2 and a 4... you have to ask 
+#   for another card.
 # - Turn is over when the player either busts or stays.
 #   - If player busts, game is over and dealer won.
 # 
@@ -51,8 +51,8 @@
 # You have: 10 and 7
 # 
 # You should "stay" here, because chances are good that the unknown card is not an 
-# Ace, which is the only situation where you can lose. Most likely, you're going to 
-# win with 17, or tie. There's a very small chance you will lose.
+# Ace, which is the only situation where you can lose. Most likely, you're going 
+# to win with 17, or tie. There's a very small chance you will lose.
 
 # 3.
 # Dealer has: 5 and unknown card
@@ -82,16 +82,24 @@
 
 ##### TIPS ON GETTING STARTED
 
-# 1. Figure out a data structure to contain the "deck" and the "player's cards" and 
-#    "dealer's cards". Maybe a hash? An array? A nested array? Your decision will 
-#    have consequences throughout your code, but don't be afraid of choosing the 
-#    wrong one. Play around with an idea, and see how far you can push it. If it 
-#    doesn't work, back out of it.
+# 1. Figure out a data structure to contain the "deck" and the "player's cards" 
+#    and "dealer's cards". Maybe a hash? An array? A nested array? Your decision 
+#    will have consequences throughout your code, but don't be afraid of choosing 
+#    the wrong one. Play around with an idea, and see how far you can push it. If 
+#    it doesn't work, back out of it.
+
+
+
+
+
+
+
+
 
 
 # 2. Calculating Aces. Remember that aces can be worth either 1 or 11, depending 
-#    on the context. You should not ask the user what the value of the ace is; your 
-#    program should be able to figure this out automatically.
+#    on the context. You should not ask the user what the value of the ace is; 
+#    your program should be able to figure this out automatically.
 
 
 # 3. Player turn. When thinking about how to code up the player's turn, think about 
