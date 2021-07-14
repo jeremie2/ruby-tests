@@ -1,0 +1,130 @@
+
+##################### PROBLEM/ALGORTHM - HIGH LEVEL
+
+1. Card deck (52 cards): 2-10, J, Q, K, A (hearts, diamonds, clubs and spades)
+   - Values: J = Q = K = 10, A = 
+2. Two players: Player and Dealer
+   - Both receive 2 cards each
+   - Player can watch his cards and just one of Dealer
+3. Target: reach total <= 21
+4. Player's turn:
+   - Stay: his cards are OK
+   - Hit: ask for another card to be added to the existing till he thinks cards 
+          are fine
+   - Check each time if 'busted' (total > 21 # => player looses)
+5. Dealer turn:
+   - increase total till 17 is reached or overtaken
+   - Check if Dealer 'busted' (total > 21 # => Dealer looses)
+6. Evaluate the result of the match:
+   - If Player busted: Dealer wins
+   - If Dealer busted: Player wins
+   - If total_player > total_dealer: Player wins
+   - If total_dealer > total_player: Dealer wins
+   - Else: it's a tie
+7. Display the result
+8. Do you want to play againg?
+
+
+############## PROGRAM SCHEME
+
+- MAIN LOOP
+
+  - welcome user
+  - initialize card's deck
+  - assign 2 cards to player (deck.pop)
+  - assign 2 cards to dealer (deck.pop)
+  - initialize total_player (total(cards))
+  - initialize total_dealer (total(cards))
+  - display dealer one of the dealer's cards
+  - display player's cards with total
+
+  - PLAYER LOOP
+    - ask if player would like to hit or stay
+    - if answer is equal h
+      - add new card to player deck
+      - add card's value to total's player's cards 
+      - display updated player cards and updated total
+    - break if answer is equal 's' (stay) or player busted
+  - END PLAYER LOOP 
+
+  - if player busted ask if player would like to play again 
+    - break if player say yes
+    - perform next if player doesn't say yes
+  - else prompt that player 'stayed'
+
+  - DEALER LOOP
+    - break if total value of dealer's card is equal/grater 17 
+    - add new card to dealer's deck
+    - update total value of dealer's cards
+  - END DEALER LOOP 
+
+  - prompt dealer's cards and relative total values
+  - prompt player's cards and relative total values
+  - display result
+  - ask if player would like to play again
+
+- END MAIN LOOP
+
+- display thanks for playing
+
+
+##################### SUB PROBLEMS
+
+1. CREATE DECK CARD
+
+- Create 2 arrays: with signs (hearts, clubs, spades, diamonds) and with
+  values [2, 3, ..., 10, J, Q, K, A]
+- Initialize it assigning a variable the #product of the 2 arraya + #shuffle 
+  deck = SIGNS.product(VALUES).shuffle
+  example: [["H", 5], ["C", "J"], ["D", "K"], ["H", 7],... ]
+
+2. COUNTING TOTAL CARD'S VALUE FOR EACH PLAYER
+
+- Create a #total method that takes the set of cards of a player
+  - Create an array with #map methods extracting the second element
+    from the player's card set.
+  - Calculate the total using #add_card method (to be implemented)
+    knowing that 'A' = 11 and other 'string' values count 10.
+  - Remove 10 for each 'A' if total exceed 21.
+  - Return total
+
+- Create #add_card method performed on a array made of card's values.
+  - Initialize total = 0
+  - Perform #each method on card's value array adding #card_value method
+    (to be implemented) to total.
+  - Return total 
+
+- Create #card_value method performed on single card value
+  - Return card value if card values class is integer.
+  - If card value is 'A' return 11, else return 10.
+
+3. DISPLAY RESULT
+
+- Create #display_result method based on total_player and total_deale
+  - Initialize 'result' variable as result of
+    detect_result(total_player, total_dealer) (to be implemented)
+  - Perform 'case result':
+    if result == 'player_busted'
+      return 'You busted! Dealer wins!'
+    if result == 'dealer_busted'
+      return 'Dealer busted! You win!'
+    ....
+    else return "It's a tie!"
+
+- Create #detect_result method based on total_player and total_deale
+  - Set if/else statement so that if total player or total dealer
+    is #busted? (to be implemented) 'player_busted' or 'dealer_busted'
+    will be returned.
+    If total_player > total_dealer or total_player < total_deale
+    'player' or 'dealer' will be returned. 
+    Else: 'tie'
+
+- Create #busted?(total)
+  - Return true if total > 21 
+
+4. RESTART THE GAME OR EXIT
+
+- Create #play_again? method
+  - Ask if user would like to play again.
+  - Set answer variable to be set as gets.chomp.downcase
+  - Return true if answer is equal 'n'
