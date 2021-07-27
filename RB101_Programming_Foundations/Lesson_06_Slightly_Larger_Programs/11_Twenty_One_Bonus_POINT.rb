@@ -84,11 +84,10 @@ def end_of_round(dealer_cards, dealer_total, player_cards, player_total)
   puts "=============="
 end
 
-def display_score(match_data[:dealer_score], match_data[:player_score])
+def display_score(dealer_score, player_score)
   puts "=============="
-  prompt "Dealer #{match_data[:dealer_score]}"
-  
-  prompt "Player #{match_data[:player_score]}"
+  prompt "Dealer #{dealer_score}"
+  prompt "Player #{player_score}"
 end
 
 def display_champion(a_player)
@@ -101,10 +100,10 @@ def next_round
   gets
 end
 
-def assign_champion(match_data[:dealer_score], match_data[:player_score])
-  if match_data[:dealer_score] == MAX_SCORE
+def assign_champion(dealer_score, player_score)
+  if dealer_score == MAX_SCORE
     'DEALER'
-  elsif match_data[:player_score] == MAX_SCORE
+  elsif player_score == MAX_SCORE
     'PLAYER'
   else
     nil
@@ -124,9 +123,9 @@ gets
 
 loop do
   system 'clear'
-  round += 1
+  match_data[:round] += 1
   puts "=============="
-  prompt "ROUND #{round}"
+  prompt "ROUND #{match_data[:round]}"
   puts "=============="
 
   # initialize vars
@@ -168,11 +167,11 @@ loop do
   end
 
   if busted?(player_total)
-    match_data[dealer_score:] += 1
+    match_data[:dealer_score] += 1
     end_of_round(dealer_cards, dealer_total, player_cards, player_total)
     display_result(dealer_total, player_total)
-    display_score(match_data[dealer_score:], match_data[player_score:])
-    champion = assign_champion(match_data[dealer_score:], match_data[player_score:])
+    display_score(match_data[:dealer_score], match_data[:player_score])
+    champion = assign_champion(match_data[:dealer_score], match_data[:player_score])
     if champion != nil
       display_champion(champion)
       if play_again?
@@ -201,12 +200,12 @@ loop do
   end
 
   if busted?(dealer_total)
-    player_score += 1
+    match_data[:player_score] += 1
     prompt "Dealer total is now: #{dealer_total}"
     end_of_round(dealer_cards, dealer_total, player_cards, player_total)
     display_result(dealer_total, player_total)
-    display_score(match_data[dealer_score:], match_data[player_score:])
-    champion = assign_champion(match_data[dealer_score:], match_data[player_score:])
+    display_score(match_data[:dealer_score], match_data[:player_score])
+    champion = assign_champion(match_data[:dealer_score], match_data[:player_score])
     if champion != nil
       display_champion(champion)
       if play_again?
@@ -233,7 +232,7 @@ loop do
 
   end_of_round(dealer_cards, dealer_total, player_cards, player_total)
   display_result(dealer_total, player_total)
-  display_score(match_data[dealer_score:], match_data[player_score:])
+  display_score(match_data[:dealer_score], match_data[:player_score])
 
     if champion != nil
       display_champion(champion)

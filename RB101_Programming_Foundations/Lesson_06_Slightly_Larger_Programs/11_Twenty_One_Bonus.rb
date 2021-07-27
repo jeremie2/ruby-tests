@@ -136,28 +136,107 @@ end
 #   no need to ask the user if he wants to play again after any round.
 # 
 # - New variables declared at the beginning:
+#   as we are going to have several variables that need to be updated I thought
+#   it would have been better to use a hash match_data to collect all of them:
 
-  MAX_SCORE = 5  # Max number of victory that a player has to reach to become
-                 # the champion.
+    def reset_data
+      {dealer_score: 0, player_score: 0, round: 0, champion: nil}
+    end
 
-  dealer_score = 0  # both take trace of players scores
-  player_score = 0  #
+    match_data = reset_data
 
-  round = 0   # Take trace of the round to be displayed at the beginning of a new
-              # round. It just shows the round.
+#   This doesn't make a big difference during the game while updating one
+#   of player's score, but #reset_data allowed to update all of them in case
+#   the player wants to play again.
+# 
+#   Using the 'round' variable is not necessary, but it's a way to communicate
+#   the user and keep trace of all the stages of the game.
 
-  champion = nil  # Take trace of the final winner if one player has reached 
-                  # MAX_SCORE
+    MAX_SCORE = 5  # Max number of victory that a player has to reach to become
+                   # the champion.
 
+    match_data[:dealer_score] = 0  # take trace of dealer's score
+    match_data[:player_score] = 0  # ... and player's score
+
+
+    match_data[:round] = 0   # Take trace of the round to be displayed at the beginning of a 
+                # new round. It just shows the round.
+
+    match_data[:champion] = nil  # Take trace of the final winner if one player 
+                                 # has reached MAX_SCORE
+
+# - #display_score(dealer_score, player_score) has been created to show the
+#   actual result at the end of every round
+# 
+# - #assign_champion is checking whether one of the player has reached MAX_SCORE
+
+  def assign_champion(dealer_score, player_score)
+    if dealer_score == MAX_SCORE
+      'DEALER'
+    elsif player_score == MAX_SCORE
+      'PLAYER'
+    else
+      nil
+    end
+  end
+
+# - PROBLEMS..
+#   Code works:
+# 
+#     ==============
+#     => ROUND 6
+#     ==============
+#     => Dealer has ["C", "K"] and ?
+#     => You have: ["H", "9"] and ["S", "A"], for a total of 20.
+#     => Would you like to (h)it or (s)tay?
+#     s
+#     => You stayed at 20
+#     => Dealer turn...
+#     => Dealer stays at 18
+#     ==============
+#     => Dealer has [["C", "K"], ["D", "8"]], for a total of: 18
+#     => Player has [["H", "9"], ["S", "A"]], for a total of: 20
+#     ==============
+#     => You win!
+#     ==============
+#     => Dealer 1
+#     => Player 5
+#     => PLAYER IS THE CHAMPION!
+#     ==============
+#     -------------
+#     => Do you want to play again? (y or n)
+#     n
+#     => Thank you for playing Twenty-One! Good bye!
+#
+#   but a still annoying part is that there still are REPETITIONS.
+#   Just take a piece of code like this, when evaluating if dealer is 'busted': 
+
+      if busted?(dealer_total)
+        match_data[:player_score] += 1
+        prompt "Dealer total is now: #{dealer_total}"
+        end_of_round(dealer_cards, dealer_total, player_cards, player_total)
+        display_result(dealer_total, player_total)
+        display_score(match_data[:dealer_score], match_data[:player_score])
+        champion = assign_champion(match_data[:dealer_score], match_data[:player_score])
+        if champion != nil
+          display_champion(champion)
+          if play_again?
+            match_data = reset_data
+            next
+          else
+            break
+          end
+        end
+        next_round
+        next
+      else
+        # ..........
+      end
+
+#   This code is repeated when checking if player is busted and at the end when
+#   comparing the two result.
+#   Next attempt is trying to find a more concise way to resume all the steps.
 # 
 # 
 # 
 # 
-# 
-# 
-# 
-
-
-
-
-
