@@ -221,7 +221,7 @@ loop do
     prompt "Dealer stays at #{dealer_total}"
   end
 
-  # both player and dealer stays - compare cards!
+  # both player and dealer stay - compare cards!
   if detect_result(dealer_total, player_total) == :dealer
     match_data[:dealer_score] += 1
   elsif detect_result(dealer_total, player_total) == :player
@@ -234,16 +234,16 @@ loop do
   display_result(dealer_total, player_total)
   display_score(match_data[:dealer_score], match_data[:player_score])
 
-    if champion != nil
-      display_champion(champion)
-      if play_again?
-        match_data = reset_data
-        next
-      else
-        break
-      end
+  if champion != nil
+    display_champion(champion)
+    if play_again?
+      match_data = reset_data
+      next
+    else
+      break
     end
-    next_round
+  end
+  next_round
 end
 
 prompt "Thank you for playing Twenty-One! Good bye!"

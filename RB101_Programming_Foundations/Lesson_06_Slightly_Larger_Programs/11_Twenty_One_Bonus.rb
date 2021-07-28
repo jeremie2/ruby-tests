@@ -59,31 +59,6 @@
   dealer_total = total(dealer_cards)
 
 # every time one of the players decides to hit a new card.
-# A way to avoid this repetition could be to split #total method in 3 different
-# methods, for example (used on twenty_one.rb file):
-
-  def card_value(card_val)
-    return card_val if card_val.class == Integer
-    card_val == 'A' ? 11 : 10
-  end
-
-  def add_cards(arr)
-    total = 0
-    arr.each { |el| total += card_value(el) }
-    total
-  end
-
-  def total(cards)
-    values = cards.map { |arr| arr[1] }
-    total = add_cards(values)
-    values.each { |el| total -= 10 if total > 21 && el == 'A' }
-    total
-  end
-
-# so that when updating the total we can do like this:
-
-  total_player += card_value(new_card[1])
-  total_dealer += card_value(new_card[1])
 
 
 ##### 2. DIFFERENT USE OF #play_again?
@@ -121,6 +96,7 @@ def end_of_round(dealer_cards, dealer_total, player_cards, player_total)
 end
 
 # and place it before #display_result
+
 
 ##### 4. RESULT TRACKING
 
@@ -233,10 +209,84 @@ end
         # ..........
       end
 
-#   This code is repeated when checking if player is busted and at the end when
-#   comparing the two result.
-#   Next attempt is trying to find a more concise way to resume all the steps.
+#   This code is repeated when checking if player is busted and at the end 
+#   when comparing the two result.
 # 
 # 
+# ######## REWRITING CODE - twenty_one_bonus_point_2.rb
 # 
+# Inside file twenty_one_bonus_point_2.rb there's an attempt to find a 
+# more concise way to resume all the steps.
 # 
+# Numeric card's values can be set as integer from the beginning:
+
+  VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
+
+# To avoid the repetition of several steps we can place each value
+# related to players and particular elements inside the hash 'data'
+# to be initialised at the beginning of the program:
+
+data = reset_data
+
+# where #reset_data is the following method returning the hash:
+
+  def reset_data
+    { dealer_cards: [],
+      dealer_total: 0,
+      dealer_score: 0,
+      player_cards: [],
+      player_total: 0,
+      player_score: 0,
+      round: 0,
+      champion: nil }
+  end
+
+# This make easyer to show in one step all details related to players
+# scores/cards using the #resume method after every interaction:
+
+  def resume(data)
+    end_of_round(data[:dealer_cards], data[:dealer_total],
+                 data[:player_cards], data[:player_total])
+    display_result(data[:dealer_total], data[:player_total])
+    display_score(data[:dealer_score], data[:player_score])
+    data[:champion] = assign_champion(data[:dealer_score], data[:player_score])
+  end
+
+# Also the output has received some refactoring:
+
+  def display_user(user, user_cards, user_total)
+    sentence = nil
+    case user
+    when 'dealer'
+      sentence = 'Dealer has'
+    when 'player'
+      sentence = 'You have'
+    end
+    prompt "#{sentence}: #{user_cards} for a total of #{user_total}."
+  end
+
+  def end_of_round(dealer_cards, dealer_total, player_cards, player_total)
+    puts "=============="
+    display_user('dealer', dealer_cards, dealer_total)
+    display_user('player', player_cards, player_total)
+    puts "=============="
+  end
+
+
+##### 5. CHANGE TARGETS
+
+# What if we wanted to change this game to Thirty-One, and the dealer hits 
+# until 27? Or what if our game should be Forty-One? Or Fifty-One? In other 
+# words, the two major values right now -- 21 and 17 -- are quite arbitrary. 
+# We can store them as constants and refer to the constants throughout the 
+# program. If we wanted to change the game to Whatever-One, it's just a 
+# matter of updating those constants.
+
+##### ANSWER
+
+# See file twenty_one_bonus_point_2.rb
+
+TOP_NUMBER = 21
+TOP_DEALER_NUM = 17
+
+# ..then replacing the 'raw' number with global variables inside the code. 
