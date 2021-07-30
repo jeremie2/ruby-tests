@@ -1,0 +1,215 @@
+############# Variables and passing by value and passing by reference
+
+
+Hello world!
+I'm starting this blog as requested/suggested by Launch School, the course I'm following on Ruby language and web development.
+As first article I think there's nothing better than talking about variables. Isn't it? :)
+
+One thing I liked about this course is the attention given from the start to how variables work and what happens behind the scenes when we write ordinary code like this: 
+
+a = 'Good morning!'
+b = a
+funct(a)
+
+For many it looks obvious, but for beginners not having a good understanding of how data is stored, referenced, used by functions, can lead to unexpected results.
+This situation reminds me myself when starting following the first beginner's tutorials. For a while I had the idea that functions were like mathematical formulas.
+Just think about rectangle's area:
+
+Area = Length * Height 
+
+If you want to find the area given two sides:
+
+side_1 = 20
+side_2 = 10
+
+all you have to do is:
+
+Area = Length * Height = side_1 * side_2 = 20 * 10
+
+If we take the same approach to create a method (functions in Ruby) that randomly changes a variable called name, we see that the result may be unexpected:
+
+def change_name(name, names)
+  name = names.sample
+end
+
+people = ['Rob', 'Sam', 'Jim']
+person = 'Alan'
+
+A beginner (as it was in my case) could think to just substitute the variables and:
+
+name = names.sample
+ 
+becomes:
+ 
+person = people.sample
+ 
+and he may think that after invoking that methods the value of person will change... but it doesn't.
+Running the code inside pry https://pry.github.io/ he can easily see that the function does return a new name:
+
+change_name(name, names)
+=> "Jim"
+
+but the original variable is unchanged:
+
+name
+=> "Alan"
+
+let's see in more in-depth..
+
+##################### LET'S CREATE SOME VARIABLES
+
+As already said I really liked how in Lesson 2 of the RB101 Programming Foundation course this topic has been clearly explained. I have seen several beginner's guide for various program languages, but quite often this aspect tends to be taken for granted.
+
+Let's see what happens when we assign for instance a string to a variable:
+
+a = "apple"
+a.object_id   # => 1140
+
+We can look at variables as labels we create to refer to some physical memory address. object_id method shows an integer identifier associated to the object (our string).
+Now assign the a variable to a new variable:
+
+b = a
+b.object_id   # => 1140
+
+And here we can notice something important. Both variables refer to the same object with ID 1140.
+We'll see how that's crucial to understand how variables works when passed to a method.
+
+To see some interesting stuff let's create more variables:
+
+c = a
+c.object_id   # => 1140
+
+d = 'bread'
+d.object_id   # => 1160
+
+Here we can visualize the situation where an object, the string 'apple', has been assigned to variable a. This object got its own ID: 1140. Then the variable a has been assigned to other two variables, b and c.
+As we can see all three variables refer to the same object:
+                      _____________                         
+                     |             |object_id
+a = 'apple'     a →  |  "apple"    |1140
+                     |_____________|
+
+                      _____________
+b = a           a →  |             |object_id
+c = a           b →  |  "apple"    |1140
+                c →  |_____________|
+
+
+There's also a new variable d initialized with value 'bread'. No such a surprise that the object ID is different by ID of a, b and c. After all d refer to a different object.
+                      _____________                         
+                     |             |object_id
+d = 'bread'     a →  |  "bread"    |1160
+                     |_____________|
+
+
+##################### LET'S DO SOME MODIFICATIONS
+
+Let's modify b and c using two particular methods:
+- string.upcase : returns a copy (new object) of the string  with all uppercase characters. The original string doesn't change
+- string.upcase! : turns to uppercase every character of the original string.
+
+Here we are:
+
+b = b.upcase
+c.upcase!
+
+To see what is happened we can print both variables and see with no surprise that both are now made of uppercase character:
+
+p b   # => "APPLE"
+p c   # => "APPLE"
+
+What about variable a?
+
+p a   # => "APPLE"
+
+Let's check the object ID:
+
+a.object_id   # => 1140
+b.object_id   # => 1180
+c.object_id   # => 1140
+
+We can see that the ID of b is changed (1180) while a and c still share the same ID (1140). What is happened?
+
+- variable b: performing b.upcase a new object has been created. This new object has been assigned to b therefore b point to a new object with different ID.
+- variable a and c: as already explained upcase! method doesn't create a new object. It directly change the original object stored at a specific memory address to which a and c refer. 
+
+That's the new situation:
+      _____________                         
+     |             |object_id
+b →  |  "APPLE"    |1180
+     |_____________|
+
+      _____________
+a →  |             |object_id
+c →  |  "APPLE"    |1140
+     |_____________|
+
+
+##################### LET'S DO SOME MODIFICATIONS
+
+We can now go back to the code met at the beginning of the article:  
+
+def change_name(name, names)
+  name = names.sample
+end
+
+people = ['Rob', 'Sam', 'Jim']
+person = 'Alan'
+
+change_name(person, people)
+
+Our imaginary beginner student didn't get why performing:
+
+change_name(person, people)
+
+variable person didn't change. And now should be clear why this happens.
+When the method is invoked first of all people and person variables are passed to the method. We have these variable assignments:
+
+name = person
+names = people
+
+At this stage name and person refer to the same object, the string 'Alan'.
+           _____________                         
+person →  |             |object_id
+name   →  |  "Alan"     |60
+          |_____________|
+
+Then an assignment is performed inside the method:
+
+name = names.sample
+
+At this stage a new object is assigned to name and whatever happens to name it will not affect person:
+           _____________                         
+person →  |             |object_id
+          |  "Alan"     |60
+          |_____________|
+           _____________                         
+name   →  |             |object_id
+          |  "Jim"      |80
+          |_____________| ('Jim' is just a possible example)
+
+
+
+Let's see a different situation where inside a method we perform a method able to modify the object referred by the variable:
+
+def modify_name(name)
+  name.upcase!
+end
+
+person = 'Alan'
+
+modify_name(person)
+
+In this case inside the method we don't assign a new object to name, but we call method able to affect the object referred by variable name which is the same referred by variable person:
+           _____________                         
+person →  |             |object_id
+name   →  |  "Alan"     |60
+          |_____________|
+
+After performing name.upcase! the original string get modified and the two variable are still pointing the same object:
+           _____________                         
+person →  |             |object_id
+name   →  |  "ALAN"     |60
+          |_____________|
+
+
