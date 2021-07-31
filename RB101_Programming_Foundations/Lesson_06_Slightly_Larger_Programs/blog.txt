@@ -5,14 +5,14 @@ Hello world!
 I'm starting this blog as requested/suggested by Launch School, the course I'm following on Ruby language and web development.
 As first article I think there's nothing better than talking about variables. Isn't it? :)
 
-One thing I liked about this course is the attention given from the start to how variables work and what happens behind the scenes when we write ordinary code like this: 
+One thing I liked about this course is the attention given from the beginning to how variables work and what happens behind the scenes when we write ordinary code like this: 
 
 a = 'Good morning!'
 b = a
 funct(a)
 
-For many it looks obvious, but for beginners not having a good understanding of how data is stored, referenced, used by functions, can lead to unexpected results.
-This situation reminds me myself when starting following the first beginner's tutorials. For a while I had the idea that functions were like mathematical formulas.
+For many it looks obvious, but for beginners not having a good understanding of how data is stored and used by variables and functions can lead to unexpected results.
+That reminds me myself when starting reading programming tutorials for beginners. I remember that for a while I had the idea that functions were like mathematical formulas.
 Just think about rectangle's area:
 
 Area = Length * Height 
@@ -35,7 +35,7 @@ end
 people = ['Rob', 'Sam', 'Jim']
 person = 'Alan'
 
-A beginner (as it was in my case) could think to just substitute the variables and:
+A beginner (as it was in my case) may think to just substitute the variables, and:
 
 name = names.sample
  
@@ -43,7 +43,7 @@ becomes:
  
 person = people.sample
  
-and he may think that after invoking that methods the value of person will change... but it doesn't.
+Then he may think that after invoking that methods the value of person will change... but it doesn't.
 Running the code inside pry https://pry.github.io/ he can easily see that the function does return a new name:
 
 change_name(name, names)
@@ -56,6 +56,7 @@ name
 
 let's see in more in-depth..
 
+
 ##################### LET'S CREATE SOME VARIABLES
 
 As already said I really liked how in Lesson 2 of the RB101 Programming Foundation course this topic has been clearly explained. I have seen several beginner's guide for various program languages, but quite often this aspect tends to be taken for granted.
@@ -66,7 +67,7 @@ a = "apple"
 a.object_id   # => 1140
 
 We can look at variables as labels we create to refer to some physical memory address. object_id method shows an integer identifier associated to the object (our string).
-Now assign the a variable to a new variable:
+Let's assign the a variable to a new variable:
 
 b = a
 b.object_id   # => 1140
@@ -105,7 +106,7 @@ d = 'bread'     a →  |  "bread"    |1160
 ##################### LET'S DO SOME MODIFICATIONS
 
 Let's modify b and c using two particular methods:
-- string.upcase : returns a copy (new object) of the string  with all uppercase characters. The original string doesn't change
+- string.upcase : returns a copy (new object) of the string with all uppercase characters. The original string doesn't change
 - string.upcase! : turns to uppercase every character of the original string.
 
 Here we are:
@@ -128,10 +129,10 @@ a.object_id   # => 1140
 b.object_id   # => 1180
 c.object_id   # => 1140
 
-We can see that the ID of b is changed (1180) while a and c still share the same ID (1140). What is happened?
+We can see that the ID of b is changed (1180) while a and c still share the same ID (1140). What is it happened?
 
-- variable b: performing b.upcase a new object has been created. This new object has been assigned to b therefore b point to a new object with different ID.
-- variable a and c: as already explained upcase! method doesn't create a new object. It directly change the original object stored at a specific memory address to which a and c refer. 
+- Variable b: performing b.upcase a new object has been created. This new object has been assigned to b therefore b point to a new object with different ID.
+- Variable a and c: as already explained upcase! method doesn't create a new object. It directly changes the original object stored at a specific memory address to which a and c refer. 
 
 That's the new situation:
       _____________                         
@@ -158,12 +159,12 @@ person = 'Alan'
 
 change_name(person, people)
 
-Our imaginary beginner student didn't get why performing:
+Our beginner student didn't get why performing:
 
 change_name(person, people)
 
-variable person didn't change. And now should be clear why this happens.
-When the method is invoked first of all people and person variables are passed to the method. We have these variable assignments:
+variable person didn't change. And now it should be clear why this happens.
+When change_name method is invoked, first of all people and person variables are passed to the method. We have these variable assignments:
 
 name = person
 names = people
@@ -178,7 +179,7 @@ Then an assignment is performed inside the method:
 
 name = names.sample
 
-At this stage a new object is assigned to name and whatever happens to name it will not affect person:
+At this stage a new object is assigned to name and whatever happens to name it will not affect person, because name refers now to a different object:
            _____________                         
 person →  |             |object_id
           |  "Alan"     |60
@@ -200,7 +201,7 @@ person = 'Alan'
 
 modify_name(person)
 
-In this case inside the method we don't assign a new object to name, but we call method able to affect the object referred by variable name which is the same referred by variable person:
+In this case inside the method we don't assign a new object to name, but we call a method able to affect the object referred by variable name which is the same referred by variable person:
            _____________                         
 person →  |             |object_id
 name   →  |  "Alan"     |60
@@ -211,5 +212,20 @@ After performing name.upcase! the original string get modified and the two varia
 person →  |             |object_id
 name   →  |  "ALAN"     |60
           |_____________|
+
+
+With that in mind it should be clear how things work ;)
+
+Just an important thing to notice!
+In the example seen here we have used strings. Strings (and also arrays and ashes) in Ruby are mutable objects and this means that it's possible to change a part of an object stored in a memory address.
+Different situation with numeric variables. Numbers are not mutable, this means that two or more variables can point the same object (number), but there isn't any methods able to change the referred number as happens for instance with upcase! method with strings.
+
+There is actually more to be said on this topic. The guide introduces the concepts of "pass by value" and "pass by reference", but this article wanted just to point out the basic concepts that can be tricky for noobs.
+
+Thanks for reading.
+
+
+
+
 
 
