@@ -40,7 +40,7 @@ end
   # It will always display "Invalid option!" because user_input is not converted
   # to integer or the comparison should be performed with strings '1' and '2'.
   #  
-  # But let's pry debugger in action running the same script with these
+  # But let's see pry debugger in action running the same script with these
   # modifications:
 
 require 'pry'
@@ -69,7 +69,6 @@ end
 
 # It's now clear that user_input is a string while comparison is performed
 # with an integer.
-# 
 
 
 ##### WHAT IS PRY?

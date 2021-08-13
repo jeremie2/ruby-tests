@@ -16,7 +16,7 @@ end
 
 def display_board(brd)
   # system 'clear'
-  print "
+  puts "
        |     |
     #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}
        |     |

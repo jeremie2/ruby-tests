@@ -11,8 +11,8 @@ a = 'Good morning!'
 b = a
 funct(a)
 
-For many it looks obvious, but for beginners not having a good understanding of how data is stored and used by variables and functions can lead to unexpected results.
-That reminds me myself when starting reading programming tutorials for beginners. I remember that for a while I had the idea that functions were like mathematical formulas.
+For many it looks obvious, but for beginners not having a good understanding of how data is stored and used by variables and functions can lead to unexpected results. And actually... that's what happened to me!
+We can experience different types of errors while starting to learn programming, but the one I remember the most was that for a while I had the idea that functions were like mathematical formulas.
 Just think about rectangle's area:
 
 Area = Length * Height 
@@ -22,7 +22,7 @@ If you want to find the area given two sides:
 side_1 = 20
 side_2 = 10
 
-all you have to do is:
+all you have to do is using the formula has a template where you just replace variable:
 
 Area = Length * Height = side_1 * side_2 = 20 * 10
 
@@ -44,7 +44,7 @@ becomes:
 person = people.sample
  
 Then he may think that after invoking that methods the value of person will change... but it doesn't.
-Running the code inside pry https://pry.github.io/ he can easily see that the function does return a new name:
+Running the code inside pry https://pry.github.io/ we can easily see that the function does return a new name:
 
 change_name(name, names)
 => "Jim"
@@ -83,8 +83,8 @@ c.object_id   # => 1140
 d = 'bread'
 d.object_id   # => 1160
 
-Here we can visualize the situation where an object, the string 'apple', has been assigned to variable a. This object got its own ID: 1140. Then the variable a has been assigned to other two variables, b and c.
-As we can see all three variables refer to the same object:
+Here we can visualize the situation where an object, the string 'apple', has been assigned to variable a. This object got its own ID: 1140. Then the variable a is assigned to other two variables, b and c.
+As we can see that all three variables refer to the same object:
                       _____________                         
                      |             |object_id
 a = 'apple'     a →  |  "apple"    |1140
@@ -99,7 +99,7 @@ c = a           b →  |  "apple"    |1140
 There's also a new variable d initialized with value 'bread'. No such a surprise that the object ID is different by ID of a, b and c. After all d refer to a different object.
                       _____________                         
                      |             |object_id
-d = 'bread'     a →  |  "bread"    |1160
+d = 'bread'     d →  |  "bread"    |1160
                      |_____________|
 
 
@@ -129,10 +129,12 @@ a.object_id   # => 1140
 b.object_id   # => 1180
 c.object_id   # => 1140
 
-We can see that the ID of b is changed (1180) while a and c still share the same ID (1140). What is it happened?
+The ID of b is changed (1180) while a and c still share the same ID (1140). What is it happened?
 
-- Variable b: performing b.upcase a new object has been created. This new object has been assigned to b therefore b point to a new object with different ID.
-- Variable a and c: as already explained upcase! method doesn't create a new object. It directly changes the original object stored at a specific memory address to which a and c refer. 
+- Variable b:
+  performing b.upcase a new object has been created. This new object has been assigned to b therefore b is now pointing to a new object with different ID.
+- Variable a and c:
+  as already explained upcase! method doesn't create a new object. It directly changes the original object stored at a specific memory address to which a and c refer. 
 
 That's the new situation:
       _____________                         
@@ -156,7 +158,6 @@ end
 
 people = ['Rob', 'Sam', 'Jim']
 person = 'Alan'
-
 change_name(person, people)
 
 Our beginner student didn't get why performing:
@@ -198,15 +199,21 @@ def modify_name(name)
 end
 
 person = 'Alan'
-
 modify_name(person)
+p person             # => "ALAN"
 
-In this case inside the method we don't assign a new object to name, but we call a method able to affect the object referred by variable name which is the same referred by variable person:
+In this case variable person does change.
+When method modify_name is invoked variable person is passed to it:
+
+name = person
+
+and name and person refer now to the same object:
            _____________                         
 person →  |             |object_id
 name   →  |  "Alan"     |60
           |_____________|
 
+This time we don't assign a new object to name, but we call a method able to affect the object referred by variables name and person.
 After performing name.upcase! the original string get modified and the two variable are still pointing the same object:
            _____________                         
 person →  |             |object_id

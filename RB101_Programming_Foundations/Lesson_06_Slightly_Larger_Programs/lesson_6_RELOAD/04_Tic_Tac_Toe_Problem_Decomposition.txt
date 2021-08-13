@@ -1,0 +1,54 @@
+########## TIC TAC TOE
+
+First info:
+- 2 player game
+- 3X3 board
+- each player marks a square
+- first player to reach 3 squares in a row wins
+- if all squares are marked and no player has 3 square in a row, it's a tie
+
+Sequence:
+1. Display the 3x3 board
+2. Ask user to mark a square
+3. Computer marks a square
+4. Display the updated board
+5. If winner, display winner
+6. If board is full, display tie
+7. If no winner or no tie, go back to #2
+8. Play again?
+9. If yes, go back to #1
+10. Bye!
+
+The sequence is at this stage high level.
+It is "dominated" by two loops at #7 and #9. 
+
+
+              START
+                |
+                |
+   -----------> 0 <------------------------------- Reset board
+  |             |                                       ^
+  |             V                                       |
+  |       Display board                                 |
+  |             |                                       |
+  |             V                                       |
+  |      User marks square                              |
+  |             |                                       |
+  |             V                                       |
+  |    Computer marks square                            |
+  |             |                                       |
+  |             V                                       |
+  |          Winner? -----> Yes ----> Display -        Yes
+  |             |                     winner   |        |
+  |             V                              |        |
+  |            No                              |--> Play again?
+  |             |                              |        |
+  |             V                              |        |
+  --- no <--Full board? --> Yes ----> Display -        No
+                                        tie             |
+                                                        V
+                                                      STOP
+
+
+This flowchart is still very generic and several sub-process need to be
+sorted out expecially when inspetting the board.
