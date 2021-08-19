@@ -134,13 +134,10 @@ def player_choice(marks)
   choice = nil
   loop do
     availabe_square = free_square(marks)
-    prompt("Select a square: #{availabe_square}")
+    prompt("Select a square: #{availabe_square.join(', ')}")
     choice = gets.to_i
-    if !availabe_square.include?(choice)
-      prompt('Not a valid choice')
-    else
-      break
-    end
+    break if availabe_square.include?(choice)
+    prompt('Not a valid choice')
   end
   choice
 end
@@ -221,22 +218,18 @@ loop do
   display_board(marks)
 
   marks[player_choice(marks)] = PLAYER_MARK
-  display_board(marks)
   winner = winner(marks)
-  break if winner == 'player'
+  break if winner == 'player' || free_square(marks).empty?
 
   marks[computer_choice(marks)] = COMPUTER_MARK
-  display_board(marks)
   winner = winner(marks)
-  break if winner == 'computer'
-
-  break if free_square(marks).empty?
+  break if winner == 'computer' || free_square(marks).empty?
 end
 
-if winner == 'player'
-  prompt('You are the winner!')
-elsif winner == 'computer'
-  prompt('Computer won!')
-else
-  prompt("It's a tie!")
+display_board(marks)
+
+case winner
+when 'player' then prompt('You are the winner!')
+when 'computer' then prompt('Computer won!')
+else prompt("It's a tie!")
 end
