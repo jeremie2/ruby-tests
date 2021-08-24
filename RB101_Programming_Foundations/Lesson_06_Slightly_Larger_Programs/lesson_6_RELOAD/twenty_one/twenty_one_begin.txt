@@ -1,0 +1,218 @@
+
+######### Rules of twenty-one
+
+- 52 card deck: hearts, diamonds, clubs, and spades from 2 to 10 plus
+                jack, queen, king and ace
+
+- card values:
+  - numbers = numbers
+  - characters = 10
+  - ace: 11 if the summ is NOT more than 21. Otherwise it counts 1 
+
+- Target: get close to 21 but NOT over ("bust")
+
+- How to play:
+  - 'dealer' and 'player' receive 2 cards
+  - player can see only one card of dealer
+  - player can 'hit' (ask a new card to get near 21) or 'stay'
+    - if player busts, dealer wins
+  - dealer turn after player's stay: dealer hits until total is at least 17
+    - if dealer busts, player wins
+  - Comparing cards to see who went nearer to 21 or if it's a tie.
+
+
+######### Pedac
+
+- Create the deck
+- Give 2 cards to dealer and player
+- show cards (just one card for the dealer)
+  - calculate and show total value of player's deck
+- player turn "hit or stay"
+  - update player's cards
+  - if player busted, dealer is the winner
+- dealer turn "hit or stay"
+  - update dealer's cards
+  - if dealer busted player is the winner
+- compare cards and declare the winner or a tie
+
+
+######### Deck
+
+To initialize the deck we could take in consideration 2 arrays:
+- one made of suits: suits = ['H', 'D', 'C', 'S']
+- the other made of values: val = [1, 2,... 10, 'J', 'Q', 'K', 'A']
+
+Then suits.product(val) return a complete deck which is an arrray made
+of arrays with pairs suit-value: [["H", 2], ["H", 3], ["H", 4],... ]
+
+Now we only need to shuffle the deck. 
+deck = suits.product(val).shuffle
+
+  suits = ['H', 'D', 'C', 'S']
+  val = (1..10).to_a + ['J', 'Q', 'K', 'A']
+  deck = suits.product(val).shuffle
+
+######### Give 2 cards
+
+We initialize the players decks and den we pop cards from the deck to
+player's decks:
+
+  player_cards = []
+  dealer_cards = []
+
+  2.times do
+    player_cards << deck.pop
+    dealer_cards << deck.pop
+  end
+
+
+######### Show cards
+
+Crated a prompt method:
+
+  def prompt(msg)
+    puts ">> #{msg}"
+  end
+
+We can now begin to communicate with the player:
+
+  prompt "Welcome to Twenty-One!"
+  prompt "Dealer has #{dealer_cards.sample} and (?)"
+  prompt "You have #{player_cards.first} and #{player_cards.last}"
+  prompt "(H)it or (S)tay?"
+
+But we need to calculate the total value of each deck.
+
+To calculate the total we can use:
+
+  def total(cards)
+    total = 0
+    values = []
+    cards.each { |arr| values << arr[1] }
+
+    values.each do |el|
+      total += if ['J', 'Q', 'K'].include?(el)
+                 10
+               elsif el == 'A'
+                 11
+               else
+                 el
+               end
+    end
+    correct_ace(total, values)
+  end
+
+which uses inside #correct_ace method:
+
+  def correct_ace(total, values)
+    if total > 21
+      values.each { |el| total -= 10 if el == 'A' && total > 21 }
+    end
+    total
+  end
+
+to correct the ace's value to 2 when total exceeds 21.
+
+Some optimization of the beginning of the program:
+
+  def generate_deck
+    system 'clear'
+    suits = ['H', 'D', 'C', 'S']
+    val = (2..10).to_a + ['J', 'Q', 'K', 'A']
+    deck = suits.product(val).shuffle
+  end
+
+  def distribute_cards(deck, player_cards, dealer_cards)
+    2.times do
+      player_cards << deck.pop
+      dealer_cards << deck.pop
+    end
+  end
+
+Now the initial prompt section looks like this:
+
+  system 'clear'
+  winner = nil            # take trace of winner
+  deck = generate_deck
+  player_cards = []
+  dealer_cards = []
+  distribute_cards(deck, player_cards, dealer_cards)
+  total_player = total(player_cards)
+  total_dealer = total(dealer_cards)
+
+  prompt "Welcome to Twenty-One!"
+  prompt "Dealer has #{dealer_cards.sample} and (?)"
+  prompt "You have #{player_cards.first} and #{player_cards.last}"
+  prompt "You got a total of #{total(player_cards)}"
+
+We take trace of the winner with variable "winner".
+It is initialize to 'nil'. It will change if one of the player busts
+while choosing new cards.
+If nothing happens (no busts) than the program will proceed to next step.
+
+ winner = nil
+     |  
+    player choose cards ---- if busted ----- winner = 'dealer'
+     |  
+    dealer choose cards ---- if busted ----- winner = 'player'
+     |
+    card comparison
+
+
+######### Player turn
+
+We create a loop so that we ask the player to accept or take another
+card. In the meantime we update player's card deck and the total score.
+
+  loop do
+    prompt "Hit or Stay?"
+    prompt "(Press 'S' to stay, any key to hit)"
+    answer = gets.chomp
+    break if answer.downcase == 's'
+    player_cards << deck.pop
+    total_player = total(player_cards)
+    prompt "You now have: #{player_cards} for a total of: #{total_player}"
+    if total_player > 21
+      prompt "You bust, dealer wins!"
+      winner = 'dealer'
+      break
+    end
+  end
+
+If player busts then dealer is the winner.
+
+######### Dealer turn
+
+If winner is still nil then it's time for dealer turn:
+
+if winner.nil?
+  loop do
+    break if total_dealer >= 17
+    dealer_cards << deck.pop if total_dealer < 17
+    total_dealer = total(dealer_cards)
+    if total_dealer > 21
+      winner = "player"
+      prompt "Dealer total is now #{total_dealer}"
+      prompt "Dealer busts, you win!"
+      break
+    end
+  end
+end
+
+
+######### Compare cards
+
+If after player's and dealer's turn nobody busted, then it's
+time to compare both player's deck total value and declare the winner:
+
+if winner.nil?
+  prompt "Total dealer: #{total_dealer}"
+  prompt "Total player: #{total_player}"
+  if total_player < total_dealer
+    prompt "Dealer wins!"
+  elsif total_player > total_dealer
+    prompt "You win!"
+  else
+    prompt "It's a tie!"
+  end
+end
