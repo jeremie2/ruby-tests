@@ -46,7 +46,7 @@ end
 ['car', 'alright', 'barman'].min_by { |x| x.length }
 
 
-['car', 'alright', 'barman'].min_by(2) { |x| x.length 
+['car', 'alright', 'barman'].min_by(2) { |x| x.length }
 
 
 ['var', 'all', 'ann'].min_by(2) { |x| x.length }

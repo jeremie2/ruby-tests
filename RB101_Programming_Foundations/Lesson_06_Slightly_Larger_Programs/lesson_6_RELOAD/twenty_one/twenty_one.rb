@@ -23,6 +23,11 @@ def correct_ace(total, values)
   total
 end
 
+def card_value(card_val)
+  return card_val if card_val.class == Integer
+  card_val == 'A' ? 11 : 10
+end
+
 def total(cards)
   total = 0
   values = []

@@ -122,9 +122,9 @@ end
 # each   :: Iteration ::   No     :: (returns   :: Original  #
 #        ::           ::          ::  original) ::  length   #
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::# 
-#        ::           ::          ::            :: Original  #
-# select :: Selection ::   Yes    ::    Yes     ::  length   #
-#        ::           :: (truthy) ::            ::  or less  #
+#        ::           ::          :: Yes - made :: Original  #
+# select :: Selection ::   Yes    :: of original::  length   #
+#        ::           :: (truthy) :: elements   ::  or less  #
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::#
 #        :: Transfor- ::          ::            ::           #
 # map    ::  mation   ::   Yes    ::    Yes     :: Original  #
