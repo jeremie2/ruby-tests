@@ -88,15 +88,6 @@
 #    the wrong one. Play around with an idea, and see how far you can push it. If 
 #    it doesn't work, back out of it.
 
-
-
-
-
-
-
-
-
-
 # 2. Calculating Aces. Remember that aces can be worth either 1 or 11, depending 
 #    on the context. You should not ask the user what the value of the ace is; 
 #    your program should be able to figure this out automatically.
@@ -110,4 +101,3 @@
 #    1. ask "hit" or "stay"
 #    2. if "stay", stop asking
 #    3. otherwise, go to #1
-

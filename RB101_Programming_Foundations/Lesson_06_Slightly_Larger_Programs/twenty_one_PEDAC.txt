@@ -128,3 +128,4 @@
   - Ask if user would like to play again.
   - Set answer variable to be set as gets.chomp.downcase
   - Return true if answer is equal 'n'
+
