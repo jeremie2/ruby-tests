@@ -39,7 +39,7 @@ Algorithm:
 #   result
 # end
 
-# one-line-solution
+## one-line-solution
 # def digit_list(num)
 #   num.to_s.chars.map { |el| el.to_i }
 # end
@@ -76,7 +76,6 @@ Algorithm:
 This time I don't use easy method at all appending every single integer
 to array `arr` and then passing each element to a new array `result`.
 
-
 Algorithm:
 - given a integer `num`
 - create empty array `arr`
@@ -88,7 +87,7 @@ Algorithm:
 - end loop
 - initialize variable `idx` with value -1
 - start loop
-  - loops will run until size of `result` will be smaller than
+  - loops keeps going on until size of `result` is smaller than
     size of `arr`
   - append element arr[idx] to `result` array (so that:
     last element of `arr` will be first element of `result`;

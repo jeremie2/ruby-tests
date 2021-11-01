@@ -20,7 +20,7 @@ Output:
 
 There's no particular data structure to take care.
 The data passed to the method will be straight used inside a loop
-that will print the string how many times  equal the value of the
+that will print the string as many times the value of the
 integer.
 
 - given a string `str` and a integer `num`

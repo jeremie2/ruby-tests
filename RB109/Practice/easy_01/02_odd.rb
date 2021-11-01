@@ -22,8 +22,8 @@ There's no particular data structure to take care. Just testing
 a property of integer odd number.
 
 - given a integer `num`
-- use  modulo operator `%` to perform comparison between `num` and zero `0`
-  so that if `num` divided 2 has rest, then method returns `true` 
+- use  modulo operator `%` to perform comparison between `num % 2` and zero `0`
+  so that if `num` divided 2 has a rest, then method returns `true` 
 
 =end
 
