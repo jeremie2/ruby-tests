@@ -197,7 +197,7 @@ def format_date(original_date)
                .sub(/\A(\d\d\d\d)\/(\d\d)\/(\d\d)\z/, '\3.\2.\1')
 end
 
-# Alternate solution
+# Alternative solution
 
 def format_date(original_date)
   date_regex = /\A(\d\d\d\d)([\-\/])(\d\d)\2(\d\d)\z/

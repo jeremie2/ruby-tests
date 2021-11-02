@@ -28,23 +28,26 @@ data structure:
 
 algorithm:
 - given a string
-- return an empty string, if the string is empty
 - split the string into array called `arr`
-- if size of arr is equal to zero
-  - return an empty string
-- reverse `arr`
-- join the elements of the array into a string and return it   
+- reverse the array (`arr_reverse`)
+- join the elements of the array into a string (`new_str`)
+- return new_str   
 =end
 
+# def reverse_sentence(str)
+#   arr = str.split
+#   arr_reverse = arr.reverse
+#   new_str = arr_reverse.join(" ")
+#   new_str
+# end
 
+# each step can be easily reproduced within a single line
 def reverse_sentence(str)
-  return "" if str == ""
-  arr = str.split()
-  return "" if arr.size == 0
-  arr.reverse.join(" ")
+  str.split.reverse.join(" ")
 end
 
 puts reverse_sentence('Hello World') == 'World Hello'
 puts reverse_sentence('Reverse these words') == 'words these Reverse'
 puts reverse_sentence('') == ''
 puts reverse_sentence('    ') == ''
+ 
