@@ -1,6 +1,7 @@
 =begin
 
-Write a method that takes one argument, a string, and returns a new string with the words in reverse order.
+Write a method that takes one argument, a string, and returns a new string
+with the words in reverse order.
 
 Examples:
 
@@ -15,7 +16,7 @@ The tests above should print true.
 
 input: string
 - looking at the examples I'm going to assume that input is just string type,
-  therefore I ignore other use cases (numbers, data collection..) 
+  therefore I ignore other use cases (numbers, data collection..)
 output: string
 
 data structure:
@@ -30,15 +31,13 @@ algorithm:
 - given a string
 - split the string into array called `arr`
 - reverse the array (`arr_reverse`)
-- join the elements of the array into a string (`new_str`)
-- return new_str   
+- return the joined array
 =end
 
 # def reverse_sentence(str)
 #   arr = str.split
 #   arr_reverse = arr.reverse
-#   new_str = arr_reverse.join(" ")
-#   new_str
+#   arr_reverse.join(" ")
 # end
 
 # each step can be easily reproduced within a single line
@@ -50,4 +49,3 @@ puts reverse_sentence('Hello World') == 'World Hello'
 puts reverse_sentence('Reverse these words') == 'words these Reverse'
 puts reverse_sentence('') == ''
 puts reverse_sentence('    ') == ''
- 
