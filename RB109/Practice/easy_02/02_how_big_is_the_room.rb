@@ -26,9 +26,9 @@ data structure:
 
 algorithm
 - print a string that asks for the length in meters
-- assign the output to variable `length` multiplying it
+- assign the user's output to variable `length` multiplying it
 - print a string that asks for the width in meters
-- assign the output to variable `width`
+- assign the user's output to variable `width`
 - assign the product between `length` and `width` to `sq_mt`
 - assign the product between `sq_mt` and 10.7639 to `sq_ft`
 - print a string that shows the room's area in square meters and square feet
