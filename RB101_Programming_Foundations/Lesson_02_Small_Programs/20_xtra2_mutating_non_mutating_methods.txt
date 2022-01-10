@@ -43,9 +43,8 @@ As confirmation that s and t point to the same object, we can run:
 
 which return true.
 
-The only place we create a new String in this code is when we assign “hello”
-to s. The rest of the time, we work directly with that object, modifying it
-as needed. 
+The only place were we create a new String in this code is when we assign “hello”
+to s. The rest of the time, we work directly with that object, modifying it as needed. 
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -190,7 +189,7 @@ ASSIGNMAENT WITH OERATORS (*=, +=, and %=...) NEVER MUTETE OPERANDS
 ::::: MUTATING METHODS
 
 Most mutating method has '!' at the end of the name, like upcase!
-..but that isn't always true: concat()
+..but that isn't always true: just see concat()
 
 Other mutating methods are: #[]= and #<<
 
@@ -264,3 +263,4 @@ Setter invocation looks like this:
 
 They work like in indexed assignment mutating the object (in this case the
 object 'person').
+

@@ -95,7 +95,8 @@ algorithm:
   between 1 and `num` is `result`."
 
 # valid_number
-- return true if `num` converted to integer and to string again is equal `num`
+- return true if `num` converted to integer and then to string again
+  is equal `num`, and `num` converted to integer is more than 0
 
 # valid_char
 - return true if `choice` is equal `s` or `p`
@@ -108,7 +109,7 @@ algorithm:
 =end
 
 def valid_number(str)
-  str == str.to_i.to_s
+  str == str.to_i.to_s && str.to_i > 0
 end
 
 def valid_char(char)

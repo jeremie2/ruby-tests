@@ -192,7 +192,7 @@
 - What are the techniques for debugging?
   - Reading line by line
   - Using pry
-  - Have a wlak!
+  - Have a walk!
   - Rubber duck
 
 

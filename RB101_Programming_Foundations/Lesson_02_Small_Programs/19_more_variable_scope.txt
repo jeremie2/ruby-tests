@@ -119,7 +119,8 @@ METHOD DEFINITION: setting a certain scope for any local variables in terms of
 
 METHOD INVOCATION: using the scope set by the method definition.
 
-If the method is defined to use a block, then the scope of the block can provide additional flexibility.
+If the method is defined to use a block, then the scope of the block can provide
+additional flexibility.
 
 
 :::: SUMMARY
