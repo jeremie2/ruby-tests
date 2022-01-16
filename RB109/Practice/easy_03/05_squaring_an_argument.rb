@@ -36,7 +36,16 @@ algorithm:
 # type method: cubed, to the 4th power, to the 5th, etc. How would
 # we go about doing so while still using the multiply method?
 
-## SOME EXAMPLE
+## SOME EXAMPLES
+
+=begin
+- set a default result when the exponent is 0 and 1
+- set `exp` to track the exponent's value during the loops
+- we set a total `tot` equal to `num` so that we can start a loop
+  where each time `tot` will be equal `tot` * `num`
+- `exp` get incremented by 1
+- the loop ends when `exp` is greater than `pow`
+=end
 
 # def power_of_num(num, pow)
 #   return 1 if pow == 0
