@@ -27,14 +27,14 @@
 # 3000.divmod(1440) = [2, 120] = 2d 120m = 48h 120m
 # 120.divmod(60) = [2, 0] = 2h 0m = 02:00
 # 
-# and tried to build 'time_of_day' method, but I was going
+# and tried to build 'time_of_day' method, but I was going through
 # an endless line of 'if' statement for every case:
 # minutes < 60, ...< 1440... etc..
 # and still to take in consideration the format '00:00'.
 # I could probably find a solution but I had the
-# filings things were too cumbersome.
+# feelings things were too cumbersome.
 # I had a look at the solution and I'm going to report
-# those steps, surely a more interesting approach.
+# those steps. Surely a more interesting approach.
 
 # The first step and main point of the solution is to 'normalize'
 # the minutes variable passed into #time_of_day(minutes) method.
