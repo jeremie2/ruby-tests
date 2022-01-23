@@ -78,8 +78,8 @@ Why is /[^xX]/ not a valid answer to the previous exercise?
 
 #####
 
-Because also other than alphabetical character are taken in consideration.
-
+Because it takes in consideration any kind of character except x and X.
+But in this case we want only alphabetical character.
 
 ########### EXERCISE 6
 
@@ -141,11 +141,11 @@ Challenge: write a regex that matches a string that looks like a simple negated
 character class range, e.g., '[^a-z]'. (Your answer should match precisely six 
 characters.) Test it with these strings:
 
-The regex /[^a-z]/i matches any character that is
-not a letter. Similarly, /[^0-9]/ matches any
-non-digit while /[^A-Z]/ matches any character
-that is not an uppercase letter. Beware: /[^+-<]/
-is at best obscure, and may even be wrong.
+  The regex /[^a-z]/i matches any character that is
+  not a letter. Similarly, /[^0-9]/ matches any
+  non-digit while /[^A-Z]/ matches any character
+  that is not an uppercase letter. Beware: /[^+-<]/
+  is at best obscure, and may even be wrong.
 
 There should be three matches.
 
@@ -175,3 +175,4 @@ The three matches are /[^a-z]/i, /[^0-9]/, and /[^A-Z]/. Technically, the last
 regex string in our sample text, /[^+-<]/, is a valid regex; there is nothing 
 illegal about character class ranges that don't use alphanumeric starting and 
 ending points. However, you should avoid such ranges; think of them as invalid.
+

@@ -5,7 +5,7 @@ Anchors provide a way to limit how a regex matches a particular string
 by telling the regex engine where matches can begin and where they can 
 end.
 
-Anchors don't match any characters, they do is ensure that a regex matches 
+Anchors don't match any characters. What they do is ensure that a regex matches 
 a string at a specific place:
 - beginning/end of a string
 - end of a line
@@ -123,3 +123,4 @@ Match 3 letter words consisting of word characters:
 
 (!!!) \b and \B do not work as word boundaries inside []
       In that case \b matches backspace character.
+

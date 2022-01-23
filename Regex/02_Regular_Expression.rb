@@ -121,7 +121,7 @@ has tab
 
 # To ignore the 'case sensitive' default behavior, we have to add 
 
-str =  "LAUNCH SCHOOL!"
+str = "LAUNCH SCHOOL!"
 
 str.match(/launch/)
 # => nil

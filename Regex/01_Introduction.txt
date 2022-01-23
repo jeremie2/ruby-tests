@@ -16,7 +16,7 @@ Regex: patterns (schemi 'it') to be used to:
 - get informations
 - perform conditional tests
 - modify information
-from a seto of strings.
+from a set of strings.
 
 
 ########### WHAT ARE REGEX USED FOR?
@@ -38,3 +38,4 @@ from a seto of strings.
 
 https://ruby-doc.org/core-3.0.1/Regexp.html
 https://rubular.com/
+

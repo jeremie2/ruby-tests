@@ -1,7 +1,7 @@
 
 ########### EXERCISE 1
 
-Write a regex that matches the word The when it occurs at the beginning 
+Write a regex that matches the word `The` when it occurs at the beginning 
 of a line. Test it with these strings:
 
 The lazy cat sleeps.
@@ -18,7 +18,7 @@ There should be two matches.
 
 ########### EXERCISE 2
 
-Write a regex that matches the word cat when it occurs at the end of a 
+Write a regex that matches the word `cat` when it occurs at the end of a 
 line. Test it with these strings:
 
 The lazy cat sleeps

@@ -27,7 +27,7 @@ options (1 and 5), the input can be validated with regex /[12345]/
 
 Likewise, you can validate a y/n prompt response with /[nyNY]/
 
-Upper/lowercase if you cant use / /i classes:
+Upper/lowercase if you can't use / /i classes:
 /[Hh]oover/ matches Hoover or hoover, but not HOOVER.
 
 
@@ -90,3 +90,4 @@ What do you think happens in this code?
 
 # ANSWER
 It should print 'matched' because 'y' matches.
+
