@@ -45,19 +45,14 @@ def fields(str)
   str.split(/[, \t]+/)
 end
 
-
-p fields("Pete,201,Student")
-# => ['Pete', '201', 'Student']
-
-p fields("Pete \t 201    ,  TA")
-# => ['Pete', '201', 'TA']
-
-p fields("Pete \t 201")
-# => ['Pete', '201']
-
-p fields("Pete \n 201")
-# => ['Pete', '\n', '201']
-
+puts fields("Pete,201,Student") == ['Pete', '201', 'Student']
+puts fields("Pete \t 201    ,  TA") == ['Pete', '201', 'TA']
+puts fields("Pete \t 201") == ['Pete', '201']
+puts fields("Pete \n 201") == ['Pete', "\n", '201']
+#                                       |
+#                            It must be double quotes!!
+#                            Escape character are not recognized
+#                            into single quotes.
 
 ######### EXERCISE 3
 

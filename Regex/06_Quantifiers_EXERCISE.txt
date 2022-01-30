@@ -52,7 +52,10 @@ There should be two matches.
 
 ########### EXERCISE 4
 
-Write a regex that matches any line of text that contains nothing but a URL. For this exercise, a URL begins with http:// or https://, and continues until it detects a whitespace character or end of line. Test your regex with these strings:
+Write a regex that matches any line of text that contains nothing but a URL.
+For this exercise, a URL begins with http:// or https://, and continues until
+it detects a whitespace character or end of line. Test your regex with these
+strings:
 
 http://launchschool.com/
 https://mail.google.com/mail/u/0/#inbox
@@ -106,7 +109,9 @@ inviting illegal iridium
 
 #####
 
-/\b([a-z]*i){3}[a-z]*\b/ 
+## /\b[a-z]*i[a-z]*i[a-z]*i[a-z]*\b/i
+
+/\b([a-z]*i){3}[a-z]*\b/i
 
 
 ########### EXERCISE 8
@@ -268,3 +273,4 @@ What would happen if you omitted the '?'? Try both the correct regex and the
 one with a greedy quantifier (/<h1>.*<\/h1>/) against this HTML to see:
 
 <h1>ABC</h1> <p>Paragraph</p> <h1>DEF</h1><p>Done</p>
+

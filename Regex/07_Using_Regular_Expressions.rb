@@ -26,7 +26,7 @@ puts 'Valid url' if text.match(/\Ahttps?:\/\/\S+\z/)
 # Similar to #match (even faster) =~ can be used in the same way:
 
 text = 'https://launchschool.com'
-puts 'Valid url' if =~ /\Ahttps?:\/\/\S+\z/
+puts 'Valid url' if text =~ /\Ahttps?:\/\/\S+\z/
 
 
 #### scan()
@@ -137,7 +137,7 @@ str.gsub!(/(\d)\s/, '\1')  # 'Please call me at 5551234. Thanks.'
 str.gsub!(/(\d)(\s)/, '\1\2')  # 'Please call me at 5 5 5 1 2 3 4. Thanks.'
 
 # In this case there is also \2 that refers to (\s), so empty spacec will be present
-# also after the substitution.
+# also after substitution.
 
 ##########
 
@@ -163,3 +163,28 @@ str.gsub!(/\b(\d{3})(\d{3})(\d{4})\b/, '(\1) \2-\3')
 
 # Result:
 # 'Please call me at (123) 555-1234. Thanks.'
+
+## ANOTHER EXAMPLE
+
+# We want to change the date format of dates like:
+
+date = '2016-06-17'
+
+# or date = '2016/06/17'
+# 
+# to:
+# 
+# 17.06.2016
+# 
+# We can set a regex like this:
+
+regex = /(\d{4})([\-\/])(\d{2})([\-\/])(\d{2})/
+#           |       |       |      |       |
+# position  1       2       3      4       5
+# 
+# equivalent of: /(\d\d\d\d)([\-\/])(\d\d)\2(\d\d)/
+# 
+# We can now build the new string changing the order of
+# parenthesis via #gsub:
+
+str.gsub(regex, '\5.\3.\1')
