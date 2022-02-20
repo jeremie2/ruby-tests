@@ -26,13 +26,13 @@ Offenses:
 hello.rb:1:1: C: Style/FrozenStringLiteralComment: Missing frozen string literal comment.
 Kernel.puts("hello world")
 
-hello.rb:1:13: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+hello.rb:1:13: C: Prefer single-quoted strings when you don't need string interpolation
+or special symbols.
 Kernel.puts("hello world")
             ^^^^^^^^^^^^^
 
 1 file inspected, 2 offenses detected
 ------------------------
-
 
 - it tells it's inspecting 1 file
 - C = 'convention' was broken. It can find also:
@@ -40,12 +40,14 @@ Kernel.puts("hello world")
   E error
   F fatal error
 - there's a list of 'offenses' where it's possible to read the part of the
-  code that should be improved and error type (Style/FrozenStringLiteralComment, Style/StringLiterals...)
+  code that should be improved and error type (Style/FrozenStringLiteralComment, Style
+  StringLiterals...)
 
  
 ::: rubocop.yml and FrozenStringLiteralCommen
 
-Rubocop will look for a .rubocop.yml file in the root directory it's executed in and apply the configuration settings.
+Rubocop will look for a .rubocop.yml file in the root directory it's executed in and
+apply the configuration settings.
 
 The FrozenStringLiteralComment is too strict for our lessons. We can set the
 rule 'Enabled: false' in the .rubocop.yml.
@@ -399,3 +401,4 @@ Style/InverseMethods:
 Style/ZeroLengthPredicate:
   Description: 'empty? instead of length == 0'
   Enabled: false
+  

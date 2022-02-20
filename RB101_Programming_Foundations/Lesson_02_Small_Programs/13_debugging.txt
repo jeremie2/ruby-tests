@@ -107,7 +107,7 @@ is wrong. Otherwise, if we don't have any clue, it's time to find some documenta
     6. model(new_car):
        if the previous method returns the make, it's quite obvious that
        model method returns the model, which should be 'Mustang'
-       but the code state new_car.split(" ")[2] and.. HERE IS THE ERROR!
+       but the code states new_car.split(" ")[2] and.. HERE IS THE ERROR!
        in the array there are 2 elements, the second position is [1] not [2]
        
        def model(new_car)

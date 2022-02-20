@@ -40,7 +40,7 @@
   - think like a programmer. To reach that we have to gain some experience
     building little programs and debugging them.
 
-- What' procedural programming? (more or less)
+- What is procedural programming? (more or less)
   We build a program step by step using basic functionalities.
 
 - ...and object programming? (more or less)

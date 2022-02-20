@@ -75,10 +75,6 @@ advice = "Few things in life are as important as house training your pet dinosau
 #
 advice.include?('Dino')
 
-# long answer:
-advice.split.include?('Dino')
-
-
 # SOLUTION:
 #
 advice.match?("Dino")

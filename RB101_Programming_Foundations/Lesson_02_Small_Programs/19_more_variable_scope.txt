@@ -89,9 +89,7 @@ method invocation.
   # Outputs 'Hello'
   # Outputs 'Goodbye'
 
-
 'yeld' is the keyword that activates the interaction with the block.
-
 
 When invoking a method with a block, we aren't just limited to execute code
 within the block; depending on the method definition, the method can use the
@@ -115,7 +113,6 @@ METHOD DEFINITION: setting a certain scope for any local variables in terms of
                    the parameters that the method definition has, what it does
                    with those parameters, and also how it interacts (if at all)
                    with a block.
-
 
 METHOD INVOCATION: using the scope set by the method definition.
 

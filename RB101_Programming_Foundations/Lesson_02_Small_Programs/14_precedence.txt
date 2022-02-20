@@ -2,14 +2,16 @@
 ::::::::: PRECEDENCE
 
 - Operator precedence: set of rules that dictate how Ruby determines what operands
-                       each operator takes. https://ruby-doc.org/core-2.6.3/doc/syntax/precedence_rdoc.html
+                       each operator takes.
+                       https://ruby-doc.org/core-2.6.3/doc/syntax/precedence_rdoc.html
 
 Example: 3 + 5 * 7 it's the equivalent of 3 + (5 * 7)
 
 + operator gets 3 and 35 (5*7) as operands
 * operator gets 5 and 7 as operands
 
-In an expression, operators with higher precedence are prioritized over those with lower precedence.
+In an expression, operators with higher precedence are prioritized over those with lower
+precedence.
 
 
 ::: PARENTHESES

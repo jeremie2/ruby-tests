@@ -22,8 +22,8 @@ greeting
 # greeting is nil here, and no "undefined method or local variable" exception
 # is thrown. Typically, when you reference an uninitialized variable, Ruby
 # will raise an exception, stating that it’s undefined. However, when you
-# initialize a local variable within an if block, even if that if block doesn’t
-# get executed, the local variable is initialized to nil.
+# initialize a local variable within an 'if' block, even if that 'if' block
+# doesn’t get executed, the local variable is initialized to nil.
 
 ########################################################
 
@@ -159,7 +159,7 @@ puts "three is: #{three}"
 # Ben was tasked to write a simple ruby method to determine if an input
 # string is an IP address representing dot-separated numbers. e.g.
 # "10.4.5.11". He is not familiar with regular expressions. Alyssa supplied
-# Ben with a  method called is_an_ip_number? that determines if a string is
+# Ben with a method called is_an_ip_number? that determines if a string is
 # a numeric string between 0 and 255 as required for IP numbers and asked
 # Ben to use it.
 

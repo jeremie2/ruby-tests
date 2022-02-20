@@ -3,11 +3,13 @@
 
 ::: BURN
 
-Every time we discover a new rule, we don't really get it till we have some big problem
-with that specific rule... which means spending hours trying to find the solution.
+Every time we discover a new rule, we don't really get it till we have some
+big problem with that specific rule... which means spending hours trying to
+find the solution.
 
-It's typical while debugging finding just a missing comma after 2/3 hours of crazy search.
-That's the point where we will never forget what happened! That's our 'burn'.
+It's typical while debugging finding just a missing comma after 2/3 hours of
+crazy search. That's the point where we will never forget what happened!
+That's our 'burn'.
 
 We can shortly say:
 
@@ -18,8 +20,8 @@ We can shortly say:
 
 Use always meaningful names!
 If you name a variable 'a' or 'x', you'll forget in the future what was for.
-The only exception: very small block of code with variables you use for 1/2 lines
-(e.g. each method).
+The only exception: very small block of code with variables you use for 1/2
+lines (e.g. #each method).
 
 
 ::: NAMING CONVENTIONS
@@ -40,18 +42,21 @@ Constants should be immutable. Don't change their value.
 ::: METHODS
 
 Make sure that a method does just one thing.
-It should be short, more or less 10 lines. If more than 15, probably you can split it
-in 2 or 3 methods.
+It should be short, more or less 10 lines. If more than 15, probably you can
+split it in 2 or 3 methods.
 
-Always choose if you want a method to return a meaningful value or perform side effects.
-Not both together.
+Always choose if you want a method to return a meaningful value or perform
+side effects. Not both together.
 
 
 ::: METHODS SHOULD BE AT THE SAME LEVEL OF ABSTRACTION
 
-In other words it should be possible to copy/paste a method into irb and test it.
+In other words it should be possible to copy/paste a method into irb and
+test it.
 
-If the methods in your program are correctly compartmentalized, it makes programming much easier, especially on larger programs. That is why when you read good code, the methods are all at the same layer of abstraction.
+If the methods in your program are correctly compartmentalized, it makes
+programming much easier, especially on larger programs. That is why when
+you read good code, the methods are all at the same layer of abstraction.
 
 
 ::: DISPLAYING OUTPUT
@@ -64,8 +69,8 @@ It's not obvious whether a method called welcome returns a string.
 print_welcome, say_welcome, display_welcome... would be better.
 
 Code not only has to work properly, but must also be read easily.
-When reading the name, we should already understand what the method is doing without having
-to look up the implementation.
+When reading the name, we should already understand what the method is
+doing without having to look up the implementation.
 
 
 ::: MISCELLANEOUS TIPS
@@ -73,11 +78,11 @@ to look up the implementation.
 - Your program should probably only have just one exit point. 
 - Indentation: 2 spaces, no tabs.
 - Name your methods from the perspective of using them later.
-  If you have an array of cards, and you want to write a method to find the ace, your method 
-  should be called find_ace.
+  If you have an array of cards, and you want to write a method to find
+  the ace, your method should be called find_ace.
   ace = find_ace(cards) and NOT find_ace_from_cards(cards)...
-- Know when to use a "do/while" vs a "while" loop. Remember that with while/do
-  we have to initialize a variable.
+- Know when to use a "do/while" vs a "while" loop. Remember that with
+  while/do we have to initialize a variable.
 
 
 ::: TRUTHINESS

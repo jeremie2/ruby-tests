@@ -47,7 +47,7 @@ end
 
 #### LOGICAL OPERATOR
 
-## Evaluating 2 or more  expressions
+## Evaluating 2 or more expressions
 # &&: 'and' operator returns true only if both expression are true
 
 true && true           # true
@@ -86,7 +86,7 @@ true || 3/0    # true
 # Ruby considers everything to be truthy other than false and nil.
 # Basically any expression that doesn't evaluate to false or nil is true.
 
-# The following code prints "valid number" because the if statement is
+# The following code prints "valid number" because the 'if' statement is
 # evaluated to true, an integer is truthy:
 num = 5
 
@@ -131,3 +131,4 @@ if name && name.valid?
 else
   puts "either couldn't find name or it's invalid"
 end
+

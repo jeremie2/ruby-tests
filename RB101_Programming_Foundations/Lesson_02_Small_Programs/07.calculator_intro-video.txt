@@ -33,3 +33,4 @@ Kernel.puts(number1.inspect())
 
 # "5\n"
 # this shows that gets method is also assigning the new line '\n'.
+

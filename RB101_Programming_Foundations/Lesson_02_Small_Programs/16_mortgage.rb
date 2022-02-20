@@ -88,7 +88,7 @@ end
 prompt("Thanks for using the Mortgage Calculator!")
 
 # WHAT I HAVE DONE:
-# compare to the solution I set a couple of methods because because
+# compare to the solution I set a couple of methods because
 # the same routine was going to be repeated:
 # valid_number?(num) and set_number
 # Also to round float to 2 decimals, I've used 'round' method.

@@ -19,7 +19,7 @@ puts numbers
 #
 # - puts automatically calls to_s on its argument 
 # - Using p the output is: [1, 2, 2, 3]. This because p automatically
-#   calls inspect. Other option puts numbers.inspect
+#   calls inspect. Other option: puts numbers.inspect
 
 ########################################################
 
@@ -43,7 +43,7 @@ puts numbers
 #                 not user_name. Anyway it returns 'false'. 
 # 3. words.uniq! : ! after a method give the method the power to modify
 #                  the caller. Variable 'words' will change rather than
-#                  creating a copy. 
+#                  creating a copy.
 # 4. ?a : it looks that before a variable it's just returning the name of
 #         the variable as string.
 # 5. a_method?: after e method can returns true or false. I've often seen it
@@ -119,6 +119,10 @@ numbers.delete(1)    # Delete any element == 1 and return the deleted number.
 # ANSWER:
 #
 (10..100).include?(42)
+#
+# or
+#
+42.between?(10, 100)
 
 # SOLUTION
 #
@@ -178,7 +182,7 @@ flintstones.flatten
 
 # QUESTION 7
 #
-# Forgot to ad ! to change the array and not only return a copy of the
+# Forgot to add ! to change the array and not only return a copy of the
 # flattened array:
 flintstones.flatten!
 

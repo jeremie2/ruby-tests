@@ -84,7 +84,7 @@ Variables are essentially labels we create to refer to some physical memory addr
                       b → |_____________|
 
                            _____________
-                          |             |  a assigned to a completely different
+                          |             |  'a' assigned to a completely different
                       a → |  "not here" |  address in memory. It's now pointing
                           |_____________|  to a new string.
   a = "not here"           _____________
@@ -111,7 +111,7 @@ Variables are essentially labels we create to refer to some physical memory addr
                            ___________________
                       a → |                   |  It's NOT a reassignment, just
   a << ", Bob"            |  "hi there, Bob"" |  modifying the existing string
-                      b → |___________________|  and b still points to it.
+                      b → |___________________|  and 'b' still points to it.
 
 
 Some operations mutate the address space in memory, but others simply change

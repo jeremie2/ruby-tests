@@ -84,18 +84,14 @@ end
 
 :::::::::::::::::::: EXAMPLES
 
-For example, write out pseudo-code (both casual and formal) that does the following:
-
+Write out pseudo-code (both casual and formal) that does the following:
 
 :::::::::::: 1. a method that returns the sum of two integer
-
 ---------------------------------------
 Given two integers
 
 Set the method with two variables for each integer
 Return the sum of the two variable
-
-
 ---------------------------------------
 START
 
@@ -105,15 +101,14 @@ SET var1 and var2
 PRINT var1 + var2
 
 END
-
 ---------------------------------------
 def sum(var1, var2)
   var1 + var2
 end
 
 
-
-:::::::::::: 2. a method that takes an array of strings, and returns a string that is all those strings concatenated together
+:::::::::::: 2. a method that takes an array of strings, and returns a
+string that is all those strings concatenated together
 
 ---------------------------------------
 Given an array of strings
@@ -123,7 +118,6 @@ Iterate through the elements of the array
  - sum each element to the variable
  - return the variable
 
- 
 ---------------------------------------
 START
 # Given an array of strings called "words"
@@ -138,7 +132,6 @@ WHILE iterator <= length of words
 PRINT string_sum
 
 END
-
 ---------------------------------------
 def sum_of_string(words)
   string_sum = ''
@@ -149,9 +142,8 @@ def sum_of_string(words)
 end
 
 
-
-:::::::::::: 3. a method that takes an array of integers, and returns a new array with every other element
-
+:::::::::::: 3. a method that takes an array of integers, and returns a
+new array with every other element
 ---------------------------------------
 Given an array of integers.
 
@@ -159,7 +151,6 @@ Create an empty array called new_array
 Iterate through the array of elements.
   - for each element append a random number < 10 to new_array
   return new_array
-
 ---------------------------------------
 START
 # Given an array of integers called 'integers'.
@@ -172,7 +163,6 @@ WHILE iterator <= length of integers
 PRINT new_array
   
 END
-
 ---------------------------------------
 integers = [9, 5, 1, 8, 4, 7]
 
@@ -181,3 +171,4 @@ def random_array(integers)
   integers.each {|elem| new_array << rand(10) }
   new_array
 end
+

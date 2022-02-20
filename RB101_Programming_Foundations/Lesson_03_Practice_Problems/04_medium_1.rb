@@ -14,7 +14,7 @@
 # ANSWER:
 #
 
-(0..9).each { |i| puts (' ' * i) + 'The Flintstones Rock!' }
+10.times { |i| puts (' ' * i) + 'The Flintstones Rock!' }
 
 # SOLUTION
 #
@@ -254,7 +254,7 @@ munsters = {
   "Grandpa" => { "age" => 402, "gender" => "male" },
   "Eddie" => { "age" => 10, "gender" => "male" },
   "Marilyn" => { "age" => 23, "gender" => "female"}
-}
+  }
 
 def mess_with_demographics(demo_hash)
   demo_hash.values.each do |family_member|
