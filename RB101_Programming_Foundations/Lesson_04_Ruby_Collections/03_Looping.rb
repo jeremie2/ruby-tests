@@ -3,7 +3,7 @@
 
 # I skipped this capitol as I already know these concepts, but there is
 # an interesting example about loop and hash.
-# We normally use such methods as #each to loop an hash, let's try 
+# We normally use such method as #each to loop a hash, let's try 
 # just using loop/do:
 
  number_of_pets = {

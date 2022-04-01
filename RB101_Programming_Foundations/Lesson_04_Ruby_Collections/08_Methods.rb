@@ -99,7 +99,7 @@ end
 
 # Here an interesting case.
 # Map is going to always return an array the same size of the original array.
-# Here we see that the new array takes original element if they are == 3.
+# Here we see that the new array takes original elements if they are == 3.
 #
 # What does happen if there isn't a returned value? ...'nil'
 # 'nil' element will be added to the new array:

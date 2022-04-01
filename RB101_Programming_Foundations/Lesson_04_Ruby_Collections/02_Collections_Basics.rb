@@ -61,7 +61,7 @@ arr.slice(3)                    # => "4"
 
 ########## HASH
 
-# Hashes are collection data structure that use key-value pairs:
+# Hashes are collection data structures that use key-value pairs:
 
 hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot' }
 
@@ -71,9 +71,9 @@ hsh['fruit'][0]        # => "a"
 # The keys must be unique:
 hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot', 'fruit' => 'pear' }
 # rises:warning: key "fruit" is duplicated and overwritten on line 7
+# but it's not a problem if values are duplicated.
 => {"fruit"=>"pear", "vegetable"=>"carrot"}
 
-# No problem if values are duplicated.
 
 ##### KEY - VALUE METHODS
 
